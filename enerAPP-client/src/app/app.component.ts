@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  base_url='https://api.esios.ree.es/';
   title = 'app';
 }
