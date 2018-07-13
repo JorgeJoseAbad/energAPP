@@ -20,6 +20,7 @@ export class MyArchivesService {
 archiveKeeped:any;
 
 
+
   constructor(private http: HttpClient) { }
 
 getarchiveslist(archives_json_url){
@@ -29,14 +30,16 @@ getarchiveslist(archives_json_url){
 
 getarchive(full_url_archive){
   console.log(full_url_archive);
-  return this.http.get(full_url_archive,this.httpOptions);
+  let archive= this.http.get(full_url_archive,this.httpOptions);
+  return archive;
 }
 
 
 keeparchiveinservice(archive){
   console.log("in sendarchive(archive) del servcio");
-  console.log(archive);
   this.archiveKeeped=archive;
+
+  console.log("INKEAPARCHIVEINSERVICE",archive);
 }
 
 getarchivefromservice(){
