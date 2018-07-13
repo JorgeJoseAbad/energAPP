@@ -30,7 +30,7 @@ keys: any;
   }
 
   ngDoCheck(){
-  
+
   }
 
   processAxisData(tittle,data){
@@ -52,7 +52,7 @@ keys: any;
         A_Axis.push(data[i][ArrayKeys[0]]);
         B_Axis.push(data[i][ArrayKeys[1]]);
         if (ArrayKeys[2]!=undefined) C_Axis.push(data[i][ArrayKeys[2]]);
-        if (ArrayKeys[3]!=undefined) D_Axis.push(data[i][ArrayKeys[3]]);
+        if (ArrayKeys[3]!=undefined) D_Axis.push(data[i][ArrayKeys[3]].replace(".","").replace(",","."));
       }
 
       console.log("ArrayKeys: ",ArrayKeys);
