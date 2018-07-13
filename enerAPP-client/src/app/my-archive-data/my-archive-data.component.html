@@ -1,0 +1,13 @@
+<script src="node_modules/chart.js/src/chart.js"></script>
+<p>
+  my-archive-data works!
+</p>
+<div id="titlefile">
+<b>Title of file downloaded:</b>
+{{titleArchive}}</div>
+<div *ngIf="dataArchives">
+  <ul><li *ngFor="let dataArchive of dataArchives">
+    {{dataArchive["GWh"]}}
+    {{dataArchive["Año"]}}
+  </li></ul>
+</div>

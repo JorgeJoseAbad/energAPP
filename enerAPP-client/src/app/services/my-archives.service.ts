@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-//import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 //import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -17,10 +17,10 @@ export class MyArchivesService {
   })
 };
 
+archiveKeeped:any;
 
-  constructor(
-              private http: HttpClient
-             ) { }
+
+  constructor(private http: HttpClient) { }
 
 getarchiveslist(archives_json_url){
   console.log("llegamos a pedir lista ",archives_json_url);
@@ -30,6 +30,18 @@ getarchiveslist(archives_json_url){
 getarchive(full_url_archive){
   console.log(full_url_archive);
   return this.http.get(full_url_archive,this.httpOptions);
+}
+
+
+keeparchiveinservice(archive){
+  console.log("in sendarchive(archive) del servcio");
+  console.log(archive);
+  this.archiveKeeped=archive;
+}
+
+getarchivefromservice(){
+  console.log("llamada a getmyarchive desde myarchivedata");
+  return this.archiveKeeped;
 }
 
 }

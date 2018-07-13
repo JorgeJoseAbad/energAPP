@@ -1,16 +1,13 @@
-<p>
-  my-list-archives works!
-</p>
-  <br>
-  <pre>get archives from direct link</pre>
-  <a href="{{archives_json_url}}">Get archives list from {{archives_json_url}}</a>
-  <br>
+
   <pre>get archives across service..</pre>
   <button (click)=getarchiveslist()>get archives</button>
   <li *ngFor="let archive of listarchives">
-    ID: {{archive.id}}<br>Name: {{archive.name}}<br>
-    <button (click)=getarchive(archive.json_download.url)>{{archive.json_download.url}}</button>
+    <div class="archive-list-item">
+      ID: {{archive.id}}<br>
+      Name: {{archive.name}}<br>
+      Description: {{archive.description}}<br>
+      <button (click)=getarchive(archive.json_download.url)>Get Archive</button>
+      
 
-</li>
-  <pre>get single archive by Id...</pre>
-  <a href="{{archive_ID}}">Get archives list from {{archive_ID}}</a>
+    </div>
+  </li>
