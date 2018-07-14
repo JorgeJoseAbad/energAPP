@@ -8,9 +8,9 @@
   <canvas id="canvas">{{ myChart }}</canvas>
 </div>
 
-<div *ngIf="dataArchives">
-  <ul><li *ngFor="let dataArchive of dataArchives">
-    {{dataArchive["GWh"]}}
-    {{dataArchive["Año"]}}
+<div *ngIf="dataArchive">
+  <ul><li *ngFor="let data of dataArchive">
+    {{data["GWh"]}}
+    {{data["Año"]}}
   </li></ul>
 </div>

@@ -12,7 +12,7 @@ export class MyListArchivesComponent implements OnInit {
 
   base_url='https://api.esios.ree.es/';
   archives_json_url=`${this.base_url}`+'archives_json';
-
+ archives_filtered_json_url=`${this.base_url}`+'archives_json?taxonomy_terms[]=Potencia';
   archive_ID:string;
 error:any;
   archives:any;
@@ -44,6 +44,24 @@ error:any;
           console.log("Retrieved all files")
         }
       );
+  }
+
+
+  getarchiveslistfiltered(){
+    this.archivesservice.getarchiveslistfiltered(this.archives_json_url)
+     .subscribe(
+       (archives) => {
+                       this.archives = archives;
+                       console.log(this.archives.archives);
+                       this.listarchives=this.archives.archives;
+       },
+       error=>{
+         console.log(error);
+       },
+       ()=>{
+         console.log("Retrieved all files")
+       }
+     );
   }
 
   getarchive(part_url_archive){

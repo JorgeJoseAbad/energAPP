@@ -1,13 +1,14 @@
 
   <pre>get archives across service..</pre>
-  <button (click)=getarchiveslist()>get archives</button>
+  <button (click)=getarchiveslist()>get archives list</button>
+  <button (click)=getarchiveslistfiltered()>get archives list filtered by taxonomy term Potencia</button>
   <li *ngFor="let archive of listarchives">
     <div class="archive-list-item">
       ID: {{archive.id}}<br>
       Name: {{archive.name}}<br>
       Description: {{archive.description}}<br>
       <button (click)=getarchive(archive.json_download.url)>Get Archive</button>
-      
+
 
     </div>
   </li>

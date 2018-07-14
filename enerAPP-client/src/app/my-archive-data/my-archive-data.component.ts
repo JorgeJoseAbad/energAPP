@@ -11,11 +11,10 @@ import { Chart } from 'chart.js';
 })
 export class MyArchiveDataComponent implements OnInit {
  archive:any;
-dataArchives:any;
-keys: any;
- titleArchive:string="no loaded";
- myChart:any;
 
+ myChart:any;
+ titleArchive:any;
+ dataArchive:any;
 
   constructor(private route: ActivatedRoute,
               private archivesservice: MyArchivesService,
@@ -23,14 +22,18 @@ keys: any;
 
   ngOnInit() {
     this.archive=this.archivesservice.getarchivefromservice();
-    this.titleArchive=Object.keys(this.archive)[0];
-    this.dataArchives=Object.values(Object.values(this.archive))[0];
-    console.log("PARA el iterable ngFOR: ",this.dataArchives);
-    this.processAxisData(this.titleArchive,this.dataArchives);
+    this.processDataFile(this.archive);
   }
 
-  ngDoCheck(){
+  processDataFile(archive){
+    console.log(archive);
 
+    this.titleArchive=Object.keys(archive)[0];
+    this.dataArchive=Object.values(Object.values(archive))[0];
+    console.log("PARA el iterable ngFOR: ",this.dataArchive);
+    if (this.titleArchive=="EnergiaAnual"||this.titleArchive=="EnergiaMensual"){
+      this.processAxisData(this.titleArchive,this.dataArchive);
+    } else console.log("no se puede procesar grafico");
   }
 
   processAxisData(tittle,data){
@@ -43,10 +46,10 @@ keys: any;
     let ArrayKeys=[];
     let i;
 
-    //extract objects keys
-    if(tittle!=0){
 
-       ArrayKeys=Object.keys(data[0]);
+    if(tittle!=0){ //if provisional
+
+       ArrayKeys=Object.keys(data[0]);    //extract objects keys
 
       for(i=0;i<data.length;i++){
         A_Axis.push(data[i][ArrayKeys[0]]);
