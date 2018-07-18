@@ -8,9 +8,43 @@
   <canvas id="canvas">{{ myChart }}</canvas>
 </div>
 
-<div *ngIf="dataArchive">
+<div *ngIf="dataArchive && modeFileOne">
   <ul><li *ngFor="let data of dataArchive">
-    {{data["GWh"]}}
-    {{data["Año"]}}
+    Year: {{data["Año"]}}
+    Energy: {{data["GWh"]}}
+  </li></ul>
+</div>
+
+<div *ngIf="dataArchive && modeFileTwo">
+  <ul><li *ngFor="let data of dataArchive">
+    Participant: {{data["Participant"]}}
+    EIC code: {{data["EIC Code"]}}
+  </li></ul>
+</div>
+
+<div *ngIf="dataArchive && modeFileThree">
+  <ul><li *ngFor="let data of dataArchive">
+    <b>BRP code: </b>{{data["BRP Code"]}}
+    <b>Name: </b>{{data["Name"]}}
+    <b>EIC code: </b>{{data["EIC Code"]}}
+    <b>BRP Type: </b>{{data["BRP Type"]}}
+  </li></ul>
+</div>
+
+<div *ngIf="dataArchive && modeFileFour">
+  <ul><li *ngFor="let data of dataArchive">
+
+      <b>BRP </b>Code{{data["BRP Code"]}}
+      <b>EIC Code</b>{{data["EIC Code"]}}
+      <b>Large Description</b>{{data["Large Description"]}}
+      <b>Maximum Power Capacity MW</b>{{data["Maximum Power Capacity MW"]}}
+      <b>Production Type</b>{{data["Production Type"]}}
+      <b>Regulation Zone</b>{{data["Regulation Zone"]}}
+      <b>Scope</b>{{data["Scope"]}}
+      <b>Short Description</b>{{data["Short Description"]}}
+      <b>Trade</b>{{data["Trade"]}}
+      <b>UP Code</b>{{data["UP Code"]}}
+      <b>UP Type</b>{{data["UP Type"]}}
+
   </li></ul>
 </div>

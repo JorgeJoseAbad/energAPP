@@ -1,14 +1,19 @@
 
   <pre>get archives across service..</pre>
   <button (click)=getarchiveslist()>get archives list</button>
-  <button (click)=getarchiveslistfiltered()>get archives list filtered by taxonomy term Potencia</button>
+  <button (click)=getarchivesjsonlist()>get archives_JSON list</button>
+  <button (click)=getarchivesjsonlistfiltered()>get archives JSON list filtered by taxonomy term Potencia</button>
+  <div *ngIf="previewFile">
+     {{previewFile|json}}
+   </div>
   <li *ngFor="let archive of listarchives">
     <div class="archive-list-item">
       ID: {{archive.id}}<br>
       Name: {{archive.name}}<br>
       Description: {{archive.description}}<br>
-      <button (click)=getarchive(archive.json_download.url)>Get Archive</button>
-
+      <button (click)=getarchive(archive.id)>Get Archive preview</button>
+      <div *ngIf="archive.json_download"><button (click)=getarchive(archive.json_download.url)>Get Archive JSON value</button></div>
+      <div *ngIf="archive.download"><button (click)=getarchive(archive.download.url)>Get Archive value</button></div>
 
     </div>
   </li>
