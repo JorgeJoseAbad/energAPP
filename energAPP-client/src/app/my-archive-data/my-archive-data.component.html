@@ -48,3 +48,19 @@
 
   </li></ul>
 </div>
+
+<div *ngIf="dataArchive && modeFilePVPC">
+  <ul><li *ngFor="let data of dataArchive">
+
+      {{data|json}}
+
+  </li></ul>
+</div>
+
+<div *ngIf="dataArchive && modeFileUmbrales">
+  <ul><li *ngFor="let data of dataArchive">
+
+      <b>{{data[0]}}: </b>{{data[1]}}
+
+  </li></ul>
+</div>

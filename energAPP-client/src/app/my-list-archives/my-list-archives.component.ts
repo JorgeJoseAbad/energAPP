@@ -89,14 +89,15 @@ export class MyListArchivesComponent implements OnInit {
     let full_url_archive;
     if (typeof(part_url_archive)=="number"){
       full_url_archive=`${this.base_url}`+'archives/'+part_url_archive
-      this.archivesservice.getarchive(full_url_archive)
+      this.archivesservice.getarchivePreview(full_url_archive)
       .subscribe(
-        (archive)=>{
-                    this.previewFile=archive
+        (response:any)=>{
+
+                    this.previewFile=response;
                     console.log(this.previewFile);
 
         },
-        error=>{
+        (error:any)=>{
           this.error=error;
           console.error('Oops:', error.message);
         },
@@ -106,10 +107,12 @@ export class MyListArchivesComponent implements OnInit {
     else {
       full_url_archive=`${this.base_url}`+part_url_archive
       console.log(full_url_archive);
+
       this.archivesservice.getarchive(full_url_archive)
       .subscribe(
-        (archive)=>{
-                    this.archive=archive
+        (response:any)=>{
+
+                    this.archive=response;
                     console.log(this.archive);
                     this.archivesservice.keeparchiveinservice(this.archive);
         },

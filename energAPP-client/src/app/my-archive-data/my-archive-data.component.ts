@@ -20,6 +20,8 @@ export class MyArchiveDataComponent implements OnInit {
  modeFileThree:any=false;
  modeFileFour:any=false;
  modeFilefive:any=false;
+ modeFilePVPC:any=false;
+ modeFileUmbrales:any=false;
 
   constructor(private route: ActivatedRoute,
               private archivesservice: MyArchivesService,
@@ -30,6 +32,13 @@ export class MyArchiveDataComponent implements OnInit {
     this.processDataFile(this.archive);
   }
 
+
+  /**
+    * Process JSON data file from REE server processDataFile
+    * documentation for JSDoc
+    * @constructor
+    * @param {object} archive - the data file from REE
+    */
   processDataFile(archive){
     console.log(archive);
 
@@ -39,10 +48,10 @@ export class MyArchiveDataComponent implements OnInit {
 
       switch(this.titleArchive) {
       case "EnergiaAnual":
-          this.processAxisData(this.titleArchive,this.dataArchive);
+          this.energyAnualMensual(this.titleArchive,this.dataArchive);
           break;
       case "EnergiaMensual":
-          this.processAxisData(this.titleArchive,this.dataArchive);
+          this.energyAnualMensual(this.titleArchive,this.dataArchive);
           break;
       case "EntitledParticipants":
           this.listParticipants(this.titleArchive,this.dataArchive);
@@ -57,14 +66,20 @@ export class MyArchiveDataComponent implements OnInit {
           this.generationUnits(this.titleArchive,this.dataArchive);
           break;
       case "0":
-          this.pvpc(this.titleArchive,this.archive);
+          this.pvpcA(this.titleArchive,this.archive);
+          break;
+      case "PVPC":
+          this.pvpcB(this.titleArchive,this.archive);
+          break;
+      case "Umbrales":
+          this.umbrales(this.titleArchive,this.archive);
           break;
       default:
      }
 
 }
 
-  processAxisData(tittle,data){
+  energyAnualMensual(tittle,data){
     this.modeFileOne=1;
     console.log("DATA: ",data);
     console.log("TITTLE: ",tittle);
@@ -89,22 +104,22 @@ export class MyArchiveDataComponent implements OnInit {
       console.log("B-AXIS: ",ArrayKeys[1],B_Axis);
       console.log("C-AXIS: ",ArrayKeys[2],C_Axis);
       console.log("D-AXIS: ",ArrayKeys[3],D_Axis);
-      this.createChartLine(A_Axis,B_Axis,D_Axis);
+      this.createChartLine(A_Axis,D_Axis);
 
 }
 
-createChartLine(A_Axis,B_Axis,D_Axis){
-   console.log(A_Axis,B_Axis,D_Axis);
+createChartLine(...axis){
+   console.log(axis);
 
   let htmlRef = this.elementRef.nativeElement.querySelector(`#canvas`);
 
   this.myChart = new Chart(htmlRef, {
           type: 'line',
           data: {
-            labels: A_Axis,
+            labels: axis[0],
             datasets: [
               {
-                data: D_Axis,
+                data: axis[1],
                 borderColor: "#3cba9f",
                 fill: false
               },
@@ -267,7 +282,7 @@ listParticipants(title,data){
 });
 }
 
-pvpc(title,data){
+pvpcA(title,data){
   console.log("In PVPC",title,data);
   let titulos=[];
   let xAxisData1=[];
@@ -282,87 +297,124 @@ pvpc(title,data){
   }
 
   xAxisData1=Object.keys(data[0]);
-  xAxisData1.shift();
+  //xAxisData1.shift();
   yAxisData1=Object.values(data[0]);
   //let titulo1=yAxisData1.shift();
 
-
   xAxisData2=Object.keys(data[1]);
-  xAxisData2.shift();
+  //xAxisData2.shift();
   yAxisData2=Object.values(data[1]);
   //let titulo2=yAxisData2.shift();
 
   xAxisData3=Object.keys(data[2]);
-  xAxisData3.shift();
+  //xAxisData3.shift();
   yAxisData3=Object.values(data[2]);
   //let titulo3=yAxisData3.shift();
 
-
   this.drawPVPC(xAxisData1,yAxisData1,yAxisData2,yAxisData3);
 
+}
 
+pvpcB(title,data){
+  console.log("IN PVPC-B",title,data)
+  console.log(typeof(data));
+  let dia=[];
+  let hora=[];
+  let gen=[];
+  let noc=[];
+  let vhc=[];
 
+  this.modeFilePVPC=true;
 }
 
 drawPVPC(axisX,...axis){
-  console.log(axisX,axis[0],axis[1],axis[2]);
 
-  let axisY1=[];
-  let axisY2=[];
-  let axisY3=[];
-  let prov;
-
-  axis[0].forEach(function(d){
-    axisY1.push(d.replace(".","").replace(",","."));
-  })
-  axis[1].forEach(function(d){
-    axisY2.push(d.replace(".","").replace(",","."));
-  })
-
-  axis[2].forEach(function(d){
-    axisY3.push(d.replace(".","").replace(",","."));
-  })
+    let axisY=[];
 
 
-let htmlRef = this.elementRef.nativeElement.querySelector(`#canvas`);
+      let axisY1=[];
+      let axisY2=[];
+      let axisY3=[];
+      let prov;
 
-this.myChart = new Chart(htmlRef, {
-  type: 'line',
-  data:
-   {labels: axisX,
-    datasets: [
-      {
-        data: axisY1,
-        label: axis[0][0],
-        borderColor: "blue",
-        fill: false,
-        borderWidth: 1
+      for (let j=0;j<axis.length;j++){
+        axisY[j]=[];
+        axis[j].forEach(function(d){
+          axisY[j].push(d.replace(".","").replace(",","."));
+        })
+        axisY[j].shift();
+      }
+    axisX.shift();
+
+    console.log(axisX,axisY);
+
+    let htmlRef = this.elementRef.nativeElement.querySelector(`#canvas`);
+
+    this.myChart = new Chart(htmlRef, {
+      type: 'line',
+      data:
+       {labels: axisX,
+        datasets: [
+          {
+            data: axisY[0],
+            label: axis[0][0],
+            borderColor: "blue",
+            fill: false,
+            borderWidth: 1
+          },
+          {
+            data: axisY[1],
+            label: axis[1][0],
+            borderColor: "red",
+            fill: false,
+            borderWidth: 1
+          },
+          {
+            data: axisY[2],
+            label: axis[2][0],
+            borderColor: "green",
+            fill: false,
+            borderWidth: 1
+          },
+        ]
       },
+      options: {
+        legend: {
+          display: true
+        },
+        scales: {
+          xAxes: [{
+            display: true
+          }],
+          yAxes: [{
+            display: true
+          }],
+        }
+      }
+    });
+ }
 
-      {
-        data: axisY3,
-        label: axis[2][0],
-        borderColor: "green",
-        fill: false,
-        borderWidth: 1
-      },
-    ]
-  },
-  options: {
-    legend: {
-      display: true
-    },
-    scales: {
-      xAxes: [{
-        display: true
-      }],
-      yAxes: [{
-        display: true
-      }],
-    }
-  }
-});
-}
+ umbrales(title,data){
+   console.log(title,data);
+   //let arrKeys=[];
+   let arrValues=[];
+   let arrUMB=[];
+   let arrVAL=[];
+   let arrData=[];
+
+   //arrKeys=Object.keys(data["Umbrales"]);
+   arrValues=Object.values(data["Umbrales"]);
+   console.log(arrValues);
+   arrValues.forEach(function(d,i){
+     arrData[i]=[];
+     arrData[i].push(d["UMB"]);
+     arrData[i].push(d["VAL"]);
+   })
+   console.log(arrData);
+   this.dataArchive=arrData;
+   this.modeFileUmbrales=true;
+
+ }
 
 
 }
