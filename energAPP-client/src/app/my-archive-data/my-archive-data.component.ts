@@ -15,13 +15,27 @@ export class MyArchiveDataComponent implements OnInit {
  myBarChart:any;
  titleArchive:any;
  dataArchive:any;
- modeFileOne:any=false;
- modeFileTwo:any=false;
- modeFileThree:any=false;
- modeFileFour:any=false;
- modeFilefive:any=false;
- modeFilePVPC:any=false;
+
+ mode_energyAnualMensual:any=false;
+ mode_Ind_MaxMinRenovEol:any=false;
+ mode_Ind_MaxMin:any=false;
+ mode_Ind_DemandaRealGen:any=false;
+ mode_Ind_DemandaPrevProg:any=false;
+ mode_EntitledParticipants:any=false;
+ mode_BalanceResponsibleParties:any=false;
+ mode_ProgrammingUnits:any=false;
+ mode_GenerationUnits:any=false;
+ mode_ParticipantesSubasta:boolean=false;
+ mode_SujetosMercado:boolean=false;
+ mode_UnidadesProgramacion:boolean=false;
+ mode_unidadesFisicas:boolean=false;
+ mode_FilePVPC:any=false;
  modeFileUmbrales:any=false;
+ mode_Ind_PrecioFinal:any=false;
+ mode_Ind_PrecioDesvios:boolean=false;
+ mode_PotInstal:boolean=false;
+ mode_Interconexiones:boolean=false;
+ mode_DemandaInterrumpible:boolean=false;
 
   constructor(private route: ActivatedRoute,
               private archivesservice: MyArchivesService,
@@ -43,8 +57,10 @@ export class MyArchiveDataComponent implements OnInit {
     console.log(archive);
 
     this.titleArchive=Object.keys(archive)[0];
-    this.dataArchive=Object.values(Object.values(archive))[0];
-    console.log("PARA el iterable ngFOR: ",this.dataArchive);
+    this.dataArchive=Object.values(Object.values(archive));
+
+
+
 
       switch(this.titleArchive) {
       case "EnergiaAnual":
@@ -53,11 +69,23 @@ export class MyArchiveDataComponent implements OnInit {
       case "EnergiaMensual":
           this.energyAnualMensual(this.titleArchive,this.dataArchive);
           break;
+      case "IND_MaxMinRenovEol":
+          this.ind_MaxMinRenovEol(this.titleArchive,this.dataArchive);
+          break;
+      case "IND_MaxMin":
+          this.ind_MaxMin(this.titleArchive,this.dataArchive);
+          break;
+      case "IND_DemandaRealGen":
+          this.ind_DemandaRealGen(this.titleArchive,this.dataArchive);
+          break;
+      case "IND_DemandaPrevProg":
+          this.ind_DemandaPrevProg(this.titleArchive,this.dataArchive);
+          break;
       case "EntitledParticipants":
-          this.listParticipants(this.titleArchive,this.dataArchive);
+          this.entitledParticipants(this.titleArchive,this.dataArchive);
           break;
       case "BalanceResponsibleParties":
-          this.balanceRespParties(this.titleArchive,this.dataArchive);
+          this.balanceResponsibleParties(this.titleArchive,this.dataArchive);
           break;
       case "ProgrammingUnits":
           this.programmingUnits(this.titleArchive,this.dataArchive);
@@ -65,14 +93,41 @@ export class MyArchiveDataComponent implements OnInit {
       case "GenerationUnits":
           this.generationUnits(this.titleArchive,this.dataArchive);
           break;
+      case "ParticipantesSubasta":
+          this.participantesSubasta(this.titleArchive,this.dataArchive);
+          break;
+      case "SujetosMercado":
+          this.sujetosMercado(this.titleArchive,this.dataArchive);
+          break;
+      case "UnidadesProgramacion":
+          this.unidadesProgramacion(this.titleArchive,this.dataArchive);
+          break;
+      case "UnidadesFisicas":
+          this.unidadesFisicas(this.titleArchive,this.dataArchive);
+          break;
       case "0":
-          this.pvpcA(this.titleArchive,this.archive);
+          this.pvpcA(this.titleArchive,this.dataArchive);
           break;
       case "PVPC":
-          this.pvpcB(this.titleArchive,this.archive);
+          this.pvpcB(this.titleArchive,this.dataArchive);
           break;
       case "Umbrales":
           this.umbrales(this.titleArchive,this.archive);
+          break;
+      case "PrecioFinal":
+          this.precioFinal(this.titleArchive,this.archive);
+          break;
+      case "PrecioDesvíos":
+          this.precioDesvíos(this.titleArchive,this.dataArchive);
+          break;
+      case "PotInstal":
+          this.potInstal(this.titleArchive,this.dataArchive);
+          break;
+      case "Interconexiones":
+          this.interconexiones(this.titleArchive,this.dataArchive);
+          break;
+      case "DemandaInterrumpible":
+          this.demandaInterrumpible(this.titleArchive,this.dataArchive);
           break;
       default:
      }
@@ -80,31 +135,34 @@ export class MyArchiveDataComponent implements OnInit {
 }
 
   energyAnualMensual(tittle,data){
-    this.modeFileOne=1;
+
     console.log("DATA: ",data);
     console.log("TITTLE: ",tittle);
+    let arrayData=data[0]; //arrayData is the real data inside data array from Object.values
     let A_Axis=[];
     let B_Axis=[];
     let C_Axis=[];
     let D_Axis=[];
-    let ArrayKeys=[];
+    let arrayKeys=[];
     let i;
 
-       ArrayKeys=Object.keys(data[0]);    //extract objects keys
+       arrayKeys=Object.keys(arrayData[0]);    //extract objects keys
 
-      for(i=0;i<data.length;i++){
-        A_Axis.push(data[i][ArrayKeys[0]]);
-        B_Axis.push(data[i][ArrayKeys[1]]);
-        if (ArrayKeys[2]!=undefined) C_Axis.push(data[i][ArrayKeys[2]]);
-        if (ArrayKeys[3]!=undefined) D_Axis.push(data[i][ArrayKeys[3]].replace(".","").replace(",","."));
+      for(i=0;i<arrayData.length;i++){
+        A_Axis.push(arrayData[i][arrayKeys[0]]);
+        B_Axis.push(arrayData[i][arrayKeys[1]]);
+        if (arrayKeys[2]!=undefined) C_Axis.push(arrayData[i][arrayKeys[2]]);
+        if (arrayKeys[3]!=undefined) D_Axis.push(arrayData[i][arrayKeys[3]].replace(".","").replace(",","."));
       }
 
-      console.log("ArrayKeys: ",ArrayKeys);
-      console.log("A-AXIS: ",ArrayKeys[0],A_Axis);
-      console.log("B-AXIS: ",ArrayKeys[1],B_Axis);
-      console.log("C-AXIS: ",ArrayKeys[2],C_Axis);
-      console.log("D-AXIS: ",ArrayKeys[3],D_Axis);
+      console.log("ArrayKeys: ",arrayKeys);
+      console.log("A-AXIS: ",arrayKeys[0],A_Axis);
+      console.log("B-AXIS: ",arrayKeys[1],B_Axis);
+      console.log("C-AXIS: ",arrayKeys[2],C_Axis);
+      console.log("D-AXIS: ",arrayKeys[3],D_Axis);
+      this.dataArchive=arrayData;
       this.createChartLine(A_Axis,D_Axis);
+      this.mode_energyAnualMensual=1;
 
 }
 
@@ -141,36 +199,80 @@ createChartLine(...axis){
         });
 }
 
-listParticipants(title,data){
+ind_MaxMinRenovEol(title,data){
+  console.log("IN INDEFINED TITLE",title,data);
+  let arr=[];
+  arr.push(data[0]);
+  this.dataArchive=arr;
+  console.log(arr);
+
+  this.mode_Ind_MaxMinRenovEol=true;
+}
+
+ind_MaxMin(title,data){
+  console.log(title,data);
+  let arr=[];
+  arr.push(data[0]);
+  this.dataArchive=arr;
+  this.mode_Ind_MaxMin=true;
+}
+
+ind_DemandaRealGen(title,data){
+  console.log(data);
+  console.log(data[0].valoresHorariosGeneracion)
+  let object:any;
+
+  object=data[0].valoresHorariosGeneracion;
+  //object=Object.values(data["IND_DemandaRealGen"]);
+  console.log(object);
+
+  this.dataArchive=object;
+  this.mode_Ind_DemandaRealGen=true;
+}
+
+ind_DemandaPrevProg(title,data){
+  console.log(data);
+
+  this.dataArchive=data[0].valoresPrevistaProgramada;
+  this.mode_Ind_DemandaPrevProg=true;
+}
+
+
+entitledParticipants(title,data){
   let listParticipants=[];
   let listEICcodes=[];
+  let arrayData=data[0];
+  let arrKeys=Object.keys(arrayData[0]);
 
-  let arrKeys=Object.keys(data[0]);
-
-  data.forEach(function(d) {
+  arrayData.forEach(function(d) {
       listParticipants.push(d[arrKeys[0]]);
       listEICcodes.push(d[arrKeys[1]]);
   });
-  this.modeFileTwo=1;
+  this.dataArchive=arrayData;
+  this.mode_EntitledParticipants=1;
   console.log(listParticipants,listEICcodes)
 }
 
-  balanceRespParties(title,data){
+  balanceResponsibleParties(title,data){
     let BRPcode=[];
     let name=[];
     let EICcode=[];
     let BRPType=[];
-    let arrKeys=Object.keys(data[0]);
-    data.forEach(function(d) {
+    let arrayData=data[0]
+    let arrKeys=Object.keys(arrayData[0]);
+    arrayData.forEach(function(d) {
       BRPcode.push(d[arrKeys[0]]);
       name.push(d[arrKeys[1]]);
       EICcode.push(d[arrKeys[2]]);
       BRPType.push(d[arrKeys[3]]);
     });
-    this.modeFileThree=1;
+    this.dataArchive=arrayData;
+    this.mode_BalanceResponsibleParties=1;
   }
 
   programmingUnits(title,data){
+
+    let arrayData=data[0];
 
     let BRPCode=[];
     let EICCode=[];
@@ -184,9 +286,10 @@ listParticipants(title,data){
     let UPCode=[];
     let UPType=[];
 
-    let arrKeys=Object.keys(data[0]);
 
-    data.forEach(function(d) {
+    let arrKeys=Object.keys(arrayData[0]);
+
+    arrayData.forEach(function(d) {
 
       BRPCode.push(d[arrKeys[0]]);
       EICCode.push(d[arrKeys[1]]);
@@ -201,10 +304,13 @@ listParticipants(title,data){
       UPType.push(d[arrKeys[10]]);
 
     });
-    this.modeFileFour=1;
+    this.dataArchive=arrayData;
+    this.mode_ProgrammingUnits=1;
   }
 
   generationUnits(title,data){
+
+    let arrayData=data[0];
 
     let BRPCode=[];
     let Description=[];
@@ -214,10 +320,10 @@ listParticipants(title,data){
     let UFCode=[];
     let UPCode=[];
 
-    let arrKeys=Object.keys(data[0]);
+    let arrKeys=Object.keys(arrayData[0]);
     console.log(arrKeys);
 
-    data.forEach(function(d) {
+    arrayData.forEach(function(d) {
       UFCode.push(d[arrKeys[0]]);
       EICCode.push(d[arrKeys[1]]);
       Description.push(d[arrKeys[2]]);
@@ -228,7 +334,7 @@ listParticipants(title,data){
     });
 
 
-    this.modeFilefive=1;
+    this.mode_GenerationUnits=1;
     this.drawGenerationUnits(ProductionType,Description,MaximumPowerCapacityMW);
   }
 
@@ -282,6 +388,30 @@ listParticipants(title,data){
 });
 }
 
+participantesSubasta(title,data){
+  let arrData=data[0];
+  this.dataArchive=arrData;
+  this.mode_ParticipantesSubasta=true;
+}
+
+sujetosMercado(title,data){
+  let arrData=data[0];
+  this.dataArchive=arrData;
+  this.mode_SujetosMercado=true;
+}
+
+unidadesProgramacion(title,data){
+  let arrData=data[0];
+  this.dataArchive=arrData;
+  this.mode_UnidadesProgramacion=true
+}
+
+unidadesFisicas(title,data){
+  let arrData=data[0];
+  this.dataArchive=arrData;
+  this.mode_unidadesFisicas=true;
+}
+
 pvpcA(title,data){
   console.log("In PVPC",title,data);
   let titulos=[];
@@ -324,7 +454,8 @@ pvpcB(title,data){
   let noc=[];
   let vhc=[];
 
-  this.modeFilePVPC=true;
+  this.dataArchive=data[0];
+  this.mode_FilePVPC=true;
 }
 
 drawPVPC(axisX,...axis){
@@ -416,5 +547,30 @@ drawPVPC(axisX,...axis){
 
  }
 
+precioFinal(title,data){
+  this.dataArchive=data.PrecioFinal;
+  this.mode_Ind_PrecioFinal=true;
+}
+
+precioDesvíos(title,data){
+  console.log(data);
+  this.dataArchive=data;
+  this.mode_Ind_PrecioDesvios=true;
+}
+
+potInstal(title,data){
+  this.dataArchive=data;
+  this.mode_PotInstal=true;
+}
+
+interconexiones(title,data){
+  this.dataArchive=data;
+  this.mode_Interconexiones=true;
+}
+
+demandaInterrumpible(title,data){
+  this.dataArchive=data;
+  this.mode_DemandaInterrumpible=true;
+}
 
 }

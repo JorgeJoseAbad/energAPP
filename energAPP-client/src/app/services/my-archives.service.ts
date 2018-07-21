@@ -73,11 +73,12 @@ constructor(private http: HttpClient) { }
   keeparchiveinservice(archive){
     //console.log("in sendarchive(archive) del servcio");
     this.keepedFile=JSON.parse(archive
-       .replace("IND_MaxMinRenovEol(", "")
-       .replace("IND_MaxMin(", "")
-       .replace("IND_DemandaRealGen(","")
-       .replace("IND_DemandaPrevProg(","")
-       .replace(");", ""));
+       .replace("IND_MaxMinRenovEol(","{\"IND_MaxMinRenovEol\" :")
+       .replace("IND_MaxMin(", "{\"IND_MaxMin\" :")
+       .replace("IND_DemandaRealGen(","{\"IND_DemandaRealGen\" :")
+       .replace("IND_DemandaPrevProg(","{\"IND_DemandaPrevProg\" :")
+       .replace(");", "}")
+     );
 
 
   }

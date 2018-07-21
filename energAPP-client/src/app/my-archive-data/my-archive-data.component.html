@@ -8,21 +8,21 @@
   <canvas id="canvas">{{ myChart }}</canvas>
 </div>
 
-<div *ngIf="dataArchive && modeFileOne">
+<div *ngIf="dataArchive && mode_energyAnualMensual">
   <ul><li *ngFor="let data of dataArchive">
     Year: {{data["Año"]}}
     Energy: {{data["GWh"]}}
   </li></ul>
 </div>
 
-<div *ngIf="dataArchive && modeFileTwo">
+<div *ngIf="dataArchive && mode_EntitledParticipants">
   <ul><li *ngFor="let data of dataArchive">
-    Participant: {{data["Participant"]}}
+    {{data["Participant"]}}
     EIC code: {{data["EIC Code"]}}
   </li></ul>
 </div>
 
-<div *ngIf="dataArchive && modeFileThree">
+<div *ngIf="dataArchive && mode_BalanceResponsibleParties">
   <ul><li *ngFor="let data of dataArchive">
     <b>BRP code: </b>{{data["BRP Code"]}}
     <b>Name: </b>{{data["Name"]}}
@@ -31,7 +31,7 @@
   </li></ul>
 </div>
 
-<div *ngIf="dataArchive && modeFileFour">
+<div *ngIf="dataArchive && mode_ProgrammingUnits">
   <ul><li *ngFor="let data of dataArchive">
 
       <b>BRP </b>Code{{data["BRP Code"]}}
@@ -49,7 +49,97 @@
   </li></ul>
 </div>
 
-<div *ngIf="dataArchive && modeFilePVPC">
+<div *ngIf="dataArchive && mode_GenerationUnits">
+  <ul><li *ngFor="let data of dataArchive">
+
+    Data received!!!
+
+  </li></ul>
+</div>
+
+<div *ngIf="dataArchive && mode_ParticipantesSubasta">
+  <ul><li *ngFor="let data of dataArchive">
+
+  {{data|json}}
+    Data received!!!
+
+  </li></ul>
+</div>
+
+
+<div *ngIf="dataArchive && mode_SujetosMercado">
+  <ul><li *ngFor="let data of dataArchive">
+
+  {{data|json}}
+    Data received!!!
+
+  </li></ul>
+</div>
+
+
+<div *ngIf="dataArchive && mode_UnidadesProgramacion">
+  <ul><li *ngFor="let data of dataArchive">
+
+  {{data|json}}
+    Data received!!!
+
+  </li></ul>
+</div>
+
+
+<div *ngIf="dataArchive && mode_unidadesFisicas">
+  <ul><li *ngFor="let data of dataArchive">
+
+  {{data|json}}
+    Data received!!!
+
+  </li></ul>
+</div>
+
+<div *ngIf="dataArchive && mode_Ind_MaxMinRenovEol">
+  <div *ngFor="let data of dataArchive">
+
+    <b>maxRenov: </b>{{data["maxRenov"]}}<br>
+    <b>minRenov: </b>{{data["minRenov"]}}<br>
+    <b>maxEol: </b>{{data["maxEol"]}}<br>
+    <b>minEol: </b>{{data["minEol"]}}<br>
+    <b>tsMaxRenov: </b>{{data["tsMaxRenov"]}}<br>
+    <b>tsMinEol: </b>{{data["tsMinEol"]}}<br>
+    <b>tsMinRenov: </b>{{data["tsMinRenov"]}}
+
+  </div>
+</div>
+
+<div *ngIf="dataArchive && mode_Ind_MaxMin">
+  <div *ngFor="let data of dataArchive">
+
+    <b>max: </b>{{data["max"]}}<br>
+    <b>min: </b>{{data["min"]}}<br>
+    <b>timeStampMax: </b>{{data["timeStampMax"]}}<br>
+    <b>timeStampMin: </b>{{data["timeStampMin"]}}<br>
+    <b>date: </b>{{data["date"]}}
+
+</div>
+</div>
+
+<div *ngIf="dataArchive && mode_Ind_DemandaRealGen">
+  <div *ngFor="let data of dataArchive">
+
+  {{data|json}}
+
+</div>
+</div>
+
+
+<div *ngIf="dataArchive && mode_Ind_DemandaPrevProg">
+  <div *ngFor="let data of dataArchive">
+
+  {{data|json}}
+
+</div>
+</div>
+
+<div *ngIf="dataArchive && mode_FilePVPC">
   <ul><li *ngFor="let data of dataArchive">
 
       {{data|json}}
@@ -61,6 +151,48 @@
   <ul><li *ngFor="let data of dataArchive">
 
       <b>{{data[0]}}: </b>{{data[1]}}
+
+  </li></ul>
+</div>
+
+
+<div *ngIf="dataArchive && mode_Ind_PrecioFinal">
+  <ul><li *ngFor="let data of dataArchive">
+
+      {{data|json}}
+
+  </li></ul>
+</div>
+
+<div *ngIf="dataArchive && mode_Ind_PrecioDesvios">
+  <ul><li *ngFor="let data of dataArchive">
+
+      {{data|json}}
+
+  </li></ul>
+</div>
+
+
+<div *ngIf="dataArchive && mode_PotInstal">
+  <ul><li *ngFor="let data of dataArchive">
+
+      {{data|json}}
+
+  </li></ul>
+</div>
+
+<div *ngIf="dataArchive && mode_Interconexiones">
+  <ul><li *ngFor="let data of dataArchive">
+
+      {{data|json}}
+
+  </li></ul>
+</div>
+
+<div *ngIf="dataArchive && mode_DemandaInterrumpible">
+  <ul><li *ngFor="let data of dataArchive">
+
+      {{data|json}}
 
   </li></ul>
 </div>
