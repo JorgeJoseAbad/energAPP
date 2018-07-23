@@ -15,6 +15,49 @@
   </li></ul>
 </div>
 
+<div *ngIf="dataArchive && mode_Ind_MaxMinRenovEol">
+  <div *ngFor="let data of dataArchive">
+
+    <b>maxRenov: </b>{{data["maxRenov"]}}<br>
+    <b>minRenov: </b>{{data["minRenov"]}}<br>
+    <b>maxEol: </b>{{data["maxEol"]}}<br>
+    <b>minEol: </b>{{data["minEol"]}}<br>
+    <b>tsMaxRenov: </b>{{data["tsMaxRenov"]}}<br>
+    <b>tsMinEol: </b>{{data["tsMinEol"]}}<br>
+    <b>tsMinRenov: </b>{{data["tsMinRenov"]}}
+
+  </div>
+</div>
+
+<div *ngIf="dataArchive && mode_Ind_MaxMin">
+  <div *ngFor="let data of dataArchive">
+
+    <b>max: </b>{{data["max"]}}<br>
+    <b>min: </b>{{data["min"]}}<br>
+    <b>timeStampMax: </b>{{data["timeStampMax"]}}<br>
+    <b>timeStampMin: </b>{{data["timeStampMin"]}}<br>
+    <b>date: </b>{{data["date"]}}
+
+ </div>
+</div>
+
+
+<div *ngIf="dataArchive && mode_Ind_DemandaRealGen">
+  <div *ngFor="let data of dataArchive">
+
+  {{data|json}}
+
+ </div>
+</div>
+
+<div *ngIf="dataArchive && mode_Ind_DemandaPrevProg">
+  <div *ngFor="let data of dataArchive">
+
+   {{data|json}}
+
+  </div>
+</div>
+
 <div *ngIf="dataArchive && mode_EntitledParticipants">
   <ul><li *ngFor="let data of dataArchive">
     {{data["Participant"]}}
@@ -96,48 +139,6 @@
   </li></ul>
 </div>
 
-<div *ngIf="dataArchive && mode_Ind_MaxMinRenovEol">
-  <div *ngFor="let data of dataArchive">
-
-    <b>maxRenov: </b>{{data["maxRenov"]}}<br>
-    <b>minRenov: </b>{{data["minRenov"]}}<br>
-    <b>maxEol: </b>{{data["maxEol"]}}<br>
-    <b>minEol: </b>{{data["minEol"]}}<br>
-    <b>tsMaxRenov: </b>{{data["tsMaxRenov"]}}<br>
-    <b>tsMinEol: </b>{{data["tsMinEol"]}}<br>
-    <b>tsMinRenov: </b>{{data["tsMinRenov"]}}
-
-  </div>
-</div>
-
-<div *ngIf="dataArchive && mode_Ind_MaxMin">
-  <div *ngFor="let data of dataArchive">
-
-    <b>max: </b>{{data["max"]}}<br>
-    <b>min: </b>{{data["min"]}}<br>
-    <b>timeStampMax: </b>{{data["timeStampMax"]}}<br>
-    <b>timeStampMin: </b>{{data["timeStampMin"]}}<br>
-    <b>date: </b>{{data["date"]}}
-
-</div>
-</div>
-
-<div *ngIf="dataArchive && mode_Ind_DemandaRealGen">
-  <div *ngFor="let data of dataArchive">
-
-  {{data|json}}
-
-</div>
-</div>
-
-
-<div *ngIf="dataArchive && mode_Ind_DemandaPrevProg">
-  <div *ngFor="let data of dataArchive">
-
-  {{data|json}}
-
-</div>
-</div>
 
 <div *ngIf="dataArchive && mode_FilePVPC">
   <ul><li *ngFor="let data of dataArchive">
@@ -147,7 +148,7 @@
   </li></ul>
 </div>
 
-<div *ngIf="dataArchive && modeFileUmbrales">
+<div *ngIf="dataArchive && mode_Ind_Umbrales">
   <ul><li *ngFor="let data of dataArchive">
 
       <b>{{data[0]}}: </b>{{data[1]}}
@@ -173,7 +174,7 @@
 </div>
 
 
-<div *ngIf="dataArchive && mode_PotInstal">
+<div *ngIf="dataArchive && mode_Ind_PotInstal">
   <ul><li *ngFor="let data of dataArchive">
 
       {{data|json}}
@@ -181,7 +182,7 @@
   </li></ul>
 </div>
 
-<div *ngIf="dataArchive && mode_Interconexiones">
+<div *ngIf="dataArchive && mode_Ind_Interconexiones">
   <ul><li *ngFor="let data of dataArchive">
 
       {{data|json}}
@@ -189,7 +190,7 @@
   </li></ul>
 </div>
 
-<div *ngIf="dataArchive && mode_DemandaInterrumpible">
+<div *ngIf="dataArchive && mode_Ind_DemandaInterrumpible">
   <ul><li *ngFor="let data of dataArchive">
 
       {{data|json}}

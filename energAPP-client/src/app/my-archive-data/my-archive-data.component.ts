@@ -30,12 +30,12 @@ export class MyArchiveDataComponent implements OnInit {
  mode_UnidadesProgramacion:boolean=false;
  mode_unidadesFisicas:boolean=false;
  mode_FilePVPC:any=false;
- modeFileUmbrales:any=false;
+ mode_Ind_Umbrales:any=false;
  mode_Ind_PrecioFinal:any=false;
  mode_Ind_PrecioDesvios:boolean=false;
- mode_PotInstal:boolean=false;
- mode_Interconexiones:boolean=false;
- mode_DemandaInterrumpible:boolean=false;
+ mode_Ind_PotInstal:boolean=false;
+ mode_Ind_Interconexiones:boolean=false;
+ mode_Ind_DemandaInterrumpible:boolean=false;
 
   constructor(private route: ActivatedRoute,
               private archivesservice: MyArchivesService,
@@ -43,24 +43,24 @@ export class MyArchiveDataComponent implements OnInit {
 
   ngOnInit() {
     this.archive=this.archivesservice.getarchivefromservice();
-    this.processDataFile(this.archive);
+    this.selectFunctionDataFile(this.archive);
   }
 
 
   /**
-    * Process JSON data file from REE server processDataFile
-    * documentation for JSDoc
+    * Documentation for JSDoc
+    * selectFunctionDataFile
+    * select JSON data file title to send data of file to
+    * proper function to process.
     * @constructor
     * @param {object} archive - the data file from REE
     */
-  processDataFile(archive){
+  selectFunctionDataFile(archive){
     console.log(archive);
 
     this.titleArchive=Object.keys(archive)[0];
+    console.log("------->",this.titleArchive);
     this.dataArchive=Object.values(Object.values(archive));
-
-
-
 
       switch(this.titleArchive) {
       case "EnergiaAnual":
@@ -106,10 +106,10 @@ export class MyArchiveDataComponent implements OnInit {
           this.unidadesFisicas(this.titleArchive,this.dataArchive);
           break;
       case "0":
-          this.pvpcA(this.titleArchive,this.dataArchive);
+          this.zero_pvpc(this.titleArchive,this.dataArchive);
           break;
       case "PVPC":
-          this.pvpcB(this.titleArchive,this.dataArchive);
+          this.pvpc(this.titleArchive,this.dataArchive);
           break;
       case "Umbrales":
           this.umbrales(this.titleArchive,this.archive);
@@ -412,7 +412,7 @@ unidadesFisicas(title,data){
   this.mode_unidadesFisicas=true;
 }
 
-pvpcA(title,data){
+zero_pvpc(title,data){
   console.log("In PVPC",title,data);
   let titulos=[];
   let xAxisData1=[];
@@ -445,7 +445,7 @@ pvpcA(title,data){
 
 }
 
-pvpcB(title,data){
+pvpc(title,data){
   console.log("IN PVPC-B",title,data)
   console.log(typeof(data));
   let dia=[];
@@ -543,7 +543,7 @@ drawPVPC(axisX,...axis){
    })
    console.log(arrData);
    this.dataArchive=arrData;
-   this.modeFileUmbrales=true;
+   this.mode_Ind_Umbrales=true;
 
  }
 
@@ -560,17 +560,17 @@ precioDesvíos(title,data){
 
 potInstal(title,data){
   this.dataArchive=data;
-  this.mode_PotInstal=true;
+  this.mode_Ind_PotInstal=true;
 }
 
 interconexiones(title,data){
   this.dataArchive=data;
-  this.mode_Interconexiones=true;
+  this.mode_Ind_Interconexiones=true;
 }
 
 demandaInterrumpible(title,data){
   this.dataArchive=data;
-  this.mode_DemandaInterrumpible=true;
+  this.mode_Ind_DemandaInterrumpible=true;
 }
 
 }
