@@ -85,7 +85,7 @@ export class MyListArchivesComponent implements OnInit {
      );
   }
 
-  getarchive(part_url_archive){
+  getarchive(part_url_archive,name){
     let full_url_archive;
     if (typeof(part_url_archive)=="number"){
       full_url_archive=`${this.base_url}`+'archives/'+part_url_archive
@@ -114,7 +114,7 @@ export class MyListArchivesComponent implements OnInit {
 
                     this.archive=response;
                     console.log(this.archive);
-                    this.archivesservice.keeparchiveinservice(this.archive);
+                    this.archivesservice.keeparchiveinservice(this.archive,name);
         },
         error=>{
           this.error=error;

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ElementRef} from '@angular/core';
+import { DoCheck } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MyArchivesService} from '../services/my-archives.service';
 import { ChartsModule } from 'ng2-charts';
@@ -9,12 +10,15 @@ import { Chart } from 'chart.js';
   templateUrl: './my-archive-data.component.html',
   styleUrls: ['./my-archive-data.component.css']
 })
-export class MyArchiveDataComponent implements OnInit {
+export class MyArchiveDataComponent implements OnInit{
  archive:any;
+ archiveName:any;
  myChart:any;
  myBarChart:any;
- titleArchive:any;
+ keyArchive:any;
  dataArchive:any;
+ globalIndex:any=0
+ time:any;
 
  mode_energyAnualMensual:any=false;
  mode_Ind_MaxMinRenovEol:any=false;
@@ -43,14 +47,17 @@ export class MyArchiveDataComponent implements OnInit {
 
   ngOnInit() {
     this.archive=this.archivesservice.getarchivefromservice();
+    this.archiveName=this.archivesservice.getNameOfArchive();
     this.selectFunctionDataFile(this.archive);
   }
+
+
 
 
   /**
     * Documentation for JSDoc
     * selectFunctionDataFile
-    * select JSON data file title to send data of file to
+    * select JSON data file object key to send value (data) of file to
     * proper function to process.
     * @constructor
     * @param {object} archive - the data file from REE
@@ -58,76 +65,76 @@ export class MyArchiveDataComponent implements OnInit {
   selectFunctionDataFile(archive){
     console.log(archive);
 
-    this.titleArchive=Object.keys(archive)[0];
-    console.log("------->",this.titleArchive);
+    this.keyArchive=Object.keys(archive)[0];
+    console.log("------->",this.keyArchive);
     this.dataArchive=Object.values(Object.values(archive));
 
-      switch(this.titleArchive) {
+      switch(this.keyArchive) {
       case "EnergiaAnual":
-          this.energyAnualMensual(this.titleArchive,this.dataArchive);
+          this.energyAnualMensual(this.keyArchive,this.dataArchive);
           break;
       case "EnergiaMensual":
-          this.energyAnualMensual(this.titleArchive,this.dataArchive);
+          this.energyAnualMensual(this.keyArchive,this.dataArchive);
           break;
       case "IND_MaxMinRenovEol":
-          this.ind_MaxMinRenovEol(this.titleArchive,this.dataArchive);
+          this.ind_MaxMinRenovEol(this.keyArchive,this.dataArchive);
           break;
       case "IND_MaxMin":
-          this.ind_MaxMin(this.titleArchive,this.dataArchive);
+          this.ind_MaxMin(this.keyArchive,this.dataArchive);
           break;
       case "IND_DemandaRealGen":
-          this.ind_DemandaRealGen(this.titleArchive,this.dataArchive);
+          this.ind_DemandaRealGen(this.keyArchive,this.dataArchive);
           break;
       case "IND_DemandaPrevProg":
-          this.ind_DemandaPrevProg(this.titleArchive,this.dataArchive);
+          this.ind_DemandaPrevProg(this.keyArchive,this.dataArchive);
           break;
       case "EntitledParticipants":
-          this.entitledParticipants(this.titleArchive,this.dataArchive);
+          this.entitledParticipants(this.keyArchive,this.dataArchive);
           break;
       case "BalanceResponsibleParties":
-          this.balanceResponsibleParties(this.titleArchive,this.dataArchive);
+          this.balanceResponsibleParties(this.keyArchive,this.dataArchive);
           break;
       case "ProgrammingUnits":
-          this.programmingUnits(this.titleArchive,this.dataArchive);
+          this.programmingUnits(this.keyArchive,this.dataArchive);
           break;
       case "GenerationUnits":
-          this.generationUnits(this.titleArchive,this.dataArchive);
+          this.generationUnits(this.keyArchive,this.dataArchive);
           break;
       case "ParticipantesSubasta":
-          this.participantesSubasta(this.titleArchive,this.dataArchive);
+          this.participantesSubasta(this.keyArchive,this.dataArchive);
           break;
       case "SujetosMercado":
-          this.sujetosMercado(this.titleArchive,this.dataArchive);
+          this.sujetosMercado(this.keyArchive,this.dataArchive);
           break;
       case "UnidadesProgramacion":
-          this.unidadesProgramacion(this.titleArchive,this.dataArchive);
+          this.unidadesProgramacion(this.keyArchive,this.dataArchive);
           break;
       case "UnidadesFisicas":
-          this.unidadesFisicas(this.titleArchive,this.dataArchive);
+          this.unidadesFisicas(this.keyArchive,this.dataArchive);
           break;
       case "0":
-          this.zero_pvpc(this.titleArchive,this.dataArchive);
+          this.zero_pvpc(this.keyArchive,this.dataArchive);
           break;
       case "PVPC":
-          this.pvpc(this.titleArchive,this.dataArchive);
+          this.pvpc(this.keyArchive,this.dataArchive);
           break;
       case "Umbrales":
-          this.umbrales(this.titleArchive,this.archive);
+          this.umbrales(this.keyArchive,this.archive);
           break;
       case "PrecioFinal":
-          this.precioFinal(this.titleArchive,this.archive);
+          this.precioFinal(this.keyArchive,this.archive);
           break;
       case "PrecioDesvíos":
-          this.precioDesvíos(this.titleArchive,this.dataArchive);
+          this.precioDesvíos(this.keyArchive,this.dataArchive);
           break;
       case "PotInstal":
-          this.potInstal(this.titleArchive,this.dataArchive);
+          this.potInstal(this.keyArchive,this.dataArchive);
           break;
       case "Interconexiones":
-          this.interconexiones(this.titleArchive,this.dataArchive);
+          this.interconexiones(this.keyArchive,this.dataArchive);
           break;
       case "DemandaInterrumpible":
-          this.demandaInterrumpible(this.titleArchive,this.dataArchive);
+          this.demandaInterrumpible(this.keyArchive,this.dataArchive);
           break;
       default:
      }
@@ -205,7 +212,6 @@ ind_MaxMinRenovEol(title,data){
   arr.push(data[0]);
   this.dataArchive=arr;
   console.log(arr);
-
   this.mode_Ind_MaxMinRenovEol=true;
 }
 
@@ -227,13 +233,279 @@ ind_DemandaRealGen(title,data){
   console.log(object);
 
   this.dataArchive=object;
+  //this.createPieChart_DemandaRealGen(object);
+  this.createStakedChart_DemandaRealGen(object);
   this.mode_Ind_DemandaRealGen=true;
 }
+
+newData(){
+  this.globalIndex++;
+  this.createPieChart_DemandaRealGen(this.dataArchive);
+  console.log(this.globalIndex,this.myChart.data.labels);
+  this.myChart.update();
+}
+
+createPieChart_DemandaRealGen(...axis){
+
+  console.log(axis);
+
+  let axisA=axis["0"];
+  console.log("AxisA-----> leng",axisA.length);
+  console.log(this.globalIndex);
+  let labels=Object.keys(axisA[this.globalIndex]);
+  let datas=Object.values(axisA[this.globalIndex]);
+
+  let dateLabel=labels.shift();
+  let date=datas.shift();
+  this.time=date;
+
+  console.log(labels,datas);
+
+ let htmlRef = this.elementRef.nativeElement.querySelector(`#canvas`);
+
+ this.myChart = new Chart(htmlRef, {
+         type: 'pie',
+
+         data: {
+           labels: labels,
+           datasets: [
+             {
+               data: datas,
+               borderColor: "#3cba9f",
+               backgroundColor: ["#ffaa00","#bbaa00","#11aa00","#ffcc00","#33aaff",
+                  "#aaaa00","#ee4400","#cc7711","#dd0055","#111100","#66aaff",
+                "#333333","#555555","#222222","#aa44aa"],
+               fill: false
+             },
+           ]
+         }, //data
+
+         options: {
+           legend: {
+             display: true
+           },
+           scales: {
+             xAxes: [{
+               display: false
+             }],
+             yAxes: [{
+               display: false
+             }],
+           }
+         } //options
+
+       });
+
+
+}
+
+/* stacked chart */
+createStakedChart_DemandaRealGen(...axis){
+
+  console.log("axis--------------->",axis);
+
+  let axisA=axis["0"];
+  console.log("AxisA-----> ",axisA);
+  let timeline=[];
+
+  let aut=[];
+  let car=[];
+  let cc=[];
+  let cogenResto=[];
+  let dem=[];
+  let eol=[];
+  let gf=[];
+  let hid=[];
+  let icb=[];
+  let inter=[];
+  let nuc=[];
+  let sol=[];
+  let solFot=[];
+  let solTer=[];
+  let termRenov=[];
+
+  let labels=Object.keys(axisA[0]);
+
+  axisA.forEach(function(d){
+    timeline.push(d.ts)
+    aut.push(d.aut)
+    car.push(d.car)
+    cc.push(d.cc)
+    cogenResto.push(d.cogenResto)
+    dem.push(d.dem)
+    eol.push(d.eol);
+    gf.push(d.gf);
+    hid.push(d.hid);
+    icb.push(d.icb);
+    inter.push(d.inter);
+    nuc.push(d.nuc);
+    sol.push(d.sol);
+    solFot.push(d.solFot);
+    solTer.push(d.solTer);
+    termRenov.push(d.termRenov);
+  })
+
+console.log(timeline);
+
+ let htmlRef = this.elementRef.nativeElement.querySelector(`#canvas`);
+
+ this.myChart = new Chart(htmlRef, {
+         type: 'line',
+
+         data: {
+           labels: timeline,
+           datasets: [
+             {
+               label: 'aut',
+               data: aut,
+               borderColor: "#3cba9f",
+               backgroundColor: ["#ffaa00"],
+               pointRadius: 0,
+               fill: true
+             },
+             {
+               label: 'car',
+               data: car,
+               borderColor: "#3cba9f",
+               backgroundColor: ["#aaee66"],
+               pointRadius: 0,
+               fill: true
+             },
+             {
+               label: 'cc',
+               data: cc,
+               borderColor: "#3cba9f",
+               backgroundColor: ["#234"],
+               pointRadius: 0,
+               fill: true
+             },
+             {
+               label: 'cogenResto',
+               data: cogenResto,
+               borderColor: "#3cba9f",
+               backgroundColor: ["#564"],
+               pointRadius: 0,
+               fill: true
+             },
+             {
+               label: 'dem',
+               data: dem,
+               borderColor: "#3cba9f",
+               backgroundColor: ["#282"],
+               pointRadius: 0,
+               fill: true
+             },
+             {
+               label: 'eol',
+               data: eol,
+               borderColor: "#3cba9f",
+               backgroundColor: ["#736"],
+               pointRadius: 0,
+               fill: true
+             },
+             {
+               label: 'gf',
+               data: gf,
+               borderColor: "#3cba9f",
+               backgroundColor: ["#345"],
+               pointRadius: 0,
+               fill: true
+             },
+             {
+               label: 'hid',
+               data: hid,
+               borderColor: "#3cba9f",
+               backgroundColor: ["#f1e"],
+               pointRadius: 0,
+               fill: true
+             },
+             {
+               label: 'icb',
+               data: icb,
+               borderColor: "#3cba9f",
+               backgroundColor: ["#23c"],
+               pointRadius: 0,
+               fill: true
+             },
+             {
+               label: 'inter',
+               data: inter,
+               borderColor: "#3cba9f",
+               backgroundColor: ["#ccc"],
+               pointRadius: 0,
+               fill: true
+             },
+             {
+               label: 'nuc',
+               data: nuc,
+               borderColor: "#3cba9f",
+               backgroundColor: ["#aae"],
+               pointRadius: 0,
+               fill: true
+             },
+             {
+               label: 'sol',
+               data: sol,
+               borderColor: "#3cba9f",
+               backgroundColor: ["#bbb"],
+               pointRadius: 0,
+               fill: true
+             },
+             {
+               label: 'solFot',
+               data: solFot,
+               borderColor: "#3cba9f",
+               backgroundColor: ["#2f3"],
+               pointRadius: 0,
+               fill: true
+             },
+             {
+               label: 'solTer',
+               data: solTer,
+               borderColor: "#3cba9f",
+               backgroundColor: ["#3af"],
+               pointRadius: 0,
+               fill: true
+             },
+             {
+               label: 'termRenov',
+               data: termRenov,
+               borderColor: "#3cba9f",
+               backgroundColor: ["#777"],
+               pointRadius: 0,
+               fill: true
+             },
+           ]
+         }, //data
+
+         options: {
+           legend: {
+             display: true
+           },
+           scales: {
+             xAxes: [{
+               display: true
+             }],
+             yAxes: [{
+               display: true,
+               stacked: true
+             }],
+           }
+         } //options
+
+       });
+
+
+}
+
 
 ind_DemandaPrevProg(title,data){
   console.log(data);
 
   this.dataArchive=data[0].valoresPrevistaProgramada;
+  let object:any;
+  object=data[0].valoresPrevistaProgramada;
+  this.createPieChart_DemandaRealGen(object);
   this.mode_Ind_DemandaPrevProg=true;
 }
 

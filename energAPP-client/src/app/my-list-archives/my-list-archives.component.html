@@ -12,7 +12,7 @@
       Name: {{archive.name}}<br>
       Description: {{archive.description}}<br>
       <button (click)=getarchive(archive.id)>Get Archive preview</button>
-      <div *ngIf="archive.json_download"><button (click)=getarchive(archive.json_download.url)>Get Archive JSON value</button></div>
+      <div *ngIf="archive.json_download"><button (click)=getarchive(archive.json_download.url,archive.name)>Get Archive JSON value</button></div>
       <div *ngIf="archive.download"><button (click)=getarchive(archive.download.url)>Get Archive value</button></div>
 
     </div>

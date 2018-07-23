@@ -23,6 +23,7 @@ httpParams={
 }
 
 keepedFile:any;
+archiveName:any;
 
 constructor(private http: HttpClient) { }
 
@@ -70,7 +71,7 @@ constructor(private http: HttpClient) { }
     * @param {text} archive - the data file from REE, text format
     * @return {object} keepedFile
     */
-  keeparchiveinservice(archive){
+  keeparchiveinservice(archive,name){
     //console.log("in sendarchive(archive) del servcio");
     this.keepedFile=JSON.parse(archive
        .replace("IND_MaxMinRenovEol(","{\"IND_MaxMinRenovEol\" :")
@@ -80,12 +81,18 @@ constructor(private http: HttpClient) { }
        .replace(");", "}")
      );
 
+     this.archiveName=name;
+
 
   }
 
   getarchivefromservice(){
     //console.log("llamada a getmyarchive desde myarchivedata");
     return this.keepedFile;
+  }
+
+  getNameOfArchive(){
+    return this.archiveName;
   }
 
 }
