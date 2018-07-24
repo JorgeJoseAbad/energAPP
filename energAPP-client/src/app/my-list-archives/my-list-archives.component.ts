@@ -67,9 +67,9 @@ export class MyListArchivesComponent implements OnInit {
       );
   }
 
-
-  getarchivesjsonlistfiltered(){
-    this.archivesservice.getarchiveslistfiltered(this.archives_json_url)
+  // filtering is only posible for non-JSON files, so this.archives_url
+  getarchiveslistfiltered(taxTerm){
+    this.archivesservice.getarchiveslistfiltered(this.archives_url,taxTerm)
      .subscribe(
        (archives) => {
                        this.archives = archives;
@@ -123,6 +123,78 @@ export class MyListArchivesComponent implements OnInit {
         ()=>{this.router.navigate(['archive-data']);}
       )
     }
+  }
+
+  getarchivesByDate(value){
+    console.log("getarchivesByDate()",value);
+    let full_url_archive;
+    full_url_archive=`${this.base_url}`+'archives/';
+    console.log(full_url_archive);
+    let query_params;
+    query_params=value+':59.000+00:00'; //seconds.microseconds and ??
+    console.log(query_params);
+    this.archivesservice.getArchivesByDate(full_url_archive,query_params)
+      .subscribe(
+        (response:any)=>{
+          this.archive=response;
+          console.log(this.archive);
+          this.listarchives=this.archive.archives;
+
+        },
+        error=>{
+          this.error=error;
+          console.error('Oops:', error.message);
+        },
+      )
+  }
+
+
+  getarchivesDateTaxonomy(myDate,taxterm){
+    console.log(myDate,taxterm);
+    let full_url_archive;
+    full_url_archive=`${this.base_url}`+'archives/';
+    let date_query=myDate+'59.000+00:00';
+
+    this.archivesservice.getArchivesDateTaxonomy(full_url_archive,date_query,taxterm)
+    .subscribe(
+      (response:any)=>{
+        this.archive=response;
+        console.log(this.archive);
+        this.listarchives=this.archive.archives;
+
+      },
+      error=>{
+        this.error=error;
+        console.error('Oops:', error.message);
+      },
+    )
+  }
+
+  getarchivesStartEndDate(start,end){
+    console.log(start,end);
+
+    let full_url_archive;
+    full_url_archive=`${this.base_url}`+'archives/';
+
+    let start_query,end_query;
+    start_query=start+':59.000+00:00';
+    end_query=end+':59.000+00:00';
+
+    this.archivesservice.getArchivesByDateStartEnd(full_url_archive,start_query,end_query)
+    .subscribe(
+      (response:any)=>{
+        this.archive=response;
+        console.log(this.archive);
+        this.listarchives=this.archive.archives;
+
+      },
+      error=>{
+        this.error=error;
+        console.error('Oops:', error.message);
+      },
+    )
+
+
   }
 
 }

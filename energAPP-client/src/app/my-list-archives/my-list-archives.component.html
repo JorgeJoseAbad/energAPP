@@ -1,11 +1,62 @@
 
   <pre>get archives across service..</pre>
   <button (click)=getarchiveslist()>get archives list</button>
-  <button (click)=getarchivesjsonlist()>get archives_JSON list</button>
-  <button (click)=getarchivesjsonlistfiltered()>get archives JSON list filtered by taxonomy term Potencia</button>
+  <button (click)=getarchivesjsonlist()>get JSON archives list</button>
+  <div id="filterByTaxonomyTerm">
+    <select name="TaxonomyTerm" #myTaxTerm (keyup)="0">
+      <option value="Potencia">Potencia</option>
+      <option value="Energia">Energía</option>
+      <option value="Generación y consumo">Generación y consumo</option>
+      <option value="Mercados y precios">Mercados y precios</option>
+      <option value="Sistemas no peninsulares">Sistemas no peninsulares</option>
+      <option value="Descargas">Descargas</option>
+      <option value="Liquidaciones">Liquidaciones</option>
+      <option value="Pérdidas">Pérdidas</option>
+      <option value="Medidas">Medidas</option>
+    </select>
+    <button (click)=getarchiveslistfiltered(myTaxTerm.value)>get archives JSON list filtered by taxonomy term</button>
+  </div>
+  <div id="fileByDate">
+    <p>Select a date to filter archives</p>
+    <input type="datetime-local" #myInput (keyup)="0"/>
+    <button (click)=getarchivesByDate(myInput.value)>get archives by date</button>
+  </div>
+
+  <div id="fileByDateFilterTaxonomy">
+    <p>Select a date to filter archives and a taxonomy term</p>
+    <input type="datetime-local" #myDate (keyup)="0"/>
+    <select name="TaxonomyTerm" #taxTerm (keyup)="0">
+      <option value="Potencia">Potencia</option>
+      <option value="Energia">Energía</option>
+      <option value="Generación y consumo">Generación y consumo</option>
+      <option value="Mercados y precios">Mercados y precios</option>
+      <option value="Sistemas no peninsulares">Sistemas no peninsulares</option>
+      <option value="Descargas">Descargas</option>
+      <option value="Liquidaciones">Liquidaciones</option>
+      <option value="Pérdidas">Pérdidas</option>
+      <option value="Medidas">Medidas</option>
+
+    </select>
+    <button (click)=getarchivesDateTaxonomy(myDate.value,taxTerm.value)>get archives between two dates</button>
+
+  </div>
+
+  <div id="fileByStartDateEndDateDateType">
+    <p>Select a date Start filter archives</p>
+    <input type="datetime-local" #myStartDate (keyup)="0"/>
+
+    <p>Select a date End filter archives</p>
+    <input type="datetime-local" #myEndDate (keyup)="0"/>
+
+    <button (click)=getarchivesStartEndDate(myStartDate.value,myEndDate.value)>get archives between two dates</button>
+
+  </div>
+
+
   <div *ngIf="previewFile">
      {{previewFile|json}}
    </div>
+
   <li *ngFor="let archive of listarchives">
     <div class="archive-list-item">
       ID: {{archive.id}}<br>
