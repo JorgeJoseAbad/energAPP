@@ -1,3 +1,8 @@
+.downloadOption{
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
 .archive-list-item{
   border-top: 2px solid blue;
   background-color: rgb(229, 229, 246);

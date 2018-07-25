@@ -1,8 +1,19 @@
 
-  <pre>get archives across service..</pre>
-  <button (click)=getarchiveslist()>get archives list</button>
-  <button (click)=getarchivesjsonlist()>get JSON archives list</button>
-  <div id="filterByTaxonomyTerm">
+  <pre>Download file listings and data files through a service..</pre>
+
+  <div class="downloadOption" id="getarchiveslist">
+    <b> Get a list of non-JSON archives </b>
+    <button (click)=getarchiveslist()>get archives list</button>
+  </div>
+
+  <div class="downloadOption" id="getarchivesjsonlist">
+    <b>Get a list of JSON archives</b>
+    <button (click)=getarchivesjsonlist()>get JSON archives list</button>
+  </div>
+
+  <div class="downloadOption" id="filterByTaxonomyTerm">
+    <b>Get a list of non-JSON archives filtered by taxonomy term</b>
+    <i>Select taxonomy term:</i>
     <select name="TaxonomyTerm" #myTaxTerm (keyup)="0">
       <option value="Potencia">Potencia</option>
       <option value="Energia">Energía</option>
@@ -16,15 +27,21 @@
     </select>
     <button (click)=getarchiveslistfiltered(myTaxTerm.value)>get archives JSON list filtered by taxonomy term</button>
   </div>
-  <div id="fileByDate">
-    <p>Select a date to filter archives</p>
+
+
+  <!--Este bloque readaptable a Getting a specific Archive GET /archives/3186?date=2015-09-15T23%3A59%3A59%2B00%3A00-->
+  <div class="downloadOption" id="getarchivesByDate">
+    <b>Get a list of Archives filtered by date and time</b>
+    <i>Select date: </i>
     <input type="datetime-local" #myInput (keyup)="0"/>
     <button (click)=getarchivesByDate(myInput.value)>get archives by date</button>
   </div>
 
-  <div id="fileByDateFilterTaxonomy">
-    <p>Select a date to filter archives and a taxonomy term</p>
+  <div class="downloadOption" id="getarchivesDateTaxonomy">
+    <b>Get a list of Archives filtered by date - time and taxonomy term</b>
+    <i>Select date: </i>
     <input type="datetime-local" #myDate (keyup)="0"/>
+    <i>Select taxonomy term: </i>
     <select name="TaxonomyTerm" #taxTerm (keyup)="0">
       <option value="Potencia">Potencia</option>
       <option value="Energia">Energía</option>
@@ -41,15 +58,29 @@
 
   </div>
 
-  <div id="fileByStartDateEndDateDateType">
-    <p>Select a date Start filter archives</p>
+  <div class="downloadOption" id="getarchivesStartEndDateDateType">
+    <b>Get a list of archives filtered by start and end date and date type datos or publication</b>
+    <i>Start date: </i>
     <input type="datetime-local" #myStartDate (keyup)="0"/>
 
-    <p>Select a date End filter archives</p>
+    <i>End date: </i>
     <input type="datetime-local" #myEndDate (keyup)="0"/>
 
-    <button (click)=getarchivesStartEndDate(myStartDate.value,myEndDate.value)>get archives between two dates</button>
+    <b>Date type</b>
+    <select name="DateType" #myType (keyup)="0">
+      <option value="datos">datos</option>
+      <option value="publicacion">publicacion</option>
+    </select>
 
+    <button (click)=getarchivesStartEndDateDateType(myStartDate.value,myEndDate.value,myType.value)>get archives between two dates</button>
+
+  </div>
+
+  <div class="downloadOption" id="getSpecificArchive">
+    <b>Get a specific archive by ID and datetime</b>
+    <input type="text" #mySpecificID (keyup)="0"/>
+    <input type="datetime-local" #mySpecificDate (keyup)="0"/>
+    <button (click)=getSpecificArchive(mySpecificID.value,mySpecificDate.value)>get archives between two dates</button>
   </div>
 
 
@@ -62,9 +93,26 @@
       ID: {{archive.id}}<br>
       Name: {{archive.name}}<br>
       Description: {{archive.description}}<br>
-      <button (click)=getarchive(archive.id)>Get Archive preview</button>
-      <div *ngIf="archive.json_download"><button (click)=getarchive(archive.json_download.url,archive.name)>Get Archive JSON value</button></div>
-      <div *ngIf="archive.download"><button (click)=getarchive(archive.download.url)>Get Archive value</button></div>
+      Archive type: {{archive.archive_type}}<br>
+      <div *ngIf="archive">
+        <button (click)=getarchive(archive.id)>Get Archive preview</button>
+      </div>
+      <div *ngIf="archive.archive_type=='json'">
+        <button (click)=getarchive(archive.json_download.url)>Get JSON archive data</button>
+        <div>
+          <i>Start date: </i>
+          <input type="datetime-local" #myStartDateCalculations (keyup)="0"/>
+          <i>End date: </i>
+          <input type="datetime-local" #myEndDateCalculations (keyup)="0"/>
+          <button (click)=getJSONdataCalculations(archive.id,myStartDateCalculations.value,myEndDateCalculations.value)>get calculations</button>
+        </div>
+      </div>
+      <div *ngIf="archive.date">
+        <button (click)=getSpecificArchive(archive.id,archive.date)>Get specific archive by id and date</button>
+      </div>
+      <div *ngIf="archive.download">
+        <button (click)=getarchive(archive.download.url)>Get Archive download value</button>
+      </div>
 
     </div>
   </li>

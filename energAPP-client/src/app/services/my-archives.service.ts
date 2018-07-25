@@ -32,7 +32,7 @@ constructor(private http: HttpClient) { }
     return this.http.get(archives_json_url,this.httpOptions)
   }
 
-  getarchiveslistfiltered(archives_url,taxonomyTerm){
+  getarchiveslistfiltered(archives_json_url,taxonomyTerm){
 
     const httpOptions = {
      headers: new HttpHeaders({
@@ -43,9 +43,10 @@ constructor(private http: HttpClient) { }
      params: new HttpParams().set('taxonomy_terms[]',taxonomyTerm)
     };
 
-    console.log("llegamos a pedir lista ",archives_url);
-    return this.http.get(archives_url,httpOptions)
+    console.log("llegamos a pedir lista ",archives_json_url);
+    return this.http.get(archives_json_url,httpOptions)
   }
+
 
   getarchivePreview(full_url_archive):Observable<any>{
     //console.log(full_url_archive);
@@ -124,18 +125,49 @@ constructor(private http: HttpClient) { }
     return this.http.get(url,httpOptionsDate);
   }
 
-  getArchivesByDateStartEnd(url,start,end){
+  getArchivesByDateStartEndDateType(url,start,end,dateType){
     const httpOptionsDate = {
      headers: new HttpHeaders({
        'Accept':'application/json; application/vnd.esios-api-v1+json',
        'Content-Type':'application/json',
        'Authorization':'Token token="65ea46a74c7372e0776cbe0a216543288fb804d6e0b5c2603c0bae449b39c824"',
      }),
-     params: new HttpParams().set('start_date', start).set('end_date',end).set('date_type','datos')
+     params: new HttpParams().set('start_date', start).set('end_date',end).set('date_type',dateType)
     };
 
     return this.http.get(url,httpOptionsDate);
 
   }
+
+  getSpecificArchive(url,date){
+
+    var query_date=Object.values(date)[0];
+    console.log(query_date);
+    const httpOptionsSpecificArchive = {
+     headers: new HttpHeaders({
+       'Accept':'application/json; application/vnd.esios-api-v1+json',
+       'Content-Type':'application/json',
+       'Authorization':'Token token="65ea46a74c7372e0776cbe0a216543288fb804d6e0b5c2603c0bae449b39c824"',
+     }),
+     params: new HttpParams().set('date',query_date)
+    };
+
+    return this.http.get(url,httpOptionsSpecificArchive);
+
+  }
+
+  getJSONdataCalculations(url,start_date,end_date){
+    const httpOptionsJSONdataCalculations = {
+     headers: new HttpHeaders({
+       'Accept':'application/json; application/vnd.esios-api-v1+json',
+       'Content-Type':'application/json',
+       'Authorization':'Token token="65ea46a74c7372e0776cbe0a216543288fb804d6e0b5c2603c0bae449b39c824"',
+     }),
+     params: new HttpParams().set('start_date',start_date).set('end_date',end_date)
+    };
+
+    return this.http.get(url,httpOptionsJSONdataCalculations);
+  }
+
 
 }

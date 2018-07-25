@@ -170,7 +170,7 @@ export class MyListArchivesComponent implements OnInit {
     )
   }
 
-  getarchivesStartEndDate(start,end){
+  getarchivesStartEndDateDateType(start,end,dateType){
     console.log(start,end);
 
     let full_url_archive;
@@ -180,7 +180,7 @@ export class MyListArchivesComponent implements OnInit {
     start_query=start+':59.000+00:00';
     end_query=end+':59.000+00:00';
 
-    this.archivesservice.getArchivesByDateStartEnd(full_url_archive,start_query,end_query)
+    this.archivesservice.getArchivesByDateStartEndDateType(full_url_archive,start_query,end_query,dateType)
     .subscribe(
       (response:any)=>{
         this.archive=response;
@@ -193,6 +193,48 @@ export class MyListArchivesComponent implements OnInit {
         console.error('Oops:', error.message);
       },
     )
+
+
+  }
+
+  getSpecificArchive(id,date){
+    console.log(id,date);
+    let full_url_archive;
+    full_url_archive=`${this.base_url}`+'/archives/'+id;
+
+    this.archivesservice.getSpecificArchive(full_url_archive,date)
+    .subscribe(
+      (response:any)=>{
+        this.archive=response;
+        console.log(this.archive);
+        this.listarchives=this.archive.archives;
+
+      },
+      error=>{
+        this.error=error;
+        console.error('Oops:', error.message);
+      },
+    )
+
+  }
+
+  getJSONdataCalculations(id,start_date,end_date){
+    console.log(id,start_date,end_date);
+    let full_url_archive=`${this.base_url}`+'calculator-data/'+id;
+    this.archivesservice.getJSONdataCalculations(full_url_archive,start_date,end_date)
+    .subscribe(
+      (response:any)=>{
+        this.archive=response;
+        console.log(this.archive);
+
+
+      },
+      error=>{
+        this.error=error;
+        console.error('Oops:', error.message);
+      },
+    )
+
 
 
   }
