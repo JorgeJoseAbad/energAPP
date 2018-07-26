@@ -175,7 +175,6 @@ export class MyListArchivesComponent implements OnInit {
 
     let full_url_archive;
     full_url_archive=`${this.base_url}`+'archives/';
-
     let start_query,end_query;
     start_query=start+':59.000+00:00';
     end_query=end+':59.000+00:00';
@@ -186,15 +185,12 @@ export class MyListArchivesComponent implements OnInit {
         this.archive=response;
         console.log(this.archive);
         this.listarchives=this.archive.archives;
-
       },
       error=>{
         this.error=error;
         console.error('Oops:', error.message);
       },
     )
-
-
   }
 
   getSpecificArchive(id,date){
@@ -207,15 +203,13 @@ export class MyListArchivesComponent implements OnInit {
       (response:any)=>{
         this.archive=response;
         console.log(this.archive);
-        this.listarchives=this.archive.archives;
-
+        this.previewFile=this.archive.archive;
       },
       error=>{
         this.error=error;
         console.error('Oops:', error.message);
       },
     )
-
   }
 
   getJSONdataCalculations(id,start_date,end_date){
@@ -226,17 +220,16 @@ export class MyListArchivesComponent implements OnInit {
       (response:any)=>{
         this.archive=response;
         console.log(this.archive);
-
-
+        console.log(this.archive.data);
+        console.log(this.archive.data.archive_values);
+        this.archivesservice.keeparchiveinservice(this.archive,"Data");
       },
       error=>{
         this.error=error;
         console.error('Oops:', error.message);
       },
+      ()=>{this.router.navigate(['archive-data']);}
     )
-
-
-
   }
 
 }

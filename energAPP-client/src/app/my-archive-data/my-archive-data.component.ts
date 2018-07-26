@@ -41,6 +41,8 @@ export class MyArchiveDataComponent implements OnInit{
  mode_Ind_Interconexiones:boolean=false;
  mode_Ind_DemandaInterrumpible:boolean=false;
 
+ mode_dataProcesing:boolean=false;
+
   constructor(private route: ActivatedRoute,
               private archivesservice: MyArchivesService,
               private elementRef: ElementRef) { }
@@ -135,6 +137,9 @@ export class MyArchiveDataComponent implements OnInit{
           break;
       case "DemandaInterrumpible":
           this.demandaInterrumpible(this.keyArchive,this.dataArchive);
+          break;
+      case "data":
+          this.dataProcesing(this.keyArchive,this.dataArchive);
           break;
       default:
      }
@@ -843,6 +848,12 @@ interconexiones(title,data){
 demandaInterrumpible(title,data){
   this.dataArchive=data;
   this.mode_Ind_DemandaInterrumpible=true;
+}
+
+dataProcesing(title,data){
+
+  this.dataArchive=data["0"].archive_values;
+  this.mode_dataProcesing=true;
 }
 
 }

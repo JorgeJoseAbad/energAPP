@@ -201,3 +201,12 @@
 
   </li></ul>
 </div>
+
+<!--pruebas-->
+<div *ngIf="dataArchive && mode_dataProcesing">
+  <ul><li *ngFor="let data of dataArchive">
+
+      {{data|json}}
+
+  </li></ul>
+</div>

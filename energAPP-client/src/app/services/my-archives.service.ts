@@ -74,6 +74,8 @@ constructor(private http: HttpClient) { }
     */
   keeparchiveinservice(archive,name){
     //console.log("in sendarchive(archive) del servcio");
+    console.log(typeof(archive));
+    if (typeof(archive)!='object'){
     this.keepedFile=JSON.parse(archive
        .replace("IND_MaxMinRenovEol(","{\"IND_MaxMinRenovEol\" :")
        .replace("IND_MaxMin(", "{\"IND_MaxMin\" :")
@@ -81,6 +83,7 @@ constructor(private http: HttpClient) { }
        .replace("IND_DemandaPrevProg(","{\"IND_DemandaPrevProg\" :")
        .replace(");", "}")
      );
+   } else this.keepedFile=archive;
 
      this.archiveName=name;
 
@@ -95,6 +98,8 @@ constructor(private http: HttpClient) { }
   getNameOfArchive(){
     return this.archiveName;
   }
+
+
 
   getArchivesByDate(url,query){
     const httpOptionsDate = {
