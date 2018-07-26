@@ -112,7 +112,7 @@
       </div>
       <div *ngIf="archive.download">
         <button (click)=getarchive(archive.download.url)>Get Archive download value</button>
-        <button (click)=downloadArchive(archive.id,archive.name)>Download archive</button>
+        <button (click)=downloadArchive(archive.id,archive.name,archive.archive_type)>Download pdf archive</button>
       </div>
 
     </div>

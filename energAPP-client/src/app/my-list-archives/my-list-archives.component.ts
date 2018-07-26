@@ -239,14 +239,14 @@ export class MyListArchivesComponent implements OnInit {
     )
   }
 
-  downloadArchive(id,name){
-    let nameOfFileToDownload=name+'.pdf';
+  downloadArchive(id,name,type){
+    let nameOfFileToDownload=name+'.'+type;
     let full_url_archive=`${this.base_url}`+'/archives/'+id+'/download';
     this.archivesservice.downloadArchive(full_url_archive)
     .subscribe(
       success=>{
         console.log("SUCESS")
-        var blob = new Blob([success], { type: 'text/pdf' });
+        var blob = new Blob([success], { type: type });
 
         if (window.navigator && window.navigator.msSaveOrOpenBlob) {
             window.navigator.msSaveOrOpenBlob(blob, nameOfFileToDownload);
