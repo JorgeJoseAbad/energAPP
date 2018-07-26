@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
-
 import { HttpHeaders,HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -25,7 +24,8 @@ httpParams={
 keepedFile:any;
 archiveName:any;
 
-constructor(private http: HttpClient) { }
+constructor(private http: HttpClient,
+              ) { }
 
   getarchiveslist(archives_json_url):Observable<any>{
     console.log("llegamos a pedir lista ",archives_json_url);
@@ -172,6 +172,25 @@ constructor(private http: HttpClient) { }
     };
 
     return this.http.get(url,httpOptionsJSONdataCalculations);
+  }
+
+
+
+  downloadArchive(download_url){
+
+    const httpOptionsDownload = {
+     headers: new HttpHeaders({
+       'Accept':'application/json; application/vnd.esios-api-v1+json',
+       'Content-Type':'application/pdf',
+       'Authorization':'Token token="65ea46a74c7372e0776cbe0a216543288fb804d6e0b5c2603c0bae449b39c824"',
+     }),
+
+    };
+
+
+      return this.http.get(download_url,{responseType:"blob"});
+
+
   }
 
 

@@ -2,6 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import {MyArchivesService} from '../services/my-archives.service';
 import { Router } from '@angular/router';
 
+import { HttpResponse} from '@angular/common/http' //to download pdv
+
+import { Subscription } from 'rxjs/Rx'; //to download pdf
+import { Headers, RequestOptions, RequestMethod, RequestOptionsArgs, URLSearchParams } from '@angular/http'; //to download pdf
+import { Subject } from 'rxjs/Rx'; //to download pdf
+
+
 @Component({
   selector: 'app-my-list-archives',
   templateUrl: './my-list-archives.component.html',
@@ -229,6 +236,34 @@ export class MyListArchivesComponent implements OnInit {
         console.error('Oops:', error.message);
       },
       ()=>{this.router.navigate(['archive-data']);}
+    )
+  }
+
+  downloadArchive(id,name){
+    let nameOfFileToDownload=name+'.pdf';
+    let full_url_archive=`${this.base_url}`+'/archives/'+id+'/download';
+    this.archivesservice.downloadArchive(full_url_archive)
+    .subscribe(
+      success=>{
+        console.log("SUCESS")
+        var blob = new Blob([success], { type: 'text/pdf' });
+
+        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveOrOpenBlob(blob, nameOfFileToDownload);
+        } else {
+            var a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = nameOfFileToDownload;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    },
+      error=>{
+        this.error=error;
+        console.error('Oops:', error.message);
+      },
+      ()=>{console.log("downloaded")}
     )
   }
 
