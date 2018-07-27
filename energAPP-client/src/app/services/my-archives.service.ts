@@ -146,15 +146,15 @@ constructor(private http: HttpClient,
 
   getSpecificArchive(url,date){
 
-    var query_date=Object.values(date)[0];
-    console.log(query_date);
+    //var query_date=Object.values(date)[0];
+    //console.log(query_date);
     const httpOptionsSpecificArchive = {
      headers: new HttpHeaders({
        'Accept':'application/json; application/vnd.esios-api-v1+json',
        'Content-Type':'application/json',
        'Authorization':'Token token="65ea46a74c7372e0776cbe0a216543288fb804d6e0b5c2603c0bae449b39c824"',
      }),
-     params: new HttpParams().set('date',query_date)
+     params: new HttpParams().set('date',date)
     };
 
     return this.http.get(url,httpOptionsSpecificArchive);

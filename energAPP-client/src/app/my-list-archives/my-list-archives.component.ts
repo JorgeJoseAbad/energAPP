@@ -204,13 +204,16 @@ export class MyListArchivesComponent implements OnInit {
     console.log(id,date);
     let full_url_archive;
     full_url_archive=`${this.base_url}`+'/archives/'+id;
+    let arrayListArchives=[];
 
     this.archivesservice.getSpecificArchive(full_url_archive,date)
     .subscribe(
       (response:any)=>{
         this.archive=response;
         console.log(this.archive);
-        this.previewFile=this.archive.archive;
+        arrayListArchives.push(this.archive.archive);
+        console.log(arrayListArchives);
+        this.listarchives=arrayListArchives;
       },
       error=>{
         this.error=error;
@@ -251,7 +254,7 @@ export class MyListArchivesComponent implements OnInit {
         if (window.navigator && window.navigator.msSaveOrOpenBlob) {
             window.navigator.msSaveOrOpenBlob(blob, nameOfFileToDownload);
         } else {
-            var a = document.createElement('a');
+            let a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
             a.download = nameOfFileToDownload;
             document.body.appendChild(a);

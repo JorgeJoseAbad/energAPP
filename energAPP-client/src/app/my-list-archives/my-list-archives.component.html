@@ -1,18 +1,20 @@
+<h1>Main Data Download page</h1>
+<h2>Main options to download data: listing of all JSON and non JSON files</h2>
 
-  <pre>Download file listings and data files through a service..</pre>
-
-  <div class="downloadOption" id="getarchiveslist">
-    <b> Get a list of non-JSON archives </b>
-    <button (click)=getarchiveslist()>get archives list</button>
-  </div>
 
   <div class="downloadOption" id="getarchivesjsonlist">
-    <b>Get a list of JSON archives</b>
+    <h3>Get a list of JSON archives</h3>
     <button (click)=getarchivesjsonlist()>get JSON archives list</button>
   </div>
 
+  <div class="downloadOption" id="getarchiveslist">
+    <h3> Get a list of non-JSON archives </h3>
+    <button (click)=getarchiveslist()>get archives list</button>
+  </div>
+
+<h2>Options to download files filtered</h2>
   <div class="downloadOption" id="filterByTaxonomyTerm">
-    <b>Get a list of non-JSON archives filtered by taxonomy term</b>
+    <h3>Get a list of non-JSON archives filtered by taxonomy term</h3>
     <i>Select taxonomy term:</i>
     <select name="TaxonomyTerm" #myTaxTerm (keyup)="0">
       <option value="Potencia">Potencia</option>
@@ -31,14 +33,14 @@
 
   <!--Este bloque readaptable a Getting a specific Archive GET /archives/3186?date=2015-09-15T23%3A59%3A59%2B00%3A00-->
   <div class="downloadOption" id="getarchivesByDate">
-    <b>Get a list of Archives filtered by date and time</b>
+    <h3>Get a list of Archives filtered by date and time</h3>
     <i>Select date: </i>
     <input type="datetime-local" #myInput (keyup)="0"/>
     <button (click)=getarchivesByDate(myInput.value)>get archives by date</button>
   </div>
 
   <div class="downloadOption" id="getarchivesDateTaxonomy">
-    <b>Get a list of Archives filtered by date - time and taxonomy term</b>
+    <h3>Get a list of Archives filtered by date and taxonomy term</h3>
     <i>Select date: </i>
     <input type="datetime-local" #myDate (keyup)="0"/>
     <i>Select taxonomy term: </i>
@@ -54,19 +56,19 @@
       <option value="Medidas">Medidas</option>
 
     </select>
-    <button (click)=getarchivesDateTaxonomy(myDate.value,taxTerm.value)>get archives between two dates</button>
+    <button (click)=getarchivesDateTaxonomy(myDate.value,taxTerm.value)>get archives fitered by date and taxonomy term</button>
 
   </div>
 
   <div class="downloadOption" id="getarchivesStartEndDateDateType">
-    <b>Get a list of archives filtered by start and end date and date type datos or publication</b>
+    <h3>Get a list of archives filtered by start and end date and type "datos" or "publication"</h3>
     <i>Start date: </i>
     <input type="datetime-local" #myStartDate (keyup)="0"/>
 
     <i>End date: </i>
     <input type="datetime-local" #myEndDate (keyup)="0"/>
 
-    <b>Date type</b>
+    <b>Type</b>
     <select name="DateType" #myType (keyup)="0">
       <option value="datos">datos</option>
       <option value="publicacion">publicacion</option>
@@ -77,7 +79,7 @@
   </div>
 
   <div class="downloadOption" id="getSpecificArchive">
-    <b>Get a specific archive by ID and datetime</b>
+    <h3>Get a specific archive by ID and datetime</h3>
     <input type="text" #mySpecificID (keyup)="0"/>
     <input type="datetime-local" #mySpecificDate (keyup)="0"/>
     <button (click)=getSpecificArchive(mySpecificID.value,mySpecificDate.value)>get archives between two dates</button>
@@ -88,6 +90,7 @@
      {{previewFile|json}}
    </div>
 
+<h2> Listing of archives </h2>
   <li *ngFor="let archive of listarchives">
     <div class="archive-list-item">
       ID: {{archive.id}}<br>
