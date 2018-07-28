@@ -99,6 +99,7 @@
 <div *ngIf="dataArchive && mode_GenerationUnits">
   <ul><li *ngFor="let data of dataArchive">
 
+    {{data|json}}
     Data received!!!
 
   </li></ul>

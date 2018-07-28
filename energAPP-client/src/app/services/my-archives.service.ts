@@ -108,10 +108,10 @@ constructor(private http: HttpClient,
        'Content-Type':'application/json',
        'Authorization':'Token token="65ea46a74c7372e0776cbe0a216543288fb804d6e0b5c2603c0bae449b39c824"',
      }),
-     params: new HttpParams().set('Date', query)
+     params: new HttpParams().set('date', query)
     };
 
-    console.log("llegamos a pedir archives por fecha",url);
+    console.log("llegamos a pedir archives por fecha",url,query);
     return this.http.get(url,httpOptionsDate);
 
   }
