@@ -27,7 +27,7 @@
       <option value="Pérdidas">Pérdidas</option>
       <option value="Medidas">Medidas</option>
     </select>
-    <button (click)=getarchiveslistfiltered(myTaxTerm.value)>get archives JSON list filtered by taxonomy term</button>
+    <button (click)=getarchiveslistfiltered(myTaxTerm.value)>get archives list filtered by taxonomy term</button>
   </div>
 
 
@@ -85,9 +85,17 @@
     <div class="archive-list-item">
       ID: {{archive.id}}<br>
       Name: {{archive.name}}<br>
-      Description: {{archive.description}}<br>
+      <div *ngIf="archive.description;else nodesciption">
+        Description: {{archive.description}}<br>
+      </div>
+      <ng-template #nodesciption>
+        <div>No description</div>
+      </ng-template>
       Archive type: {{archive.archive_type}}<br>
       <div *ngIf="archive">
+        <div class="preview" *ngIf="((previewFile)&&(previewFile.archive.name==archive.name))">
+           {{previewFile.archive|json}}
+         </div>
         <button (click)=getarchive(archive.id)>Get Archive preview</button>
         <div *ngIf="archive.archive_type=='json'">
           <button (click)=getarchive(archive.json_download.url)>Get JSON archive data</button>
@@ -100,26 +108,24 @@
                                                     ||(archive.name=='PVPC_NOC_P1_DD')
                                                     ||(archive.name=='PVPC_GEN_P1_DD'))">
 
-        <div>
+
           <h5>Get this data selecting between two dates</h5>
           <i>Start date: </i>
           <input type="datetime-local" #myStartDateCalculations (keyup)="0"/>
           <i>End date: </i>
           <input type="datetime-local" #myEndDateCalculations (keyup)="0"/>
           <button (click)=getJSONdataCalculations(archive.id,myStartDateCalculations.value,myEndDateCalculations.value)>get calculations</button>
-        </div>
+
       </div>
 
 
       <div *ngIf="archive.archive_type=='pdf'||archive.archive_type=='xls'">
         <button (click)=downloadArchive(archive.download.url,archive.name,archive.archive_type)>Download archive</button>
       </div>
-      <div class="preview" *ngIf="((previewFile)&&(previewFile.archive.name==archive.name))">
-         {{previewFile.archive|json}}
-       </div>
+
      <div>
        <input type="datetime-local" #mySpecificDate (keyup)="0"/>
-       <button (click)=getSpecificArchive(archive.id,mySpecificDate.value)>get this file by date</button>
+       <button (click)=getSpecificArchive(archive.id,mySpecificDate.value)>get this file with another date</button>
      </div>
     </div>
 

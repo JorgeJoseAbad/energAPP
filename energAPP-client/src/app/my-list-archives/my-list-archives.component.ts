@@ -42,10 +42,10 @@ export class MyListArchivesComponent implements OnInit {
     console.log("en getarchiveslist del componente");
      this.archivesservice.getarchiveslist(this.archives_url)
       .subscribe(
-        (archives) => {
-                        this.archives = archives;
-                        console.log(this.archives);
-                        this.listarchives=this.archives.archives;
+        (response) => {
+                        this.archives = response;
+                        console.log(response);
+                        this.listarchives=response.archives;
         },
         error=>{
           console.log(error);
@@ -60,10 +60,10 @@ export class MyListArchivesComponent implements OnInit {
     console.log("en getarchiveslist del componente");
      this.archivesservice.getarchiveslist(this.archives_json_url)
       .subscribe(
-        (archives) => {
-                        this.archives = archives;
-                        console.log(this.archives);
-                        this.listarchives=this.archives.archives;
+        (response) => {
+                        this.archives = response;
+                        console.log(response);
+                        this.listarchives=response.archives;
         },
         error=>{
           console.log(error);
@@ -78,10 +78,10 @@ export class MyListArchivesComponent implements OnInit {
   getarchiveslistfiltered(taxTerm){
     this.archivesservice.getarchiveslistfiltered(this.archives_url,taxTerm)
      .subscribe(
-       (archives) => {
-                       this.archives = archives;
+       (response:any) => {
+                       this.archives = response;
                        console.log(this.archives);
-                       this.listarchives=this.archives.archives;
+                       this.listarchives=response.archives;
        },
        error=>{
          console.log(error);
