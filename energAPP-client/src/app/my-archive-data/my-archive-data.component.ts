@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ElementRef} from '@angular/core';
 import { DoCheck } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MyArchivesService} from '../services/my-archives.service';
+import { MyCalculationsService} from '../services/my-calculations.service';
 import { ChartsModule } from 'ng2-charts';
 import { Chart } from 'chart.js';
 
@@ -45,6 +46,7 @@ export class MyArchiveDataComponent implements OnInit{
 
   constructor(private route: ActivatedRoute,
               private archivesservice: MyArchivesService,
+              private calculationService: MyCalculationsService,
               private elementRef: ElementRef) { }
 
   ngOnInit() {
@@ -854,6 +856,8 @@ dataForCalculations(title,data){
 
   this.dataArchive=data["0"].archive_values;
   this.mode_dataForCalculations=true;
+  this.calculationService.saveBlockData(this.dataArchive);
+
 }
 
 }

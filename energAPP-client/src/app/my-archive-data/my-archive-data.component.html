@@ -205,9 +205,7 @@
 
 <!--pruebas-->
 <div *ngIf="dataArchive && mode_dataForCalculations">
-  <ul><li *ngFor="let data of dataArchive">
+  <app-my-calculations>
 
-      {{data|json}}
-
-  </li></ul>
+  </app-my-calculations>
 </div>
