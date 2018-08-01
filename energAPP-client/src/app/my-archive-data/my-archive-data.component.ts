@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ElementRef} from '@angular/core';
 import { DoCheck } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { MyArchivesService} from '../services/my-archives.service';
 import { MyCalculationsService} from '../services/my-calculations.service';
 import { ChartsModule } from 'ng2-charts';
@@ -14,6 +15,8 @@ import { Chart } from 'chart.js';
 export class MyArchiveDataComponent implements OnInit{
  archive:any;
  archiveName:any;
+ aditionalData:any;
+
  myChart:any;
  myBarChart:any;
  keyArchive:any;
@@ -45,6 +48,7 @@ export class MyArchiveDataComponent implements OnInit{
  mode_dataForCalculations:boolean=false;
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private archivesservice: MyArchivesService,
               private calculationService: MyCalculationsService,
               private elementRef: ElementRef) { }
@@ -52,6 +56,7 @@ export class MyArchiveDataComponent implements OnInit{
   ngOnInit() {
     this.archive=this.archivesservice.getarchivefromservice();
     this.archiveName=this.archivesservice.getNameOfArchive();
+    this.aditionalData=this.archivesservice.getAditionalData();
     this.selectFunctionDataFile(this.archive);
   }
 
@@ -68,6 +73,10 @@ export class MyArchiveDataComponent implements OnInit{
     */
   selectFunctionDataFile(archive){
     console.log(archive);
+
+    if (archive==undefined) {
+      this.router.navigate(['archive-list']);
+    }
 
     this.keyArchive=Object.keys(archive)[0];
     console.log("------->",this.keyArchive);

@@ -28,9 +28,9 @@ export class MyCalculationsService {
     //originalData is an array of objects
     let listCategorys=[];
 
-    let arrayA=[]; //array of objects that share 'indicator'
-    let arrayB=[];  //array of objects that share 'indicator'
-    let arrayC=[]; //array of objects that share 'indicator'
+    let arrayA=[]; //array of objects that share 'indicator value'
+    let arrayB=[];  //array of objects that share 'indicator value'
+    let arrayC=[]; //array of objects that share 'indicator value'
     let arrayTiempo=[];
 
     originalData.forEach(function(d){
@@ -48,10 +48,14 @@ export class MyCalculationsService {
     console.log("Original data: ------>",originalData);
     console.log("list Categorys:------->",listCategorys);
 
+
+  //unshift() to order time and its values. Arrays of data (only value),
+  // from arrays of objects (key - value pairs).
   originalData.forEach(function(d){
     let tempObj={}
     tempObj[Object.keys(d)[1]]=Object.values(d)[1];
-    if (d['Indicadores']==listCategorys[0]) {arrayA.unshift(tempObj);
+    if (d['Indicadores']==listCategorys[0]) {
+                                             arrayA.unshift(tempObj);
                                              arrayTiempo.unshift(Object.keys(d)[1])
                                            }
     if (d['Indicadores']==listCategorys[1]) arrayB.unshift(tempObj);
@@ -60,6 +64,8 @@ export class MyCalculationsService {
   })
 
   console.log(arrayA,arrayB,arrayC);
+
+  //object with ordered arrays of time and data.
   this.dataForPlot[listCategorys[0]]=arrayA;
   this.dataForPlot[listCategorys[1]]=arrayB;
   this.dataForPlot[listCategorys[2]]=arrayC;

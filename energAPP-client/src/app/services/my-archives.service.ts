@@ -21,8 +21,9 @@ httpParams={
   params: new HttpParams().set('responseType', "Text")
 }
 
-keepedFile:any;
-archiveName:any;
+keepedFile:any; //data from original file
+archiveName:any; //name original file, ej PVPC_VHC_P1 -->posible change to description
+aditionalData:any; // Data betwen dates etc
 
 constructor(private http: HttpClient,
               ) { }
@@ -72,7 +73,7 @@ constructor(private http: HttpClient,
     * @param {text} archive - the data file from REE, text format
     * @return {object} keepedFile
     */
-  keeparchiveinservice(archive,name){
+  keeparchiveinservice(archive,name,additionalData){
     //console.log("in sendarchive(archive) del servcio");
     console.log(typeof(archive));
     if (typeof(archive)!='object'){
@@ -86,6 +87,7 @@ constructor(private http: HttpClient,
    } else this.keepedFile=archive;
 
      this.archiveName=name;
+     this.aditionalData=additionalData;
 
 
   }
@@ -97,6 +99,10 @@ constructor(private http: HttpClient,
 
   getNameOfArchive(){
     return this.archiveName;
+  }
+
+  getAditionalData(){
+     return this.aditionalData;
   }
 
 

@@ -123,7 +123,7 @@ export class MyListArchivesComponent implements OnInit {
 
                     this.archive=response;
                     console.log(this.archive);
-                    this.archivesservice.keeparchiveinservice(this.archive,name);
+                    this.archivesservice.keeparchiveinservice(this.archive,name,'');
         },
         error=>{
           this.error=error;
@@ -227,8 +227,8 @@ export class MyListArchivesComponent implements OnInit {
     )
   }
 
-  getJSONdataCalculations(id,start_date,end_date){
-    console.log(id,start_date,end_date);
+  getJSONdataCalculations(id,name,start_date,end_date){
+    console.log(id,name,start_date,end_date);
     let full_url_archive=`${this.base_url}`+'calculator-data/'+id;
     this.archivesservice.getJSONdataCalculations(full_url_archive,start_date,end_date)
     .subscribe(
@@ -237,7 +237,7 @@ export class MyListArchivesComponent implements OnInit {
         console.log(this.archive);
         console.log(this.archive.data);
         console.log(this.archive.data.archive_values);
-        this.archivesservice.keeparchiveinservice(this.archive,"Data");
+        this.archivesservice.keeparchiveinservice(this.archive,name,'Data between: '+ `${start_date}`+ ' and ' +`${end_date}`);
       },
       error=>{
         this.error=error;

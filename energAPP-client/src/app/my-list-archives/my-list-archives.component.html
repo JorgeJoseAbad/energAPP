@@ -98,7 +98,7 @@
          </div>
         <button (click)=getarchive(archive.id)>Get Archive preview</button>
         <div *ngIf="archive.archive_type=='json'">
-          <button (click)=getarchive(archive.json_download.url)>Get JSON archive data</button>
+          <button (click)=getarchive(archive.json_download.url,archive.name)>Get JSON archive data</button>
         </div>
       </div>
       <div *ngIf="(archive.archive_type=='json')&&((archive.name=='PVPC_VHC_P3_DD')
@@ -109,12 +109,12 @@
                                                     ||(archive.name=='PVPC_GEN_P1_DD'))">
 
 
-          <h5>Get this data selecting between two dates</h5>
+          <h5>Get this data restricted between two dates</h5>
           <i>Start date: </i>
           <input type="datetime-local" #myStartDateCalculations (keyup)="0"/>
           <i>End date: </i>
           <input type="datetime-local" #myEndDateCalculations (keyup)="0"/>
-          <button (click)=getJSONdataCalculations(archive.id,myStartDateCalculations.value,myEndDateCalculations.value)>get calculations</button>
+          <button (click)=getJSONdataCalculations(archive.id,archive.name,myStartDateCalculations.value,myEndDateCalculations.value)>get calculations</button>
 
       </div>
 

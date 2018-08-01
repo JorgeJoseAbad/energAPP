@@ -27,28 +27,29 @@ export class MyCalculationsComponent implements OnInit {
 controlChart(dataObject){
   console.log("IN CONTROLCHART------->:",dataObject);
 
+   //axis arrays
   let datosTiempo=[];
   let datosPrecio=[];
   let datosCosteEnergia=[];
   let datosPeajeAcceso=[];
 
 
-  datosPrecio.push('Precio')
+  datosPrecio.push('Precio') //for labels array
   dataObject['Precio'].forEach(function(d){
     datosPrecio.push(Object.values(d)[0].replace(",","."));
   })
 
-  datosCosteEnergia.push('Coste Energia')
+  datosCosteEnergia.push('Coste Energia')//for labels array
   dataObject["Coste Energia"].forEach(function(d){
     datosCosteEnergia.push(Object.values(d)[0].replace(",","."));
   })
 
-  datosPeajeAcceso.push('Peaje Acceso')
+  datosPeajeAcceso.push('Peaje Acceso')//for labels array
   dataObject["Peaje Acceso"].forEach(function(d){
     datosPeajeAcceso.push(Object.values(d)[0].replace(",","."));
   })
 
-  datosTiempo=dataObject['Tiempo'];;
+  datosTiempo=dataObject['Tiempo'];
 
 
   this.createChartLine(datosTiempo,datosPrecio,datosCosteEnergia,datosPeajeAcceso)
@@ -73,22 +74,22 @@ controlChart(dataObject){
               datasets: [
                 {
                   data: axis[0],
-                  label:labels[0],
-                  borderColor: "#6f45aa",
+                  label: labels[0],
+                  borderColor: "#3CB371",
                   fill: false,
                   borderWidth: 1
                 },
                 {
                   data: axis[1],
-                  label:labels[1],
-                  borderColor: "#3cba9f",
+                  label: labels[1],
+                  borderColor: "#D2691E",
                   fill: false,
                   borderWidth: 1
                 },
                 {
                   data: axis[2],
-                  label:labels[2],
-                  borderColor: "#e5e1aa",
+                  label: labels[2],
+                  borderColor: "#4169E1",
                   fill: false,
                   borderWidth: 1
                 },
