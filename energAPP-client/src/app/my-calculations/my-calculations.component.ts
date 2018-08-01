@@ -13,6 +13,26 @@ export class MyCalculationsComponent implements OnInit {
   data:any;
   myChart;
 
+  setedData={
+    datosPrecio:[],
+    datosCosteEnergia:[],
+    datosPeajeAcceso:[],
+    tiempo:[]
+  }
+
+  mDatosPrecio={
+    var:'',
+    value:0
+  };
+  mDatosCosteEnergia={
+    var:'',
+    value:0
+  };
+  mDatosPeajeAcceso={
+    var:'',
+    value:0
+  }
+
 
   constructor(
     private calculationService: MyCalculationsService,
@@ -51,7 +71,7 @@ controlChart(dataObject){
 
   datosTiempo=dataObject['Tiempo'];
 
-
+  this.setAverages(datosTiempo,datosPrecio,datosCosteEnergia,datosPeajeAcceso);
   this.createChartLine(datosTiempo,datosPrecio,datosCosteEnergia,datosPeajeAcceso)
 
 
@@ -110,6 +130,76 @@ controlChart(dataObject){
               }
             }
           });
+  }
+
+
+  setAverages(datosTiempo,datosPrecio,datosCosteEnergia,datosPeajeAcceso){
+
+  let t_tiempo=[];
+  let t_datosPrecio=[];
+  let t_datosCosteEnergia=[];
+  let t_datosPeajeAcceso=[];
+
+    datosTiempo.forEach(function(d){
+      t_tiempo.push(d)
+    })
+
+    datosPrecio.forEach(function(d){
+      t_datosPrecio.push(d)
+    })
+
+    datosCosteEnergia.forEach(function(d){
+      t_datosCosteEnergia.push(d)
+    })
+
+    datosPeajeAcceso.forEach(d => {
+        t_datosPeajeAcceso.push(d)
+    });
+
+    this.setedData.tiempo=t_tiempo;
+    this.setedData.datosPrecio=t_datosPrecio;
+    this.setedData.datosCosteEnergia=t_datosCosteEnergia;
+    this.setedData.datosPeajeAcceso=t_datosPeajeAcceso;
+
+
+  }
+
+  getAverages(){
+
+    this.mDatosPrecio.var=this.setedData.datosPrecio.shift();
+    this.mDatosCosteEnergia.var=this.setedData.datosCosteEnergia.shift();
+    this.mDatosPeajeAcceso.var=this.setedData.datosPeajeAcceso.shift();
+
+    let n:number=this.setedData.tiempo.length;
+    let suma:number=0;
+
+    this.setedData.datosPrecio.forEach(function(d){
+
+      suma+=Number(d);
+    })
+
+    this.mDatosPrecio.value=suma/n;
+    suma=0;
+
+
+    this.setedData.datosCosteEnergia.forEach(function(d){
+      suma+=Number(d);
+    })
+
+    this.mDatosCosteEnergia.value=suma/n;
+    suma=0;
+
+    this.setedData.datosPeajeAcceso.forEach(function(d){
+      suma+=Number(d);
+    })
+
+    this.mDatosPeajeAcceso.value=suma/n;
+    suma=0;
+
+  }
+
+  getAverage(){
+
   }
 
 
