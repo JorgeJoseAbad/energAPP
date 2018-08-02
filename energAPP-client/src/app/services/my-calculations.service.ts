@@ -9,6 +9,22 @@ export class MyCalculationsService {
     Tiempo: []
   };
 
+  averages={
+    dataPrecio:{
+      var:'',
+      value:0
+    },
+    dataCosteEnergia:{
+      var:'',
+      value:0
+    },
+    dataPeajeAcceso:{
+      var:'',
+      value:0
+    }
+  }
+
+
   constructor() { }
 
   saveBlockData(block){
@@ -71,6 +87,43 @@ export class MyCalculationsService {
   this.dataForPlot[listCategorys[2]]=arrayC;
   this.dataForPlot['Tiempo']=arrayTiempo;
   console.log(this.dataForPlot);
+
+  }
+
+
+  getAverages(setedDatafromComponent){
+
+    this.averages.dataPrecio.var=setedDatafromComponent.datosPrecio.shift();
+    this.averages.dataCosteEnergia.var=setedDatafromComponent.datosCosteEnergia.shift();
+    this.averages.dataPeajeAcceso.var=setedDatafromComponent.datosPeajeAcceso.shift();
+
+    let n:number=setedDatafromComponent.tiempo.length;
+    let suma:number=0;
+
+    setedDatafromComponent.datosPrecio.forEach(function(d){
+
+      suma+=Number(d);
+    })
+
+    this.averages.dataPrecio.value=suma/n;
+    suma=0;
+
+
+    setedDatafromComponent.datosCosteEnergia.forEach(function(d){
+      suma+=Number(d);
+    })
+
+    this.averages.dataCosteEnergia.value=suma/n;
+    suma=0;
+
+    setedDatafromComponent.datosPeajeAcceso.forEach(function(d){
+      suma+=Number(d);
+    })
+
+    this.averages.dataPeajeAcceso.value=suma/n;
+    suma=0;
+
+    return this.averages;
 
   }
 

@@ -2,12 +2,13 @@
 <div [hidden]="!myChart">
   <canvas id="canvas">{{ myChart }}</canvas>
 </div>
-
 <div>
-  <button (click)=getAverages()>Get Average</button>
-  {{mDatosPrecio.var}}:{{mDatosPrecio.value}}
-  {{mDatosCosteEnergia.var}}: {{mDatosCosteEnergia.value}}
-  {{mDatosPeajeAcceso.var}}: {{mDatosPeajeAcceso.value}}
+ <button (click)=getAverages()>Get Average</button>
+</div>
+<div *ngIf="dataCalculated">
+  <b>{{averages.dataPrecio.var}}:</b> {{averages.dataPrecio.value}}<br>
+  <b>{{averages.dataCosteEnergia.var}}:</b> {{averages.dataCosteEnergia.value}}<br>
+  <b>{{averages.dataPeajeAcceso.var}}:</b> {{averages.dataPeajeAcceso.value}}
 </div>
 
 <div>

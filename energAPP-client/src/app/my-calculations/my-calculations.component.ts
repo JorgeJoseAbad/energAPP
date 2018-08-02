@@ -20,18 +20,12 @@ export class MyCalculationsComponent implements OnInit {
     tiempo:[]
   }
 
-  mDatosPrecio={
-    var:'',
-    value:0
-  };
-  mDatosCosteEnergia={
-    var:'',
-    value:0
-  };
-  mDatosPeajeAcceso={
-    var:'',
-    value:0
-  }
+
+  dataCalculated:boolean=false;
+
+  averages:any;
+
+  alreadyDo:boolean=false;
 
 
   constructor(
@@ -46,6 +40,7 @@ export class MyCalculationsComponent implements OnInit {
 
 controlChart(dataObject){
   console.log("IN CONTROLCHART------->:",dataObject);
+
 
    //axis arrays
   let datosTiempo=[];
@@ -165,42 +160,13 @@ controlChart(dataObject){
   }
 
   getAverages(){
-
-    this.mDatosPrecio.var=this.setedData.datosPrecio.shift();
-    this.mDatosCosteEnergia.var=this.setedData.datosCosteEnergia.shift();
-    this.mDatosPeajeAcceso.var=this.setedData.datosPeajeAcceso.shift();
-
-    let n:number=this.setedData.tiempo.length;
-    let suma:number=0;
-
-    this.setedData.datosPrecio.forEach(function(d){
-
-      suma+=Number(d);
-    })
-
-    this.mDatosPrecio.value=suma/n;
-    suma=0;
-
-
-    this.setedData.datosCosteEnergia.forEach(function(d){
-      suma+=Number(d);
-    })
-
-    this.mDatosCosteEnergia.value=suma/n;
-    suma=0;
-
-    this.setedData.datosPeajeAcceso.forEach(function(d){
-      suma+=Number(d);
-    })
-
-    this.mDatosPeajeAcceso.value=suma/n;
-    suma=0;
-
+    if (!this.alreadyDo){
+      this.averages=this.calculationService.getAverages(this.setedData);
+      this.alreadyDo=true;
+    }
+    this.dataCalculated=true;
   }
 
-  getAverage(){
-
-  }
 
 
 }
