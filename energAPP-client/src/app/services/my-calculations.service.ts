@@ -24,6 +24,21 @@ export class MyCalculationsService {
     }
   }
 
+  increments={
+    dataPrecio:{
+      var:'',
+      value:0
+    },
+    dataCosteEnergia:{
+      var:'',
+      value:0
+    },
+    dataPeajeAcceso:{
+      var:'',
+      value:0
+    }
+  }
+
 
   constructor() { }
 
@@ -125,6 +140,27 @@ export class MyCalculationsService {
 
     return this.averages;
 
+  }
+
+  getIncrements(setedDatafromComponent){
+
+        this.increments.dataPrecio.var=setedDatafromComponent.datosPrecio.shift();
+        this.increments.dataCosteEnergia.var=setedDatafromComponent.datosCosteEnergia.shift();
+        this.increments.dataPeajeAcceso.var=setedDatafromComponent.datosPeajeAcceso.shift();
+
+        this.increments.dataPrecio.value
+          =setedDatafromComponent.datosPrecio[setedDatafromComponent.datosPrecio.length-1]
+          -setedDatafromComponent.datosPrecio[0];
+
+        this.increments.dataCosteEnergia.value
+          =setedDatafromComponent.datosCosteEnergia[setedDatafromComponent.datosCosteEnergia.length-1]
+          -setedDatafromComponent.datosCosteEnergia[0];
+
+        this.increments.dataPeajeAcceso.value
+          =setedDatafromComponent.datosPeajeAcceso[setedDatafromComponent.datosPeajeAcceso.length-1]
+          -setedDatafromComponent.datosPeajeAcceso[0];
+
+        return this.increments;
   }
 
 }

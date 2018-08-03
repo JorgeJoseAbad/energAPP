@@ -21,11 +21,13 @@ export class MyCalculationsComponent implements OnInit {
   }
 
 
-  dataCalculated:boolean=false;
+
 
   averages:any;
+  increments:any;
 
-  alreadyDo:boolean=false;
+  averageObtained:boolean=false;
+  incrementsObtained:boolean=false;
 
 
   constructor(
@@ -160,12 +162,21 @@ controlChart(dataObject){
   }
 
   getAverages(){
-    if (!this.alreadyDo){
+    if (!this.averageObtained){
       this.averages=this.calculationService.getAverages(this.setedData);
-      this.alreadyDo=true;
+      this.averageObtained=true;
     }
-    this.dataCalculated=true;
   }
+
+  getIncrement(){
+    if (!this.incrementsObtained){
+      this.increments=this.calculationService.getIncrements(this.setedData)
+      this.incrementsObtained=true;
+    }
+
+  }
+
+
 
 
 

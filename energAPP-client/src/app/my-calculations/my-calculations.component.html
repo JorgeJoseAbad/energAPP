@@ -3,12 +3,23 @@
   <canvas id="canvas">{{ myChart }}</canvas>
 </div>
 <div>
- <button (click)=getAverages()>Get Average</button>
+  <p>Obtain averages value of data</p>
+ <button (click)=getAverages()>Get Averages</button>
 </div>
-<div *ngIf="dataCalculated">
+<div *ngIf="averageObtained">
   <b>{{averages.dataPrecio.var}}:</b> {{averages.dataPrecio.value}}<br>
   <b>{{averages.dataCosteEnergia.var}}:</b> {{averages.dataCosteEnergia.value}}<br>
   <b>{{averages.dataPeajeAcceso.var}}:</b> {{averages.dataPeajeAcceso.value}}
+</div>
+
+<div>
+  <p>Obtain increment in values in period</p>
+  <button (click)=getIncrement()>Get Increments</button>
+</div>
+<div *ngIf="incrementsObtained">
+  <b>{{increments.dataPrecio.var}}:</b> {{increments.dataPrecio.value}}<br>
+  <b>{{increments.dataCosteEnergia.var}}:</b> {{increments.dataCosteEnergia.value}}<br>
+  <b>{{increments.dataPeajeAcceso.var}}:</b> {{increments.dataPeajeAcceso.value}} 
 </div>
 
 <div>
