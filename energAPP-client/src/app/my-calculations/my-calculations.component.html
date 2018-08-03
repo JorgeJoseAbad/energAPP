@@ -7,8 +7,12 @@
  <button (click)=getAverages()>Get Averages</button>
 </div>
 <div *ngIf="averageObtained">
-  <b>{{averages.dataPrecio.var}}:</b> {{averages.dataPrecio.value}}<br>
-  <b>{{averages.dataCosteEnergia.var}}:</b> {{averages.dataCosteEnergia.value}}<br>
+  <b>Averages values between {{averages.interval.start}} and {{averages.interval.end}}</b>
+  <br>
+  <b>{{averages.dataPrecio.var}}:</b> {{averages.dataPrecio.value}}
+  <br>
+  <b>{{averages.dataCosteEnergia.var}}:</b> {{averages.dataCosteEnergia.value}}
+  <br>
   <b>{{averages.dataPeajeAcceso.var}}:</b> {{averages.dataPeajeAcceso.value}}
 </div>
 
@@ -17,9 +21,11 @@
   <button (click)=getIncrement()>Get Increments</button>
 </div>
 <div *ngIf="incrementsObtained">
+  <b>Increment values between {{increments.interval.start}} and {{increments.interval.end}}</b>
+  <br>
   <b>{{increments.dataPrecio.var}}:</b> {{increments.dataPrecio.value}}<br>
   <b>{{increments.dataCosteEnergia.var}}:</b> {{increments.dataCosteEnergia.value}}<br>
-  <b>{{increments.dataPeajeAcceso.var}}:</b> {{increments.dataPeajeAcceso.value}} 
+  <b>{{increments.dataPeajeAcceso.var}}:</b> {{increments.dataPeajeAcceso.value}}
 </div>
 
 <div>

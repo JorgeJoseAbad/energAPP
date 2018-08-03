@@ -10,6 +10,10 @@ export class MyCalculationsService {
   };
 
   averages={
+    interval:{
+      start:0,
+      end:0,
+    },
     dataPrecio:{
       var:'',
       value:0
@@ -25,6 +29,10 @@ export class MyCalculationsService {
   }
 
   increments={
+    interval:{
+      start:0,
+      end:0,
+    },
     dataPrecio:{
       var:'',
       value:0
@@ -108,14 +116,44 @@ export class MyCalculationsService {
 
   getAverages(setedDatafromComponent){
 
-    this.averages.dataPrecio.var=setedDatafromComponent.datosPrecio.shift();
-    this.averages.dataCosteEnergia.var=setedDatafromComponent.datosCosteEnergia.shift();
-    this.averages.dataPeajeAcceso.var=setedDatafromComponent.datosPeajeAcceso.shift();
+    // important, setedDatafromComponent is a object.
+    // Is pased by REFERENCE
+    // needed a intermediate object
+
+      let mydatosPrecio=[];
+      let mydatosCosteEnergia=[];
+      let mydatosPeajeAcceso=[];
+      let mytiempo=[];
+
+      setedDatafromComponent.datosPrecio.forEach(function(d){
+        mydatosPrecio.push(d)
+      })
+
+      setedDatafromComponent.datosCosteEnergia.forEach(function(d){
+        mydatosCosteEnergia.push(d)
+      })
+
+      setedDatafromComponent.datosPeajeAcceso.forEach(function(d){
+         mydatosPeajeAcceso.push(d)
+      })
+
+      setedDatafromComponent.tiempo.forEach(function(d){
+         mytiempo.push(d)
+       })
+
+    console.log("EN GET AVERAGES: ",setedDatafromComponent);
+
+    this.averages.dataPrecio.var=mydatosPrecio.shift();
+    this.averages.dataCosteEnergia.var=mydatosCosteEnergia.shift();
+    this.averages.dataPeajeAcceso.var=mydatosPeajeAcceso.shift();
 
     let n:number=setedDatafromComponent.tiempo.length;
+
+    this.averages.interval.start=mytiempo[0];
+    this.averages.interval.end=mytiempo[setedDatafromComponent.tiempo.length-1]
     let suma:number=0;
 
-    setedDatafromComponent.datosPrecio.forEach(function(d){
+    mydatosPrecio.forEach(function(d){
 
       suma+=Number(d);
     })
@@ -124,14 +162,14 @@ export class MyCalculationsService {
     suma=0;
 
 
-    setedDatafromComponent.datosCosteEnergia.forEach(function(d){
+    mydatosCosteEnergia.forEach(function(d){
       suma+=Number(d);
     })
 
     this.averages.dataCosteEnergia.value=suma/n;
     suma=0;
 
-    setedDatafromComponent.datosPeajeAcceso.forEach(function(d){
+    mydatosPeajeAcceso.forEach(function(d){
       suma+=Number(d);
     })
 
@@ -144,23 +182,53 @@ export class MyCalculationsService {
 
   getIncrements(setedDatafromComponent){
 
-        this.increments.dataPrecio.var=setedDatafromComponent.datosPrecio.shift();
-        this.increments.dataCosteEnergia.var=setedDatafromComponent.datosCosteEnergia.shift();
-        this.increments.dataPeajeAcceso.var=setedDatafromComponent.datosPeajeAcceso.shift();
+    // important, setedDatafromComponent is a object.
+    // Is pased by REFERENCE
+    // needed a intermediate object
 
-        this.increments.dataPrecio.value
-          =setedDatafromComponent.datosPrecio[setedDatafromComponent.datosPrecio.length-1]
-          -setedDatafromComponent.datosPrecio[0];
+    let mydatosPrecio=[];
+    let mydatosCosteEnergia=[];
+    let mydatosPeajeAcceso=[];
+    let mytiempo=[];
 
-        this.increments.dataCosteEnergia.value
-          =setedDatafromComponent.datosCosteEnergia[setedDatafromComponent.datosCosteEnergia.length-1]
-          -setedDatafromComponent.datosCosteEnergia[0];
+    setedDatafromComponent.datosPrecio.forEach(function(d){
+      mydatosPrecio.push(d)
+    })
 
-        this.increments.dataPeajeAcceso.value
-          =setedDatafromComponent.datosPeajeAcceso[setedDatafromComponent.datosPeajeAcceso.length-1]
-          -setedDatafromComponent.datosPeajeAcceso[0];
+    setedDatafromComponent.datosCosteEnergia.forEach(function(d){
+      mydatosCosteEnergia.push(d)
+    })
 
-        return this.increments;
-  }
+    setedDatafromComponent.datosPeajeAcceso.forEach(function(d){
+       mydatosPeajeAcceso.push(d)
+    })
+
+    setedDatafromComponent.tiempo.forEach(function(d){
+       mytiempo.push(d)
+     })
+
+    console.log("EN GET INCREMENTS: ",setedDatafromComponent);
+
+    this.increments.dataPrecio.var=mydatosPrecio.shift();
+    this.increments.dataCosteEnergia.var=mydatosCosteEnergia.shift();
+    this.increments.dataPeajeAcceso.var=mydatosPeajeAcceso.shift();
+
+    this.increments.interval.start=mytiempo[0];
+    this.increments.interval.end=mytiempo[setedDatafromComponent.tiempo.length-1]
+
+    this.increments.dataPrecio.value
+      =mydatosPrecio[mydatosPrecio.length-1]
+      -mydatosPrecio[0];
+
+    this.increments.dataCosteEnergia.value
+      =mydatosCosteEnergia[mydatosCosteEnergia.length-1]
+      -mydatosCosteEnergia[0];
+
+    this.increments.dataPeajeAcceso.value
+      =mydatosPeajeAcceso[mydatosPeajeAcceso.length-1]
+      -mydatosPeajeAcceso[0];
+
+    return this.increments;
+}
 
 }
