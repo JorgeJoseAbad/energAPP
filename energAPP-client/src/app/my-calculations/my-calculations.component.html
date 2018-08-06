@@ -3,7 +3,7 @@
   <canvas id="canvas">{{ myChart }}</canvas>
 </div>
 <div>
-  <p>Obtain averages value of data</p>
+  <p>Obtain averages value of data between start and end period</p>
  <button (click)=getAverages()>Get Averages</button>
 </div>
 <div *ngIf="averageObtained">
@@ -17,16 +17,28 @@
 </div>
 
 <div>
-  <p>Obtain increment in values in period</p>
+  <p>Obtain increment in values in period, from start to end</p>
   <button (click)=getIncrement()>Get Increments</button>
 </div>
 <div *ngIf="incrementsObtained">
-  <b>Increment values between {{increments.interval.start}} and {{increments.interval.end}}</b>
+  <b>Increment values from start to end between {{increments.interval.start}} and {{increments.interval.end}}</b>
   <br>
   <b>{{increments.dataPrecio.var}}:</b> {{increments.dataPrecio.value}}<br>
   <b>{{increments.dataCosteEnergia.var}}:</b> {{increments.dataCosteEnergia.value}}<br>
   <b>{{increments.dataPeajeAcceso.var}}:</b> {{increments.dataPeajeAcceso.value}}
 </div>
+
+<div>
+  <p>Obtain max and min values in period</p>
+  <button (click)=getMaxMin()>Get max and min</button>
+</div>
+<div *ngIf="maxminObtained">
+  <b> Max and min values between {{maxmin.interval.start}} and {{maxmin.interval.end}}</b>
+  <b>{{maxmin.dataPrecio.var}} Max:</b> {{maxmin.dataPrecio.max}}<b>; Min:</b> {{maxmin.dataPrecio.min}}
+  <b>{{maxmin.dataCosteEnergia.var}} Max:</b> {{maxmin.dataCosteEnergia.max}}<b>; Min:</b> {{maxmin.dataCosteEnergia.min}}
+  <b>{{maxmin.dataPeajeAcceso.var}} Max:</b> {{maxmin.dataPeajeAcceso.max}}<b>; Min:</b> {{maxmin.dataPeajeAcceso.min}}
+</div>
+
 
 <div>
  {{data|json}}

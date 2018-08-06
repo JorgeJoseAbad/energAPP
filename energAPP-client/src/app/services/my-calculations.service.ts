@@ -47,6 +47,29 @@ export class MyCalculationsService {
     }
   }
 
+  maxmins={
+
+    interval:{
+      start:0,
+      end:0,
+    },
+    dataPrecio:{
+      var:'',
+      max:0,
+      min:0
+    },
+    dataCosteEnergia:{
+      var:'',
+      max:0,
+      min:0
+    },
+    dataPeajeAcceso:{
+      var:'',
+      max:0,
+      min:0
+    }
+  }
+
 
   constructor() { }
 
@@ -150,7 +173,7 @@ export class MyCalculationsService {
     let n:number=setedDatafromComponent.tiempo.length;
 
     this.averages.interval.start=mytiempo[0];
-    this.averages.interval.end=mytiempo[setedDatafromComponent.tiempo.length-1]
+    this.averages.interval.end=mytiempo[mytiempo.length-1]
     let suma:number=0;
 
     mydatosPrecio.forEach(function(d){
@@ -214,7 +237,7 @@ export class MyCalculationsService {
     this.increments.dataPeajeAcceso.var=mydatosPeajeAcceso.shift();
 
     this.increments.interval.start=mytiempo[0];
-    this.increments.interval.end=mytiempo[setedDatafromComponent.tiempo.length-1]
+    this.increments.interval.end=mytiempo[mytiempo.length-1]
 
     this.increments.dataPrecio.value
       =mydatosPrecio[mydatosPrecio.length-1]
@@ -229,6 +252,51 @@ export class MyCalculationsService {
       -mydatosPeajeAcceso[0];
 
     return this.increments;
+}
+
+getMaxMin(setedDatafromComponent){
+
+  console.log(setedDatafromComponent);
+
+  let mydatosPrecio=[];
+  let mydatosCosteEnergia=[];
+  let mydatosPeajeAcceso=[];
+  let mytiempo=[];
+
+  setedDatafromComponent.datosPrecio.forEach(function(d){
+    mydatosPrecio.push(d)
+  })
+
+  setedDatafromComponent.datosCosteEnergia.forEach(function(d){
+    mydatosCosteEnergia.push(d)
+  })
+
+  setedDatafromComponent.datosPeajeAcceso.forEach(function(d){
+     mydatosPeajeAcceso.push(d)
+  })
+
+  setedDatafromComponent.tiempo.forEach(function(d){
+     mytiempo.push(d)
+   })
+
+   this.maxmins.dataPrecio.var=mydatosPrecio.shift();
+   this.maxmins.dataCosteEnergia.var=mydatosCosteEnergia.shift();
+   this.maxmins.dataPeajeAcceso.var=mydatosPeajeAcceso.shift();
+
+   this.maxmins.interval.start=mytiempo[0];
+   this.maxmins.interval.end=mytiempo[mytiempo.length-1]
+
+
+   this.maxmins.dataPrecio.max=Math.max(...mydatosPrecio);
+   this.maxmins.dataCosteEnergia.max=Math.max(...mydatosCosteEnergia);
+   this.maxmins.dataPeajeAcceso.max=Math.max(...mydatosPeajeAcceso);
+
+   this.maxmins.dataPrecio.min=Math.min(...mydatosPrecio)
+   this.maxmins.dataCosteEnergia.min=Math.min(...mydatosCosteEnergia)
+   this.maxmins.dataPeajeAcceso.min=Math.min(...mydatosPeajeAcceso)
+
+   return this.maxmins;
+
 }
 
 }

@@ -20,14 +20,13 @@ export class MyCalculationsComponent implements OnInit {
     tiempo:[]
   }
 
-
-
-
   averages:any;
   increments:any;
+  maxmin:any;
 
   averageObtained:boolean=false;
   incrementsObtained:boolean=false;
+  maxminObtained:boolean=false;
 
 
   constructor(
@@ -172,6 +171,15 @@ controlChart(dataObject){
     if (!this.incrementsObtained){
       this.increments=this.calculationService.getIncrements(this.setedData)
       this.incrementsObtained=true;
+    }
+
+  }
+
+
+  getMaxMin(){
+    if (!this.maxminObtained){
+      this.maxmin=this.calculationService.getMaxMin(this.setedData)
+      this.maxminObtained=true;
     }
 
   }
