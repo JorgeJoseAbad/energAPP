@@ -33,10 +33,20 @@
   <button (click)=getMaxMin()>Get max and min</button>
 </div>
 <div *ngIf="maxminObtained">
-  <b> Max and min values between {{maxmin.interval.start}} and {{maxmin.interval.end}}</b>
-  <b>{{maxmin.dataPrecio.var}} Max:</b> {{maxmin.dataPrecio.max}}<b>; Min:</b> {{maxmin.dataPrecio.min}}
-  <b>{{maxmin.dataCosteEnergia.var}} Max:</b> {{maxmin.dataCosteEnergia.max}}<b>; Min:</b> {{maxmin.dataCosteEnergia.min}}
-  <b>{{maxmin.dataPeajeAcceso.var}} Max:</b> {{maxmin.dataPeajeAcceso.max}}<b>; Min:</b> {{maxmin.dataPeajeAcceso.min}}
+  <b> Max and min values between {{maxmin.interval.start}} and {{maxmin.interval.end}}</b><br>
+  <b>{{maxmin.dataPrecio.var}} </b><br>
+    <b>Max:</b> {{maxmin.dataPrecio.max.value}} at {{maxmin.dataPrecio.max.time}};<br>
+    <b>Min:</b> {{maxmin.dataPrecio.min.value}} at {{maxmin.dataPrecio.min.time}}<br>
+    <b>Diference: </b>{{maxmin.dataPrecio.max.value-maxmin.dataPrecio.min.value}}<br>
+
+  <b>{{maxmin.dataCosteEnergia.var}} </b><br>
+    <b>Max:</b> {{maxmin.dataCosteEnergia.max.value}} at {{maxmin.dataCosteEnergia.max.time}};<br>
+    <b>Min:</b> {{maxmin.dataCosteEnergia.min.value}} at {{maxmin.dataCosteEnergia.min.time}}<br>
+    <b>Diference: </b>{{maxmin.dataCosteEnergia.max.value-maxmin.dataCosteEnergia.min.value}}<br>
+  <b>{{maxmin.dataPeajeAcceso.var}} </b><br>
+    <b>Max:</b> {{maxmin.dataPeajeAcceso.max.value}} at {{maxmin.dataPeajeAcceso.max.time}};<br>
+    <b>Min:</b> {{maxmin.dataPeajeAcceso.min.value}} at {{maxmin.dataPeajeAcceso.min.time}}<br>
+    <b>Diference: </b>{{maxmin.dataPeajeAcceso.max.value-maxmin.dataPeajeAcceso.min.value}}<br>
 </div>
 
 

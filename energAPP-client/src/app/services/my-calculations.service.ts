@@ -55,18 +55,36 @@ export class MyCalculationsService {
     },
     dataPrecio:{
       var:'',
-      max:0,
-      min:0
+      max:{
+        value:0,
+        time:0,
+      },
+      min:{
+        value:0,
+        time:0,
+      }
     },
     dataCosteEnergia:{
       var:'',
-      max:0,
-      min:0
+      max:{
+        value:0,
+        time:0
+      },
+      min:{
+        value:0,
+        time:0,
+      }
     },
     dataPeajeAcceso:{
       var:'',
-      max:0,
-      min:0
+      max:{
+        value:0,
+        time:0,
+      },
+      min:{
+        value:0,
+        time:0,
+      }
     }
   }
 
@@ -263,6 +281,14 @@ getMaxMin(setedDatafromComponent){
   let mydatosPeajeAcceso=[];
   let mytiempo=[];
 
+  let index;
+  let tiempoRef;
+
+  function valueForIndex(element){
+    return element==this; // "==" compare string with number
+  }
+
+
   setedDatafromComponent.datosPrecio.forEach(function(d){
     mydatosPrecio.push(d)
   })
@@ -286,14 +312,37 @@ getMaxMin(setedDatafromComponent){
    this.maxmins.interval.start=mytiempo[0];
    this.maxmins.interval.end=mytiempo[mytiempo.length-1]
 
+   /*find time of max mins */
+   this.maxmins.dataPrecio.max.value=Math.max(...mydatosPrecio);
+   index=mydatosPrecio.findIndex(valueForIndex,this.maxmins.dataPrecio.max.value);
+   tiempoRef=mytiempo[index];
+   this.maxmins.dataPrecio.max.time=tiempoRef;
 
-   this.maxmins.dataPrecio.max=Math.max(...mydatosPrecio);
-   this.maxmins.dataCosteEnergia.max=Math.max(...mydatosCosteEnergia);
-   this.maxmins.dataPeajeAcceso.max=Math.max(...mydatosPeajeAcceso);
+   this.maxmins.dataCosteEnergia.max.value=Math.max(...mydatosCosteEnergia);
+   index=mydatosCosteEnergia.findIndex(valueForIndex,this.maxmins.dataCosteEnergia.max.value);
+   tiempoRef=mytiempo[index];
+   this.maxmins.dataCosteEnergia.max.time=tiempoRef;
 
-   this.maxmins.dataPrecio.min=Math.min(...mydatosPrecio)
-   this.maxmins.dataCosteEnergia.min=Math.min(...mydatosCosteEnergia)
-   this.maxmins.dataPeajeAcceso.min=Math.min(...mydatosPeajeAcceso)
+   this.maxmins.dataPeajeAcceso.max.value=Math.max(...mydatosPeajeAcceso);
+   index=mydatosPeajeAcceso.findIndex(valueForIndex,this.maxmins.dataPeajeAcceso.max.value);
+   tiempoRef=mytiempo[index]
+   this.maxmins.dataPeajeAcceso.max.time=tiempoRef;
+
+
+   this.maxmins.dataPrecio.min.value=Math.min(...mydatosPrecio);
+   index=mydatosPrecio.findIndex(valueForIndex,this.maxmins.dataPrecio.min.value);
+   tiempoRef=mytiempo[index];
+   this.maxmins.dataPrecio.min.time=tiempoRef;
+
+   this.maxmins.dataCosteEnergia.min.value=Math.min(...mydatosCosteEnergia);
+   index=mydatosCosteEnergia.findIndex(valueForIndex,this.maxmins.dataCosteEnergia.min.value);
+   tiempoRef=mytiempo[index];
+   this.maxmins.dataCosteEnergia.min.time=tiempoRef;
+
+   this.maxmins.dataPeajeAcceso.min.value=Math.min(...mydatosPeajeAcceso);
+   index=mydatosPeajeAcceso.findIndex(valueForIndex,this.maxmins.dataPeajeAcceso.min.value);
+   tiempoRef=mytiempo[index];
+   this.maxmins.dataPeajeAcceso.min.time=tiempoRef;
 
    return this.maxmins;
 
