@@ -44,7 +44,7 @@ constructor(private http: HttpClient,
      params: new HttpParams().set('taxonomy_terms[]',taxonomyTerm)
     };
 
-    console.log("llegamos a pedir lista ",archives_json_url);
+
     return this.http.get(archives_json_url,httpOptions)
   }
 
@@ -52,14 +52,14 @@ constructor(private http: HttpClient,
   getarchivePreview(full_url_archive):Observable<any>{
     //console.log(full_url_archive);
     let archive= this.http.get(full_url_archive,this.httpOptions);
-    console.log(archive);
+
     return archive;
   }
 
   getarchive(full_url_archive):Observable<any>{
     //console.log(full_url_archive);
     let archive= this.http.get(full_url_archive,{responseType:'text'});
-    console.log(archive);
+
     return archive;
   }
 
@@ -75,7 +75,7 @@ constructor(private http: HttpClient,
     */
   keeparchiveinservice(archive,name,additionalData){
     //console.log("in sendarchive(archive) del servcio");
-    console.log(typeof(archive));
+
     if (typeof(archive)!='object'){
     this.keepedFile=JSON.parse(archive
        .replace("IND_MaxMinRenovEol(","{\"IND_MaxMinRenovEol\" :")
@@ -117,7 +117,7 @@ constructor(private http: HttpClient,
      params: new HttpParams().set('date', query)
     };
 
-    console.log("llegamos a pedir archives por fecha",url,query);
+
     return this.http.get(url,httpOptionsDate);
 
   }
@@ -131,7 +131,7 @@ constructor(private http: HttpClient,
      }),
      params: new HttpParams().set('date',date).set('taxonomy_terms[]',taxonomy)
     };
-    console.log(url,date,taxonomy);
+    
 
     return this.http.get(url,httpOptionsDate);
   }

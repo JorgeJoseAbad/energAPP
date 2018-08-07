@@ -72,14 +72,14 @@ export class MyArchiveDataComponent implements OnInit{
     * @param {object} archive - the data file from REE
     */
   selectFunctionDataFile(archive){
-    console.log(archive);
+
 
     if (archive==undefined) {
       this.router.navigate(['archive-list']);
     }
 
     this.keyArchive=Object.keys(archive)[0];
-    console.log("------->",this.keyArchive);
+
     this.dataArchive=Object.values(Object.values(archive));
 
       switch(this.keyArchive) {
@@ -159,8 +159,6 @@ export class MyArchiveDataComponent implements OnInit{
 
   energyAnualMensual(tittle,data){
 
-    console.log("DATA: ",data);
-    console.log("TITTLE: ",tittle);
     let arrayData=data[0]; //arrayData is the real data inside data array from Object.values
     let A_Axis=[];
     let B_Axis=[];
@@ -178,11 +176,6 @@ export class MyArchiveDataComponent implements OnInit{
         if (arrayKeys[3]!=undefined) D_Axis.push(arrayData[i][arrayKeys[3]].replace(".","").replace(",","."));
       }
 
-      console.log("ArrayKeys: ",arrayKeys);
-      console.log("A-AXIS: ",arrayKeys[0],A_Axis);
-      console.log("B-AXIS: ",arrayKeys[1],B_Axis);
-      console.log("C-AXIS: ",arrayKeys[2],C_Axis);
-      console.log("D-AXIS: ",arrayKeys[3],D_Axis);
       this.dataArchive=arrayData;
       this.createChartLine(A_Axis,D_Axis);
       this.mode_energyAnualMensual=1;
@@ -190,7 +183,7 @@ export class MyArchiveDataComponent implements OnInit{
 }
 
 createChartLine(...axis){
-   console.log(axis);
+
 
   let htmlRef = this.elementRef.nativeElement.querySelector(`#canvas`);
 
@@ -223,16 +216,16 @@ createChartLine(...axis){
 }
 
 ind_MaxMinRenovEol(title,data){
-  console.log("IN INDEFINED TITLE",title,data);
+
   let arr=[];
   arr.push(data[0]);
   this.dataArchive=arr;
-  console.log(arr);
+
   this.mode_Ind_MaxMinRenovEol=true;
 }
 
 ind_MaxMin(title,data){
-  console.log(title,data);
+
   let arr=[];
   arr.push(data[0]);
   this.dataArchive=arr;
@@ -240,13 +233,12 @@ ind_MaxMin(title,data){
 }
 
 ind_DemandaRealGen(title,data){
-  console.log(data);
-  console.log(data[0].valoresHorariosGeneracion)
+
   let object:any;
 
   object=data[0].valoresHorariosGeneracion;
   //object=Object.values(data["IND_DemandaRealGen"]);
-  console.log(object);
+
 
   this.dataArchive=object;
   //this.createPieChart_DemandaRealGen(object);
@@ -257,17 +249,16 @@ ind_DemandaRealGen(title,data){
 newData(){
   this.globalIndex++;
   this.createPieChart_DemandaRealGen(this.dataArchive);
-  console.log(this.globalIndex,this.myChart.data.labels);
+
   this.myChart.update();
 }
 
 createPieChart_DemandaRealGen(...axis){
 
-  console.log(axis);
+
 
   let axisA=axis["0"];
-  console.log("AxisA-----> leng",axisA.length);
-  console.log(this.globalIndex);
+
   let labels=Object.keys(axisA[this.globalIndex]);
   let datas=Object.values(axisA[this.globalIndex]);
 
@@ -275,7 +266,7 @@ createPieChart_DemandaRealGen(...axis){
   let date=datas.shift();
   this.time=date;
 
-  console.log(labels,datas);
+
 
  let htmlRef = this.elementRef.nativeElement.querySelector(`#canvas`);
 
@@ -318,10 +309,10 @@ createPieChart_DemandaRealGen(...axis){
 /* stacked chart */
 createStakedChart_DemandaRealGen(...axis){
 
-  console.log("axis--------------->",axis);
+
 
   let axisA=axis["0"];
-  console.log("AxisA-----> ",axisA);
+
   let timeline=[];
 
   let aut=[];
@@ -361,7 +352,7 @@ createStakedChart_DemandaRealGen(...axis){
     termRenov.push(d.termRenov);
   })
 
-console.log(timeline);
+
 
  let htmlRef = this.elementRef.nativeElement.querySelector(`#canvas`);
 
@@ -516,7 +507,7 @@ console.log(timeline);
 
 
 ind_DemandaPrevProg(title,data){
-  console.log(data);
+
 
   this.dataArchive=data[0].valoresPrevistaProgramada;
   let object:any;
@@ -538,7 +529,7 @@ entitledParticipants(title,data){
   });
   this.dataArchive=arrayData;
   this.mode_EntitledParticipants=1;
-  console.log(listParticipants,listEICcodes)
+
 }
 
   balanceResponsibleParties(title,data){
@@ -609,7 +600,7 @@ entitledParticipants(title,data){
     let UPCode=[];
 
     let arrKeys=Object.keys(arrayData[0]);
-    console.log(arrKeys);
+
 
     arrayData.forEach(function(d) {
       UFCode.push(d[arrKeys[0]]);
@@ -643,7 +634,7 @@ entitledParticipants(title,data){
     })
 
 
-  console.log(Description,MaximumPowerCapacityMW,power);
+
 
   let htmlRef = this.elementRef.nativeElement.querySelector(`#canvas`);
 
@@ -701,7 +692,7 @@ unidadesFisicas(title,data){
 }
 
 zero_pvpc(title,data){
-  console.log("In PVPC",title,data);
+
   let titulos=[];
   let xAxisData1=[];
   let yAxisData1=[];
@@ -734,8 +725,7 @@ zero_pvpc(title,data){
 }
 
 pvpc(title,data){
-  console.log("IN PVPC-B",title,data)
-  console.log(typeof(data));
+
   let dia=[];
   let hora=[];
   let gen=[];
@@ -765,7 +755,7 @@ drawPVPC(axisX,...axis){
       }
     axisX.shift();
 
-    console.log(axisX,axisY);
+
 
     let htmlRef = this.elementRef.nativeElement.querySelector(`#canvas`);
 
@@ -814,7 +804,7 @@ drawPVPC(axisX,...axis){
  }
 
  umbrales(title,data){
-   console.log(title,data);
+
    //let arrKeys=[];
    let arrValues=[];
    let arrUMB=[];
@@ -823,13 +813,13 @@ drawPVPC(axisX,...axis){
 
    //arrKeys=Object.keys(data["Umbrales"]);
    arrValues=Object.values(data["Umbrales"]);
-   console.log(arrValues);
+
    arrValues.forEach(function(d,i){
      arrData[i]=[];
      arrData[i].push(d["UMB"]);
      arrData[i].push(d["VAL"]);
    })
-   console.log(arrData);
+
    this.dataArchive=arrData;
    this.mode_Ind_Umbrales=true;
 
@@ -841,7 +831,7 @@ precioFinal(title,data){
 }
 
 precioDesvíos(title,data){
-  console.log(data);
+  
   this.dataArchive=data;
   this.mode_Ind_PrecioDesvios=true;
 }

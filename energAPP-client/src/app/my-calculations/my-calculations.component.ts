@@ -40,8 +40,6 @@ export class MyCalculationsComponent implements OnInit {
 
 
 controlChart(dataObject){
-  console.log("IN CONTROLCHART------->:",dataObject);
-
 
    //axis arrays
   let datosTiempo=[];
@@ -74,7 +72,7 @@ controlChart(dataObject){
 }
 
   createChartLine(datosTiempo,...axis){
-     console.log(datosTiempo,axis);
+
      var labels=[]
 
      axis.forEach(function(d){

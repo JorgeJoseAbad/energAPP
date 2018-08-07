@@ -125,9 +125,6 @@ export class MyCalculationsService {
 
     });
 
-    console.log("Original data: ------>",originalData);
-    console.log("list Categorys:------->",listCategorys);
-
 
   //unshift() to order time and its values. Arrays of data (only value),
   // from arrays of objects (key - value pairs).
@@ -143,14 +140,12 @@ export class MyCalculationsService {
 
   })
 
-  console.log(arrayA,arrayB,arrayC);
-
   //object with ordered arrays of time and data.
   this.dataForPlot[listCategorys[0]]=arrayA;
   this.dataForPlot[listCategorys[1]]=arrayB;
   this.dataForPlot[listCategorys[2]]=arrayC;
   this.dataForPlot['Tiempo']=arrayTiempo;
-  console.log(this.dataForPlot);
+
 
   }
 
@@ -182,7 +177,7 @@ export class MyCalculationsService {
          mytiempo.push(d)
        })
 
-    console.log("EN GET AVERAGES: ",setedDatafromComponent);
+
 
     this.averages.dataPrecio.var=mydatosPrecio.shift();
     this.averages.dataCosteEnergia.var=mydatosCosteEnergia.shift();
@@ -248,7 +243,6 @@ export class MyCalculationsService {
        mytiempo.push(d)
      })
 
-    console.log("EN GET INCREMENTS: ",setedDatafromComponent);
 
     this.increments.dataPrecio.var=mydatosPrecio.shift();
     this.increments.dataCosteEnergia.var=mydatosCosteEnergia.shift();
@@ -274,7 +268,6 @@ export class MyCalculationsService {
 
 getMaxMin(setedDatafromComponent){
 
-  console.log(setedDatafromComponent);
 
   let mydatosPrecio=[];
   let mydatosCosteEnergia=[];
