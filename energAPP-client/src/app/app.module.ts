@@ -12,9 +12,10 @@ import { MyArchivesService} from './services/my-archives.service';
 import { MyCalculationsService} from './services/my-calculations.service';
 import { MyArchiveDataComponent } from './my-archive-data/my-archive-data.component';
 import { MyCalculationsComponent } from './my-calculations/my-calculations.component';
+import { MyIntroComponent } from './my-intro/my-intro.component';
 
 const appRoutes: Routes = [
-  { path: '',component: MyListArchivesComponent},
+  { path: ''            , component: MyListArchivesComponent},
   { path: 'archive-list', component: MyListArchivesComponent },
   { path: 'archive-data', component: MyArchiveDataComponent },
   { path: 'calculations', component: MyCalculationsComponent}
@@ -25,12 +26,13 @@ const appRoutes: Routes = [
     AppComponent,
     MyListArchivesComponent,
     MyArchiveDataComponent,
-    MyCalculationsComponent
+    MyCalculationsComponent,
+    MyIntroComponent
   ],
   imports: [
     RouterModule.forRoot(
       appRoutes
-      //{ enableTracing: true }  <-- debugging purposes only
+      //{ enableTracing: true }  //<-- debugging purposes only
     ),
     BrowserModule,
     HttpClientModule,

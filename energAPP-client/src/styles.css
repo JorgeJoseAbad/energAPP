@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+a{
+  color:blue;
+}
+
+#prov-intro{
+  background-color: rgb(204, 223, 249);
+}
+
+#prov-intro pre{
+  font-size: 20px;
+}
