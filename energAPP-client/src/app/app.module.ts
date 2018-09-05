@@ -15,7 +15,7 @@ import { MyCalculationsComponent } from './my-calculations/my-calculations.compo
 import { MyIntroComponent } from './my-intro/my-intro.component';
 
 const appRoutes: Routes = [
-  { path: ''            , component: MyListArchivesComponent},
+  { path: ''            , component: MyIntroComponent},
   { path: 'archive-list', component: MyListArchivesComponent },
   { path: 'archive-data', component: MyArchiveDataComponent },
   { path: 'calculations', component: MyCalculationsComponent}

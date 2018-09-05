@@ -3,6 +3,13 @@ a{
   color:blue;
 }
 
+a#redirections{
+  color: #743232;
+  font-size: 20px;
+  margin: 60px;
+  background-color: #b7b7ea;
+}
+
 #prov-intro{
   background-color: rgb(204, 223, 249);
 }
