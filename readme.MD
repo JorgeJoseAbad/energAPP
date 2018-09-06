@@ -5,7 +5,7 @@ https://api.esios.ree.es/ in order to show these data, and perform calculations 
 
 Through an own API it will store in BBDD the results of relevant calculations to be able to present them independently.
 
-Front technology: Angular 5, Chart.js, Blob.
+Front technology: Angular 6, Chart.js, Blob.
 Back technology: node.js, express, mongoDB..
 
 A long-term development for the management of energy data is planned

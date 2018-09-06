@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
@@ -13,9 +15,12 @@ import { MyCalculationsService} from './services/my-calculations.service';
 import { MyArchiveDataComponent } from './my-archive-data/my-archive-data.component';
 import { MyCalculationsComponent } from './my-calculations/my-calculations.component';
 import { MyIntroComponent } from './my-intro/my-intro.component';
+import { MyTableComponent } from './my-table/my-table.component';
 
 const appRoutes: Routes = [
-  { path: ''            , component: MyIntroComponent},
+  { path: ''            ,redirectTo: 'intro', pathMatch: 'full'},
+  { path: 'intro'       , component: MyIntroComponent},
+  { path: 'table'       , component: MyTableComponent},
   { path: 'archive-list', component: MyListArchivesComponent },
   { path: 'archive-data', component: MyArchiveDataComponent },
   { path: 'calculations', component: MyCalculationsComponent}
@@ -27,9 +32,11 @@ const appRoutes: Routes = [
     MyListArchivesComponent,
     MyArchiveDataComponent,
     MyCalculationsComponent,
-    MyIntroComponent
+    MyIntroComponent,
+    MyTableComponent
   ],
   imports: [
+    NgbModule.forRoot(),
     RouterModule.forRoot(
       appRoutes
       //{ enableTracing: true }  //<-- debugging purposes only
@@ -37,6 +44,7 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     ChartsModule,
+    NgbModule
 
   ],
   providers: [MyArchivesService,MyCalculationsService],

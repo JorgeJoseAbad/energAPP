@@ -50,17 +50,17 @@ controlChart(dataObject){
 
   datosPrecio.push('Precio') //for labels array
   dataObject['Precio'].forEach(function(d){
-    datosPrecio.push(Object.values(d)[0].replace(",","."));
+    datosPrecio.push(String(Object.values(d)[0]).replace(",","."));
   })
 
   datosCosteEnergia.push('Coste Energia')//for labels array
   dataObject["Coste Energia"].forEach(function(d){
-    datosCosteEnergia.push(Object.values(d)[0].replace(",","."));
+    datosCosteEnergia.push(String(Object.values(d)[0]).replace(",","."));
   })
 
   datosPeajeAcceso.push('Peaje Acceso')//for labels array
   dataObject["Peaje Acceso"].forEach(function(d){
-    datosPeajeAcceso.push(Object.values(d)[0].replace(",","."));
+    datosPeajeAcceso.push(String(Object.values(d)[0]).replace(",","."));
   })
 
   datosTiempo=dataObject['Tiempo'];
