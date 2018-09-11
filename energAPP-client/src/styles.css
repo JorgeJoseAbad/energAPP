@@ -1,21 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
-@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+/*@import "../node_modules/bootstrap/dist/css/bootstrap.css";*/
 
 a{
   color:blue;
 }
 
+#divbutton{
+  text-align:center;
+  width:auto;
+  margin: 0 auto;
+}
+
+button{
+  box-shadow: 1px 2px 2px 1px #c0a0f1;
+}
+
 button#redirections{
   color: #743232;
   font-size: 20px;
-  margin-left: 60px;
+  position: relative;
   border: 3px solid red;
   border-radius: 5px;
   background-color: #b7b7ea;
 }
 
 #prov-intro{
-  background-color: rgb(204, 223, 249);
+  background-color: #e4d7b98c;
 }
 
 #prov-intro pre{

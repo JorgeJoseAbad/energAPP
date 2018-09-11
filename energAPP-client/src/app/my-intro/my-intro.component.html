@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="!loadComponent" class="container-fluid">
   <div class="row">
     <div class="col-md-12">
     <div id="prov-intro">
@@ -9,10 +9,11 @@
          to be able to present them independently.
          Front technology: Angular 6, Chart.js, Blob, Bootstrap 4 for Angular.
          Back technology: node.js, express, mongoDB..
-      <div>
-        <button id="redirections" routerLink="/table">Go to Main Data Options Page</button>
+      <div id="divbutton">
+        <button class="btn btn-primary btn-lg" id="redirections" type="button" routerLink="/" (click)="hideIntro()">I got it!</button>
       </div>
     </div>
   </div>
   </div>
 </div>
+<app-my-table *ngIf="loadComponent"></app-my-table>

@@ -18,9 +18,9 @@ import { MyIntroComponent } from './my-intro/my-intro.component';
 import { MyTableComponent } from './my-table/my-table.component';
 
 const appRoutes: Routes = [
-  { path: ''            ,redirectTo: 'intro', pathMatch: 'full'},
-  { path: 'intro'       , component: MyIntroComponent},
-  { path: 'table'       , component: MyTableComponent},
+  { path: ''            ,redirectTo: '/', pathMatch: 'full'},
+  //{ path: 'intro'       , component: MyIntroComponent}, //not necessary
+  //{ path: 'table'       , component: MyTableComponent}, //not necessary
   { path: 'archive-list', component: MyListArchivesComponent },
   { path: 'archive-data', component: MyArchiveDataComponent },
   { path: 'calculations', component: MyCalculationsComponent}

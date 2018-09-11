@@ -1,5 +1,6 @@
-<h1>Main Data Download Component</h1>
-<h3>Main options to download data: listing of all JSON and non JSON files</h3>
+<div class="mylist">
+  <h1>Main Data Download Component</h1>
+  <h3>Main options to download data: listing of all JSON and non JSON files</h3>
 
 
   <div class="downloadOption" id="getarchivesjsonlist">
@@ -12,7 +13,7 @@
     <button (click)=getarchiveslist()>get archives list</button>
   </div>
 
-<h3>Options to download files filtered</h3>
+  <h3>Options to download files filtered</h3>
   <div class="downloadOption" id="filterByTaxonomyTerm">
     <h5>Get a list of non-JSON archives filtered by taxonomy term</h5>
     <i>Select taxonomy term:</i>
@@ -77,11 +78,12 @@
     <button (click)=getarchivesStartEndDateDateType(myStartDate.value,myEndDate.value,myType.value)>get archives between two dates</button>
 
   </div>
+</div>
 
+<div class="mylist">
+  <h1> Listing of archives selected</h1>
 
-<h2> Listing of archives selected</h2>
-
-  <li *ngFor="let archive of listarchives">
+  <li class="listing" *ngFor="let archive of listarchives">
     <div class="archive-list-item">
       ID: {{archive.id}}<br>
       Name: {{archive.name}}<br>
@@ -130,3 +132,4 @@
     </div>
 
   </li>
+</div>

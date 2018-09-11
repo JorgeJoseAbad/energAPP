@@ -2,9 +2,16 @@
   background-color: #9dc1f094;
   color: #244424;
   text-align: center;
+  border: 2px solid #3F51B5;
+  border-radius: 10px;
+  margin-bottom: 5px;
 
 }
 
-#info{
-  font-weight: bold;
+#routerplace{
+  border: 1px solid #cb7a7a;
+  box-shadow: -6px 5px 6px 2px #cb7a7a;
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-right: 2px;
 }

@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyIntroComponent implements OnInit {
 
+  loadComponent:boolean;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  hideIntro() {
+    this.loadComponent = true;
+
   }
 
 }
