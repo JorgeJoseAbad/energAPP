@@ -831,7 +831,7 @@ precioFinal(title,data){
 }
 
 precioDesvíos(title,data){
-  
+
   this.dataArchive=data;
   this.mode_Ind_PrecioDesvios=true;
 }
@@ -857,6 +857,11 @@ dataForCalculations(title,data){
   this.mode_dataForCalculations=true;
   this.calculationService.saveBlockData(this.dataArchive);
 
+}
+
+sendDataToBackEnd(data){
+  console.log('Sending data to back end to write BBDD....');
+  console.log(data);
 }
 
 }

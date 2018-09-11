@@ -17,9 +17,19 @@
 
 <div *ngIf="dataArchive && mode_energyAnualMensual">
   <ul><li *ngFor="let data of dataArchive">
-    Year: {{data["Año"]}}
-    Energy: {{data["GWh"]}}
+    <div class="container-fluid">
+      <div class=row>
+        <div class="col-8">
+          <div *ngIf="!data.Mes">Year: {{data["Año"]}}; Energy: {{data["GWh"]}}</div>
+          <div *ngIf="data.Mes">Month: {{data.Mes}}; Energy: {{data["GWh"]}}</div>
+        </div>
+        <div class="col-4">
+          <button (click)=sendDataToBackEnd(data)>datos</button>
+        </div>
+      </div>
+    </div>
   </li></ul>
+  <button (click)=sendDataToBackEnd(dataArchive)>prueba envio datos</button>
 </div>
 
 <div *ngIf="dataArchive && mode_Ind_MaxMinRenovEol">
