@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { MyListArchivesComponent } from './my-list-archives/my-list-archives.component';
 
 import { MyArchivesService} from './services/my-archives.service';
+import { MySendDataService} from './services/my-send-data.service';
 import { MyCalculationsService} from './services/my-calculations.service';
 import { MyArchiveDataComponent } from './my-archive-data/my-archive-data.component';
 import { MyCalculationsComponent } from './my-calculations/my-calculations.component';
@@ -47,7 +48,7 @@ const appRoutes: Routes = [
     NgbModule
 
   ],
-  providers: [MyArchivesService,MyCalculationsService],
+  providers: [MyArchivesService,MyCalculationsService,MySendDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

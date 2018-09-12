@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import {MyCalculationsService} from '../services/my-calculations.service';
 import { ChartsModule } from 'ng2-charts';
 import { Chart } from 'chart.js';
+import { MySendDataService} from '../services/my-send-data.service';
 
 @Component({
   selector: 'app-my-calculations',
@@ -31,7 +32,8 @@ export class MyCalculationsComponent implements OnInit {
 
   constructor(
     private calculationService: MyCalculationsService,
-    private elementRef: ElementRef) { }
+    private elementRef: ElementRef,
+    private send:MySendDataService) { }
 
   ngOnInit() {
      this.data=this.calculationService.getBlockData();
@@ -179,9 +181,9 @@ controlChart(dataObject){
 
 
 sendCalculatedDataToBackEnd(averages,increments,maxmin){
-  console.log("averages: ",averages);
-  console.log("increments: ",increments);
-  console.log("maxmin",maxmin);
+  let result;
+  result=this.send.sendCalculatedDataToBackEnd(averages,increments,maxmin);
+  console.log("in Component result is:",result);
 }
 
 
