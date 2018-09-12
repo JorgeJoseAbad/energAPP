@@ -24,12 +24,12 @@
           <div *ngIf="data.Mes">Month: {{data.Mes}}; Energy: {{data["GWh"]}}</div>
         </div>
         <div class="col-4">
-          <button (click)=sendDataToBackEnd(data)>datos</button>
+          <button (click)=sendDataToBackEnd(data)>Data</button>
         </div>
       </div>
     </div>
   </li></ul>
-  <button (click)=sendDataToBackEnd(dataArchive)>prueba envio datos</button>
+  <button (click)=sendDataToBackEnd(dataArchive)>Data array</button>
 </div>
 
 <div *ngIf="dataArchive && mode_Ind_MaxMinRenovEol">

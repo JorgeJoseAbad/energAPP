@@ -113,9 +113,9 @@
 
           <h5>Get this data restricted between two dates</h5>
           <i>Start date: </i>
-          <input type="datetime-local" #myStartDateCalculations (keyup)="0"/>
+          <input type="datetime-local" #myStartDateCalculations (keyup)="0"/><br>
           <i>End date: </i>
-          <input type="datetime-local" #myEndDateCalculations (keyup)="0"/>
+          <input type="datetime-local" #myEndDateCalculations (keyup)="0"/><br>
           <button (click)=getJSONdataCalculations(archive.id,archive.name,myStartDateCalculations.value,myEndDateCalculations.value)>get calculations</button>
 
       </div>

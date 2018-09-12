@@ -154,8 +154,6 @@ controlChart(dataObject){
     this.setedData.datosPrecio=t_datosPrecio;
     this.setedData.datosCosteEnergia=t_datosCosteEnergia;
     this.setedData.datosPeajeAcceso=t_datosPeajeAcceso;
-
-
   }
 
   getAverages(){
@@ -170,20 +168,21 @@ controlChart(dataObject){
       this.increments=this.calculationService.getIncrements(this.setedData)
       this.incrementsObtained=true;
     }
-
   }
-
 
   getMaxMin(){
     if (!this.maxminObtained){
       this.maxmin=this.calculationService.getMaxMin(this.setedData)
       this.maxminObtained=true;
     }
-
   }
 
 
-
+sendCalculatedDataToBackEnd(averages,increments,maxmin){
+  console.log("averages: ",averages);
+  console.log("increments: ",increments);
+  console.log("maxmin",maxmin);
+}
 
 
 }
