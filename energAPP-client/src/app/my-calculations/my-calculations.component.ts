@@ -3,6 +3,7 @@ import {MyCalculationsService} from '../services/my-calculations.service';
 import { ChartsModule } from 'ng2-charts';
 import { Chart } from 'chart.js';
 import { MySendDataService} from '../services/my-send-data.service';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-my-calculations',
@@ -13,6 +14,8 @@ export class MyCalculationsComponent implements OnInit {
 
   data:any;
   myChart;
+  error:string;
+  response;
 
   setedData={
     datosPrecio:[],
@@ -179,12 +182,19 @@ controlChart(dataObject){
     }
   }
 
-
-sendCalculatedDataToBackEnd(averages,increments,maxmin){
-  let result;
-  result=this.send.sendCalculatedDataToBackEnd(averages,increments,maxmin);
-  console.log("in Component result is:",result);
-}
+  sendCalculatedDataToBackEnd(averages,increments,maxmin){
+    this.send.sendCalculatedDataToBackEnd(averages,increments,maxmin)
+      .subscribe((res)=>{
+        console.log(res);
+        this.response=res;
+         }
+      ,
+        (err)=>{
+          this.error=err;
+          console.log(this.error)
+        }
+      );
+  }
 
 
 }
