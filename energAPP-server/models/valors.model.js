@@ -12,7 +12,11 @@ const ValorsSchema = new Schema({
   },
   maxmin:{
     type: Object,
-  }
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  },
 
   /*_author: {
     type: Schema.Types.ObjectId,

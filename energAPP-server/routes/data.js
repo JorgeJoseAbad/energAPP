@@ -23,6 +23,12 @@ router.post('/',function(req,res,next){
     maxmin:myvalors.maxmin,
   });
 
+  console.log("Este es valor: ",valor);
+
+  valor.save( (err) => {
+
+  });
+
 
   res.send(
 
