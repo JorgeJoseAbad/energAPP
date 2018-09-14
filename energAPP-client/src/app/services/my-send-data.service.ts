@@ -13,6 +13,7 @@ export class MySendDataService {
 
 
   calculatedData={
+    archivename: String,
     averages: Object,
     increments: Object,
     maxmin: Object,
@@ -21,10 +22,12 @@ export class MySendDataService {
   constructor(private httpclient: HttpClient,
               ) { }
 
-  sendCalculatedDataToBackEnd(averages,increments,maxmin){
+  sendCalculatedDataToBackEnd(archiveName,averages,increments,maxmin){
+    console.log("In Service, name of archive;",archiveName)
     console.log("In service, averages: ",averages);
     console.log("In service, increments: ",increments);
     console.log("In service, maxmin",maxmin);
+    this.calculatedData.archivename=archiveName;
     this.calculatedData.averages=averages;
     this.calculatedData.increments=increments;
     this.calculatedData.maxmin=maxmin;

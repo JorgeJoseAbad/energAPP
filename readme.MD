@@ -12,7 +12,7 @@ A long-term development for the management of energy data is planned
 
 At this time, the following functionalities are implemented:
 
-###For generic archive (pdf,xml,xls)
+### For generic archive (pdf,xml,xls)
 Getting a list of archives
 Getting a list of archives by date
 Getting a list of archives filtered by taxonomy terms
@@ -22,7 +22,7 @@ Getting a list of archives by start_date, end_date and date_type publicacion
 Getting a specific Archive
 Download Archive (pdf,xls)
 
-###For archive JSON
+### For archive JSON
 Get a specific Archive Value of type JSON
 Getting a list of archives of type JSON
 Getting a list of archives of type JSON filtered by taxonomy terms

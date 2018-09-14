@@ -3,7 +3,9 @@ const Schema      = mongoose.Schema;
 
 
 const ValorsSchema = new Schema({
-
+  archivename:{
+    type: String,
+  },
   averages:{
     type: Object,
   },

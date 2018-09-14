@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import {MyCalculationsService} from '../services/my-calculations.service';
+import { MyArchivesService} from '../services/my-archives.service';
 import { ChartsModule } from 'ng2-charts';
 import { Chart } from 'chart.js';
 import { MySendDataService} from '../services/my-send-data.service';
@@ -16,6 +17,7 @@ export class MyCalculationsComponent implements OnInit {
   myChart;
   error:string;
   response;
+  archiveName:string;
 
   setedData={
     datosPrecio:[],
@@ -36,10 +38,12 @@ export class MyCalculationsComponent implements OnInit {
   constructor(
     private calculationService: MyCalculationsService,
     private elementRef: ElementRef,
-    private send:MySendDataService) { }
+    private send:MySendDataService,
+    private archivesservice: MyArchivesService) { }
 
   ngOnInit() {
      this.data=this.calculationService.getBlockData();
+     this.archiveName=this.archivesservice.getNameOfArchive();
      this.controlChart(this.data);
   }
 
@@ -182,8 +186,8 @@ controlChart(dataObject){
     }
   }
 
-  sendCalculatedDataToBackEnd(averages,increments,maxmin){
-    this.send.sendCalculatedDataToBackEnd(averages,increments,maxmin)
+  sendCalculatedDataToBackEnd(archiveName,averages,increments,maxmin){
+    this.send.sendCalculatedDataToBackEnd(archiveName,averages,increments,maxmin)
       .subscribe((res)=>{
         console.log(res);
         this.response=res;
