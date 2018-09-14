@@ -1,60 +1,63 @@
 
-<div [hidden]="!myChart">
-  <canvas id="canvas">{{ myChart }}</canvas>
-</div>
-<div>
-  <p>Obtain averages value of data between start and end period</p>
- <button (click)=getAverages()>Get Averages</button>
-</div>
-<div *ngIf="averageObtained">
-  <b>Averages values between {{averages.interval.start}} and {{averages.interval.end}}</b>
-  <br>
-  <b>{{averages.dataPrecio.var}}:</b> {{averages.dataPrecio.value}}
-  <br>
-  <b>{{averages.dataCosteEnergia.var}}:</b> {{averages.dataCosteEnergia.value}}
-  <br>
-  <b>{{averages.dataPeajeAcceso.var}}:</b> {{averages.dataPeajeAcceso.value}}
-</div>
+<div id="my-calculations">
+  <h4>Calculations</h4>
+  <div [hidden]="!myChart">
+    <canvas id="canvas">{{ myChart }}</canvas>
+  </div>
+  <div>
+    <p>Obtain averages value of data between start and end period</p>
+   <button (click)=getAverages()>Get Averages</button>
+  </div>
+  <div *ngIf="averageObtained">
+    <b>Averages values between {{averages.interval.start}} and {{averages.interval.end}}</b>
+    <br>
+    <b>{{averages.dataPrecio.var}}:</b> {{averages.dataPrecio.value}}
+    <br>
+    <b>{{averages.dataCosteEnergia.var}}:</b> {{averages.dataCosteEnergia.value}}
+    <br>
+    <b>{{averages.dataPeajeAcceso.var}}:</b> {{averages.dataPeajeAcceso.value}}
+  </div>
 
-<div>
-  <p>Obtain increment in values in period, from start to end</p>
-  <button (click)=getIncrement()>Get Increments</button>
-</div>
-<div *ngIf="incrementsObtained">
-  <b>Increment values from start to end between {{increments.interval.start}} and {{increments.interval.end}}</b>
-  <br>
-  <b>{{increments.dataPrecio.var}}:</b> {{increments.dataPrecio.value}}<br>
-  <b>{{increments.dataCosteEnergia.var}}:</b> {{increments.dataCosteEnergia.value}}<br>
-  <b>{{increments.dataPeajeAcceso.var}}:</b> {{increments.dataPeajeAcceso.value}}
-</div>
+  <div>
+    <p>Obtain increment in values in period, from start to end</p>
+    <button (click)=getIncrement()>Get Increments</button>
+  </div>
+  <div *ngIf="incrementsObtained">
+    <b>Increment values from start to end between {{increments.interval.start}} and {{increments.interval.end}}</b>
+    <br>
+    <b>{{increments.dataPrecio.var}}:</b> {{increments.dataPrecio.value}}<br>
+    <b>{{increments.dataCosteEnergia.var}}:</b> {{increments.dataCosteEnergia.value}}<br>
+    <b>{{increments.dataPeajeAcceso.var}}:</b> {{increments.dataPeajeAcceso.value}}
+  </div>
 
-<div>
-  <p>Obtain max and min values in period</p>
-  <button (click)=getMaxMin()>Get max and min</button>
-</div>
-<div *ngIf="maxminObtained">
-  <b> Max and min values between {{maxmin.interval.start}} and {{maxmin.interval.end}}</b><br>
-  <b>{{maxmin.dataPrecio.var}} </b><br>
-    <b>Max:</b> {{maxmin.dataPrecio.max.value}} at {{maxmin.dataPrecio.max.time}};<br>
-    <b>Min:</b> {{maxmin.dataPrecio.min.value}} at {{maxmin.dataPrecio.min.time}}<br>
-    <b>Diference: </b>{{maxmin.dataPrecio.max.value-maxmin.dataPrecio.min.value}}<br>
+  <div>
+    <p>Obtain max and min values in period</p>
+    <button (click)=getMaxMin()>Get max and min</button>
+  </div>
+  <div *ngIf="maxminObtained">
+    <b> Max and min values between {{maxmin.interval.start}} and {{maxmin.interval.end}}</b><br>
+    <b>{{maxmin.dataPrecio.var}} </b><br>
+      <b>Max:</b> {{maxmin.dataPrecio.max.value}} at {{maxmin.dataPrecio.max.time}};<br>
+      <b>Min:</b> {{maxmin.dataPrecio.min.value}} at {{maxmin.dataPrecio.min.time}}<br>
+      <b>Diference: </b>{{maxmin.dataPrecio.max.value-maxmin.dataPrecio.min.value}}<br>
 
-  <b>{{maxmin.dataCosteEnergia.var}} </b><br>
-    <b>Max:</b> {{maxmin.dataCosteEnergia.max.value}} at {{maxmin.dataCosteEnergia.max.time}};<br>
-    <b>Min:</b> {{maxmin.dataCosteEnergia.min.value}} at {{maxmin.dataCosteEnergia.min.time}}<br>
-    <b>Diference: </b>{{maxmin.dataCosteEnergia.max.value-maxmin.dataCosteEnergia.min.value}}<br>
-  <b>{{maxmin.dataPeajeAcceso.var}} </b><br>
-    <b>Max:</b> {{maxmin.dataPeajeAcceso.max.value}} at {{maxmin.dataPeajeAcceso.max.time}};<br>
-    <b>Min:</b> {{maxmin.dataPeajeAcceso.min.value}} at {{maxmin.dataPeajeAcceso.min.time}}<br>
-    <b>Diference: </b>{{maxmin.dataPeajeAcceso.max.value-maxmin.dataPeajeAcceso.min.value}}<br>
-</div>
+    <b>{{maxmin.dataCosteEnergia.var}} </b><br>
+      <b>Max:</b> {{maxmin.dataCosteEnergia.max.value}} at {{maxmin.dataCosteEnergia.max.time}};<br>
+      <b>Min:</b> {{maxmin.dataCosteEnergia.min.value}} at {{maxmin.dataCosteEnergia.min.time}}<br>
+      <b>Diference: </b>{{maxmin.dataCosteEnergia.max.value-maxmin.dataCosteEnergia.min.value}}<br>
+    <b>{{maxmin.dataPeajeAcceso.var}} </b><br>
+      <b>Max:</b> {{maxmin.dataPeajeAcceso.max.value}} at {{maxmin.dataPeajeAcceso.max.time}};<br>
+      <b>Min:</b> {{maxmin.dataPeajeAcceso.min.value}} at {{maxmin.dataPeajeAcceso.min.time}}<br>
+      <b>Diference: </b>{{maxmin.dataPeajeAcceso.max.value-maxmin.dataPeajeAcceso.min.value}}<br>
+  </div>
 
-<button (click)=sendCalculatedDataToBackEnd(archiveName,averages,increments,maxmin)>Send Calculated data...</button>
+  <button (click)=sendCalculatedDataToBackEnd(archiveName,averages,increments,maxmin)>Send Calculated data...</button>
 
 
-<div>
- {{data|json}}
-</div>
-<div>
-  {{response}}
+  <div>
+   {{data|json}}
+  </div>
+  <div>
+    {{response}}
+  </div>
 </div>

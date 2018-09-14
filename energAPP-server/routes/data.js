@@ -28,16 +28,18 @@ router.post('/',function(req,res,next){
 
   console.log("Este es valor: ",valor);
 
+
   valor.save( (err) => {
+
+    if (err) { return next(err); }
+     return res.send(
+        valor.archivename
+     );
 
   });
 
 
-  res.send(
 
-     valor.archivename
-
-  );
 
 });
 
