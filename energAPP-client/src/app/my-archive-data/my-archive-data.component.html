@@ -159,11 +159,14 @@
 
 
 <div *ngIf="dataArchive && mode_FilePVPC">
-  <ul><li *ngFor="let data of dataArchive">
-
+  <app-my-pvpc
+    [data]="dataArchive">
+  </app-my-pvpc>
+  <ul>
+    <li *ngFor="let data of dataArchive">
       {{data|json}}
-
-  </li></ul>
+    </li>
+  </ul>
 </div>
 
 <div *ngIf="dataArchive && mode_Ind_Umbrales">
@@ -216,7 +219,7 @@
   </li></ul>
 </div>
 
-<!--pruebas-->
+
 <div *ngIf="dataArchive && mode_dataForCalculations">
   Title of archive: {{archiveName}}
   <br>

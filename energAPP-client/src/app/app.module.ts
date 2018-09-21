@@ -17,6 +17,7 @@ import { MyArchiveDataComponent } from './my-archive-data/my-archive-data.compon
 import { MyCalculationsComponent } from './my-calculations/my-calculations.component';
 import { MyIntroComponent } from './my-intro/my-intro.component';
 import { MyTableComponent } from './my-table/my-table.component';
+import { MyPVPCComponent } from './my-pvpc/my-pvpc.component';
 
 const appRoutes: Routes = [
   { path: ''            ,redirectTo: '/', pathMatch: 'full'},
@@ -34,7 +35,8 @@ const appRoutes: Routes = [
     MyArchiveDataComponent,
     MyCalculationsComponent,
     MyIntroComponent,
-    MyTableComponent
+    MyTableComponent,
+    MyPVPCComponent
   ],
   imports: [
     NgbModule.forRoot(),
