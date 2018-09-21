@@ -44,7 +44,6 @@ export class MyListArchivesComponent implements OnInit {
       .subscribe(
         (response) => {
                         this.archives = response;
-                        console.log(response);
                         this.listarchives=response.archives;
         },
         error=>{
@@ -62,7 +61,6 @@ export class MyListArchivesComponent implements OnInit {
       .subscribe(
         (response) => {
                         this.archives = response;
-
                         this.listarchives=response.archives;
         },
         error=>{
@@ -192,7 +190,6 @@ export class MyListArchivesComponent implements OnInit {
     .subscribe(
       (response:any)=>{
         this.archive=response;
-
         this.listarchives=this.archive.archives;
       },
       error=>{
@@ -213,10 +210,9 @@ export class MyListArchivesComponent implements OnInit {
     this.archivesservice.getSpecificArchive(full_url_archive,ndate)
     .subscribe(
       (response:any)=>{
-
         arrayListArchives.push(response.archive);
         myresponse=response;
-        this.listarchives=arrayListArchives;
+        this.listarchives=arrayListArchives; //this clear list archives, with only this one response
       },
       error=>{
         this.error=error;
