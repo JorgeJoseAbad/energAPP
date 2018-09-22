@@ -9,13 +9,116 @@ import { Chart } from 'chart.js';
 })
 export class MyPVPCComponent implements OnInit {
   @Input() datas;
+  @Input() mode
    myChart:any;
 
   constructor(private elementRef:ElementRef) { }
 
   ngOnInit() {
-    this.pvpc(this.datas);
+    if (this.mode==1) this.zero_pvpc(this.datas)
+    if (this.mode==2) this.pvpc(this.datas);
   }
+
+
+  zero_pvpc(data){
+
+    let titulos=[];
+    let xAxisData1=[];
+    let yAxisData1=[];
+    let xAxisData2=[];
+    let yAxisData2=[];
+    let xAxisData3=[];
+    let yAxisData3=[];
+    for (let i=0;i<data.length;i++){
+      titulos[i]=Object.values(data[i])[0];
+
+    }
+
+    xAxisData1=Object.keys(data[0]);
+    //xAxisData1.shift();
+    yAxisData1=Object.values(data[0]);
+    //let titulo1=yAxisData1.shift();
+
+    xAxisData2=Object.keys(data[1]);
+    //xAxisData2.shift();
+    yAxisData2=Object.values(data[1]);
+    //let titulo2=yAxisData2.shift();
+
+    xAxisData3=Object.keys(data[2]);
+    //xAxisData3.shift();
+    yAxisData3=Object.values(data[2]);
+    //let titulo3=yAxisData3.shift();
+
+    this.draw_zero_PVPC(xAxisData1,yAxisData1,yAxisData2,yAxisData3);
+
+  }
+
+  draw_zero_PVPC(axisX,...axis){
+
+      let axisY=[];
+
+
+        let axisY1=[];
+        let axisY2=[];
+        let axisY3=[];
+        let prov;
+
+        for (let j=0;j<axis.length;j++){
+          axisY[j]=[];
+          axis[j].forEach(function(d){
+            axisY[j].push(d.replace(".","").replace(",","."));
+          })
+          axisY[j].shift();
+        }
+      axisX.shift();
+
+
+
+      let htmlRef = this.elementRef.nativeElement.querySelector(`#canvas`);
+
+      this.myChart = new Chart(htmlRef, {
+        type: 'line',
+        data:
+         {labels: axisX,
+          datasets: [
+            {
+              data: axisY[0],
+              label: axis[0][0],
+              borderColor: "blue",
+              fill: false,
+              borderWidth: 1
+            },
+            {
+              data: axisY[1],
+              label: axis[1][0],
+              borderColor: "red",
+              fill: false,
+              borderWidth: 1
+            },
+            {
+              data: axisY[2],
+              label: axis[2][0],
+              borderColor: "green",
+              fill: false,
+              borderWidth: 1
+            },
+          ]
+        },
+        options: {
+          legend: {
+            display: true
+          },
+          scales: {
+            xAxes: [{
+              display: true
+            }],
+            yAxes: [{
+              display: true
+            }],
+          }
+        }
+      });
+   }
 
 
   pvpc(data){
