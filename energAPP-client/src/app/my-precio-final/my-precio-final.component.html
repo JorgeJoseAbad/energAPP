@@ -1,0 +1,12 @@
+
+<div id="my-preciofinal">
+  <pre>My-Precio-Final component</pre>
+  <div [hidden]="!myChart">
+    <canvas id="canvas">{{ myChart }}</canvas>
+  </div>
+  <ul><li *ngFor="let data of datas">
+
+      {{data|json}}
+
+  </li></ul>
+</div>

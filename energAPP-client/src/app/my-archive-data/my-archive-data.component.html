@@ -160,13 +160,8 @@
 
 <div *ngIf="dataArchive && mode_FilePVPC">
   <app-my-pvpc
-    [data]="dataArchive">
+    [datas]="dataArchive">
   </app-my-pvpc>
-  <ul>
-    <li *ngFor="let data of dataArchive">
-      {{data|json}}
-    </li>
-  </ul>
 </div>
 
 <div *ngIf="dataArchive && mode_Ind_Umbrales">
@@ -179,11 +174,9 @@
 
 
 <div *ngIf="dataArchive && mode_Ind_PrecioFinal">
-  <ul><li *ngFor="let data of dataArchive">
-
-      {{data|json}}
-
-  </li></ul>
+  <app-my-precio-final
+    [datas]="dataArchive">
+  </app-my-precio-final>
 </div>
 
 <div *ngIf="dataArchive && mode_Ind_PrecioDesvios">

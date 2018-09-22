@@ -8,21 +8,21 @@ import { Chart } from 'chart.js';
   styleUrls: ['./my-pvpc.component.css']
 })
 export class MyPVPCComponent implements OnInit {
-  @Input() data;
+  @Input() datas;
    myChart:any;
 
   constructor(private elementRef:ElementRef) { }
 
   ngOnInit() {
-    this.pvpc(this.data);
+    this.pvpc(this.datas);
   }
+
 
   pvpc(data){
 
-    console.log("IN NEW CHILD COMPT",data);
-
     let dia=[];
     let hora=[];
+    let diahora=[];
     let gen=['GEN']; //init with label
     let noc=['NOC']; //init with label
     let vhc=['VHC']; //init with label...
@@ -58,6 +58,7 @@ export class MyPVPCComponent implements OnInit {
      data.forEach(function(d){
        dia.push(d.Dia);
        hora.push(d.Hora);
+       diahora.push(d.Dia+":"+d.Hora);
        gen.push(d.GEN);
        noc.push(d.NOC);
        vhc.push(d.VHC);
@@ -89,13 +90,13 @@ export class MyPVPCComponent implements OnInit {
        cofnoc.push(d.COFNOC);
        cofvhc.push(d.COFVHC);
      })
-     console.log(dia,hora,gen,noc,vhc);
+     console.log(diahora);
 
-    this.draw_PVPC(dia,gen,noc,vhc,ccvgen,ccvnoc,ccvvhc,fomgen,fomnoc,fomvhc
+    this.draw_PVPC(diahora,gen,noc,vhc,ccvgen,ccvnoc,ccvvhc,fomgen,fomnoc,fomvhc
     ,fosgen,fosnoc,fosvhc,intgen,intnoc,intvhc,pcapgen,pcapnoc,pcapvhc
     ,pmhgen,pmhnoc,pmhvhc,sahgen,sahnoc,sahvhc,teugen,teunoc,teuvhc
     ,cofgen,cofnoc,cofvhc);
-  }
+}
 
   draw_PVPC(axisX,...axis){
 
