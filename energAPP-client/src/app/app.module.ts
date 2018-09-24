@@ -19,6 +19,7 @@ import { MyIntroComponent } from './my-intro/my-intro.component';
 import { MyTableComponent } from './my-table/my-table.component';
 import { MyPVPCComponent } from './my-pvpc/my-pvpc.component';
 import { MyPrecioFinalComponent } from './my-precio-final/my-precio-final.component';
+import { MyPrecioDesviosComponent } from './my-precio-desvios/my-precio-desvios.component';
 
 const appRoutes: Routes = [
   { path: ''            ,redirectTo: '/', pathMatch: 'full'},
@@ -38,7 +39,8 @@ const appRoutes: Routes = [
     MyIntroComponent,
     MyTableComponent,
     MyPVPCComponent,
-    MyPrecioFinalComponent
+    MyPrecioFinalComponent,
+    MyPrecioDesviosComponent
   ],
   imports: [
     NgbModule.forRoot(),

@@ -733,7 +733,7 @@ precioFinal(title,data){
 
 precioDesvíos(title,data){
 
-  this.dataArchive=data;
+  this.dataArchive=data[0];
   this.mode_Ind_PrecioDesvios=true;
 }
 

@@ -182,11 +182,10 @@
 </div>
 
 <div *ngIf="dataArchive && mode_Ind_PrecioDesvios">
-  <ul><li *ngFor="let data of dataArchive">
-
-      {{data|json}}
-
-  </li></ul>
+  <app-my-precio-desvios
+    [datas]="dataArchive">
+  </app-my-precio-desvios>
+  
 </div>
 
 
