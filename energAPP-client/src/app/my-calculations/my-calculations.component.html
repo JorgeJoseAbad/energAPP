@@ -51,6 +51,14 @@
       <b>Diference: </b>{{maxmin.dataPeajeAcceso.max.value-maxmin.dataPeajeAcceso.min.value}}<br>
   </div>
 
+  <div class="response" *ngIf="response">
+    <b>Data loaded in BBDD from file: {{response}}</b>
+
+  </div>
+  <div class="response" *ngIf="error">
+    {{error}}
+  </div>
+
   <button (click)=sendCalculatedDataToBackEnd(archiveName,averages,increments,maxmin)>Send Calculated data...</button>
 
 
