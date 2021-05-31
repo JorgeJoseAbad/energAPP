@@ -17,7 +17,10 @@ const data  = require('./routes/data');
 mongoose.Promise=global.Promise;
 
 
-mongoose.connect('mongodb://localhost/energapp',{ useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/energapp',{
+  useNewUrlParser: true,
+  useUnifiedTopology: true 
+});
 
 const app = express();
 
