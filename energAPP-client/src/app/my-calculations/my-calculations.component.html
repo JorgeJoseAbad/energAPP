@@ -56,7 +56,7 @@
 
   </div>
   <div class="response" *ngIf="error">
-    {{error}}
+    {{error.message}}
   </div>
 
   <button (click)=sendCalculatedDataToBackEnd(archiveName,averages,increments,maxmin)>Send Calculated data...</button>

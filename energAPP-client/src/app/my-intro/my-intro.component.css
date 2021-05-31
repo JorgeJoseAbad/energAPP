@@ -1,5 +1,6 @@
 #prov-intro{
   background-color: #e4d7b98c;
+  font-size: 1.2rem;
   box-shadow: 11px 18px 13px 6px #7f2f2f80;
   margin: 50px;
   padding: 20px;
@@ -7,4 +8,14 @@
 
 #divbutton{
   margin-top:20px;
+  margin-bottom: 20px;
+}
+
+#note{
+  text-align: center;
+  padding: 20px;
+  background-color: #ffcc66;
+  max-width: 800px;
+
+
 }

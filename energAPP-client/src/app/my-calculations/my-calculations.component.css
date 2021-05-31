@@ -6,7 +6,12 @@
 }
 
 .response{
-  text-decoration: underline;
-  color: red;
-  font-size: 22px;
+  border: 1px solid hsl(300, 100%, 20%);
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: hsl(330, 50%, 75%);
+  color: hsl(240, 60%, 40%);
+  font-size: 1.2rem;
 }
