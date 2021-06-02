@@ -61,8 +61,6 @@ export class MyArchiveDataComponent implements OnInit{
   }
 
 
-
-
   /**
     * Documentation for JSDoc
     * selectFunctionDataFile
@@ -73,14 +71,12 @@ export class MyArchiveDataComponent implements OnInit{
     */
   selectFunctionDataFile(archive){
 
-
     if (archive==undefined) {
       this.router.navigate(['archive-list']);
     }
 
     this.keyArchive=Object.keys(archive)[0];
     console.log("KEY ARCHIVE",this.keyArchive);
-
     this.dataArchive=Object.values(Object.values(archive));
 
       switch(this.keyArchive) {
@@ -508,7 +504,6 @@ createStakedChart_DemandaRealGen(...axis){
 
 
 ind_DemandaPrevProg(title,data){
-
 
   this.dataArchive=data[0].valoresPrevistaProgramada;
   let object:any;

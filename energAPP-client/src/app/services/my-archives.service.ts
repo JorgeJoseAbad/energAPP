@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders,HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -9,7 +8,7 @@ import 'rxjs/add/operator/map';
 
 export class MyArchivesService {
 
- httpOptions = {
+ private httpOptions = {
   headers: new HttpHeaders({
     'Accept':'application/json; application/vnd.esios-api-v1+json',
     'Content-Type':'text',
@@ -17,7 +16,7 @@ export class MyArchivesService {
   })
 };
 
-httpParams={
+private httpParams={
   params: new HttpParams().set('responseType', "Text")
 }
 
@@ -25,15 +24,16 @@ keepedFile:any; //data from original file
 archiveName:any; //name original file, ej PVPC_VHC_P1 -->posible change to description
 aditionalData:any; // Data betwen dates etc
 
-constructor(private http: HttpClient,
-              ) { }
+constructor(
+  private http: HttpClient,
+) { }
 
-  getarchiveslist(archives_json_url):Observable<any>{
+  getarchiveslist(archives_json_url):Observable<Object>{
     console.log("llegamos a pedir lista ",archives_json_url);
     return this.http.get(archives_json_url,this.httpOptions)
   }
 
-  getarchiveslistfiltered(archives_json_url,taxonomyTerm){
+  getarchiveslistfiltered(archives_json_url,taxonomyTerm):Observable<Object>{
 
     const httpOptions = {
      headers: new HttpHeaders({
@@ -41,25 +41,20 @@ constructor(private http: HttpClient,
        'Content-Type':'application/json',
        'Authorization':'Token token="65ea46a74c7372e0776cbe0a216543288fb804d6e0b5c2603c0bae449b39c824"',
      }),
-     params: new HttpParams().set('taxonomy_terms[]',taxonomyTerm)
+     params: new HttpParams().set('taxonomy_terms',taxonomyTerm)
     };
-
 
     return this.http.get(archives_json_url,httpOptions)
   }
 
 
-  getarchivePreview(full_url_archive):Observable<any>{
-    //console.log(full_url_archive);
+  getarchivePreview(full_url_archive):Observable<Object>{
     let archive= this.http.get(full_url_archive,this.httpOptions);
-
     return archive;
   }
 
-  getarchive(full_url_archive):Observable<any>{
-    //console.log(full_url_archive);
+  getarchive(full_url_archive):Observable<Object>{
     let archive= this.http.get(full_url_archive,{responseType:'text'});
-
     return archive;
   }
 
@@ -74,7 +69,6 @@ constructor(private http: HttpClient,
     * @return {object} keepedFile
     */
   keeparchiveinservice(archive,name,additionalData){
-    //console.log("in sendarchive(archive) del servcio");
 
     if (typeof(archive)!='object'){
     this.keepedFile=JSON.parse(archive
@@ -85,11 +79,8 @@ constructor(private http: HttpClient,
        .replace(");", "}")
      );
    } else this.keepedFile=archive;
-
      this.archiveName=name;
      this.aditionalData=additionalData;
-
-
   }
 
   getarchivefromservice(){
@@ -106,7 +97,6 @@ constructor(private http: HttpClient,
   }
 
 
-
   getArchivesByDate(url,query){
     const httpOptionsDate = {
      headers: new HttpHeaders({
@@ -116,7 +106,6 @@ constructor(private http: HttpClient,
      }),
      params: new HttpParams().set('date', query)
     };
-
 
     return this.http.get(url,httpOptionsDate);
 
@@ -131,7 +120,6 @@ constructor(private http: HttpClient,
      }),
      params: new HttpParams().set('date',date).set('taxonomy_terms[]',taxonomy)
     };
-    
 
     return this.http.get(url,httpOptionsDate);
   }
@@ -152,8 +140,6 @@ constructor(private http: HttpClient,
 
   getSpecificArchive(url,date){
 
-    //var query_date=Object.values(date)[0];
-    //console.log(query_date);
     const httpOptionsSpecificArchive = {
      headers: new HttpHeaders({
        'Accept':'application/json; application/vnd.esios-api-v1+json',
@@ -181,7 +167,6 @@ constructor(private http: HttpClient,
   }
 
 
-
   downloadArchive(download_url){
 
     const httpOptionsDownload = {
@@ -193,9 +178,7 @@ constructor(private http: HttpClient,
 
     };
 
-
       return this.http.get(download_url,{responseType:"blob"});
-
 
   }
 

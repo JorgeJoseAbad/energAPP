@@ -25,15 +25,17 @@ export class MyListArchivesComponent implements OnInit {
   error:any;
   archives:any;
   listarchives:any;
-  archive:any;
+  //archive:any;
   previewFile:any;
 
-  constructor(private archivesservice:MyArchivesService,
-  private router:Router) { }
+
+
+  constructor(
+    private archivesservice:MyArchivesService,
+    private router:Router
+  ) { }
 
   ngOnInit() {
-
-
     console.log(this.archives_json_url);
   }
 
@@ -42,15 +44,16 @@ export class MyListArchivesComponent implements OnInit {
 
      this.archivesservice.getarchiveslist(this.archives_url)
       .subscribe(
-        (response) => {
-                        this.archives = response;
+        (response:any) => {
+                        //this.archives = response;
                         this.listarchives=response.archives;
         },
         error=>{
-          console.log(error);
+          this.error = error;
+          console.error("Ooops! ",error.message);
         },
         ()=>{
-          console.log("Retrieved all files")
+          console.info("Retrieved all files by getarchiveslist");
         }
       );
   }
@@ -59,15 +62,16 @@ export class MyListArchivesComponent implements OnInit {
 
      this.archivesservice.getarchiveslist(this.archives_json_url)
       .subscribe(
-        (response) => {
-                        this.archives = response;
+        (response:any) => {
+                        //this.archives = response;
                         this.listarchives=response.archives;
         },
         error=>{
-          console.log(error);
+          this.error = error;
+          console.error("oops!! ", error.message);
         },
         ()=>{
-          console.log("Retrieved all files")
+          console.info("Retrieved all files by getarchivesjsonlist");
         }
       );
   }
@@ -77,15 +81,15 @@ export class MyListArchivesComponent implements OnInit {
     this.archivesservice.getarchiveslistfiltered(this.archives_url,taxTerm)
      .subscribe(
        (response:any) => {
-                       this.archives = response;
-
+                       //this.archives = response;
                        this.listarchives=response.archives;
        },
        error=>{
-         console.log(error);
+         this.error = error;
+         console.error("oops!! ", error.message);
        },
        ()=>{
-         console.log("Retrieved all files")
+         console.info("Retrieved all files by getarchiveslistfiltered");
        }
      );
   }
@@ -98,13 +102,10 @@ export class MyListArchivesComponent implements OnInit {
       this.archivesservice.getarchivePreview(full_url_archive)
       .subscribe(
         (response:any)=>{
-
                     this.previewFile=response;
-
-
         },
         (error:any)=>{
-          this.error=error;
+          this.error = error;
           console.error('Oops:', error.message);
         },
         ()=>{console.log("show archivedata")}
@@ -118,13 +119,11 @@ export class MyListArchivesComponent implements OnInit {
       this.archivesservice.getarchive(full_url_archive)
       .subscribe(
         (response:any)=>{
-
-                    this.archive=response;
-
-                    this.archivesservice.keeparchiveinservice(this.archive,name,'');
+                    //this.archive=response;
+                    this.archivesservice.keeparchiveinservice(response,name,'');
         },
         error=>{
-          this.error=error;
+          this.error = error;
           console.error('Oops:', error.message);
         },
         ()=>{this.router.navigate(['archive-data']);}
@@ -143,10 +142,8 @@ export class MyListArchivesComponent implements OnInit {
     this.archivesservice.getArchivesByDate(full_url_archive,query_params)
       .subscribe(
         (response:any)=>{
-          this.archive=response;
-
-          this.listarchives=this.archive.archives;
-
+          //this.archive=response;
+          this.listarchives=response.archives;
         },
         error=>{
           this.error=error;
@@ -165,10 +162,8 @@ export class MyListArchivesComponent implements OnInit {
     this.archivesservice.getArchivesDateTaxonomy(full_url_archive,date_query,taxterm)
     .subscribe(
       (response:any)=>{
-        this.archive=response;
-
-        this.listarchives=this.archive.archives;
-
+        //this.archive=response;
+        this.listarchives=response.archives;
       },
       error=>{
         this.error=error;
@@ -189,8 +184,8 @@ export class MyListArchivesComponent implements OnInit {
     this.archivesservice.getArchivesByDateStartEndDateType(full_url_archive,start_query,end_query,dateType)
     .subscribe(
       (response:any)=>{
-        this.archive=response;
-        this.listarchives=this.archive.archives;
+        //this.archive=response;
+        this.listarchives=response.archives;
       },
       error=>{
         this.error=error;
@@ -229,9 +224,9 @@ export class MyListArchivesComponent implements OnInit {
     this.archivesservice.getJSONdataCalculations(full_url_archive,start_date,end_date)
     .subscribe(
       (response:any)=>{
-        this.archive=response;
+        //this.archive=response;
 
-        this.archivesservice.keeparchiveinservice(this.archive,name,'Data between: '+ `${start_date}`+ ' and ' +`${end_date}`);
+        this.archivesservice.keeparchiveinservice(response,name,'Data between: '+ `${start_date}`+ ' and ' +`${end_date}`);
       },
       error=>{
         this.error=error;

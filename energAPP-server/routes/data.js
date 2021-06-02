@@ -14,20 +14,12 @@ router.post('/',function(req,res,next){
       maxmin:req.body.maxmin,
   };
 
-  console.log(myvalors.archivename);
-  console.log(myvalors.averages);
-  console.log(myvalors.increments);
-  console.log(myvalors.maxmin);
-
   const valor = new Valor({
     archivename:myvalors.archivename,
     averages:myvalors.averages,
     increments:myvalors.increments,
     maxmin:myvalors.maxmin,
   });
-
-  console.log("Este es valor: ",valor);
-
 
   valor.save( (err) => {
 
@@ -37,8 +29,6 @@ router.post('/',function(req,res,next){
      );
 
   });
-
-
 
 
 });
