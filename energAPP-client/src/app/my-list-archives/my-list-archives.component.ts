@@ -168,7 +168,7 @@ export class MyListArchivesComponent implements OnInit {
       error=>{
         this.error=error;
         console.error('Oops:', error.message);
-      },
+      }
     )
   }
 
