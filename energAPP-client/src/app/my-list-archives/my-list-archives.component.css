@@ -25,23 +25,10 @@
   margin-bottom:10px;
 }
 
-.archive-list-item{
-  border-top: 1px solid blue;
-  border-bottom: 1px solid blue;
-  padding-left: 10px;
-  padding-right: 2px;
-  background-color: rgb(229, 229, 246);
-  font-size: 16px;
-}
+
 
 .listing{
   list-style-type: decimal;
   border-top: 5px solid #a26060;
   margin-top: 10px;
-}
-
-.preview{
-  background-color: rgb(200,180,150);
-  margin-top: 5px;
-  padding: 5px;
 }
