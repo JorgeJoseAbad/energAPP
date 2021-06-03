@@ -153,7 +153,7 @@ constructor(
 
   }
 
-  getJSONdataCalculations(url,start_date,end_date){
+  getJSONdataCalculations(url,start_date,end_date):Observable<Object>{
     const httpOptionsJSONdataCalculations = {
      headers: new HttpHeaders({
        'Accept':'application/json; application/vnd.esios-api-v1+json',

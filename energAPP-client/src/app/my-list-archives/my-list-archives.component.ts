@@ -148,7 +148,7 @@ export class MyListArchivesComponent implements OnInit {
         error=>{
           this.error=error;
           console.error('Oops:', error.message);
-        },
+        }
       )
   }
 
@@ -190,7 +190,7 @@ export class MyListArchivesComponent implements OnInit {
       error=>{
         this.error=error;
         console.error('Oops:', error.message);
-      },
+      }
     )
   }
 
@@ -219,7 +219,7 @@ export class MyListArchivesComponent implements OnInit {
   }
 
   getJSONdataCalculations(id,name,start_date,end_date){
-
+    debugger;
     let full_url_archive=`${this.base_url}`+'calculator-data/'+id;
     this.archivesservice.getJSONdataCalculations(full_url_archive,start_date,end_date)
     .subscribe(
